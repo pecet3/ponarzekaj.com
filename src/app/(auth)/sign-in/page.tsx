@@ -4,9 +4,7 @@ import * as React from "react";
 import { FC } from "react";
 import { Icons } from "../../../components/ui/Icons";
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
+const UserAuthForm = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const loginWithGoogle = async () => {
