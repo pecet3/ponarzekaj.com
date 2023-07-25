@@ -1,5 +1,6 @@
 import { getAuthSession } from "../lib/auth";
 import Link from "next/link";
+import Image from "next/image";
 export const Navbar = async () => {
   const session = await getAuthSession();
 
@@ -15,7 +16,12 @@ export const Navbar = async () => {
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img src={session.user.image ?? ""} />
+                <Image
+                  src={session.user.image ?? ""}
+                  height={16}
+                  width={16}
+                  alt="Your avatar"
+                />
               </div>
             </label>
             <ul

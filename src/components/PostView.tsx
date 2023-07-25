@@ -12,7 +12,7 @@ dayjs.extend(relativeTime);
 
 type PostWithUser = Post & {
   comments: Comment[];
-  user: User;
+  author: User;
 };
 
 interface Props {
@@ -21,13 +21,13 @@ interface Props {
 
 export const PostView: React.FC<Props> = ({ post }) => {
   return (
-    <div className="m-1 rounded-md bg-slate-700 shadow-md shadow-slate-950">
+    <div className="m-1 rounded-md bg-slate-700 shadow-md shadow-slate-950 text-slate-200">
       <div className="flex items-end">
         <div className="flex justify-start gap-2 px-1 pt-1 md:px-2 md:pt-2">
-          <Link href={`/@${post.user.name}`} className="">
+          <Link href={`/@${post.author.name}`} className="">
             <Image
-              src={post.user.image || ""}
-              alt={`@${post.user.name}'s avatar`}
+              src={post.author.image || ""}
+              alt={`@${post.author.name}'s avatar`}
               className="h-10 w-10 rounded-full md:h-12 md:w-12"
               width={48}
               height={48}
@@ -35,8 +35,8 @@ export const PostView: React.FC<Props> = ({ post }) => {
           </Link>
           <div className="flex flex-col">
             <div className="flex gap-1 text-sm text-slate-300">
-              <Link href={`/@${post.user.name}`}>
-                <span className="font-bold">{`@${post.user.name}`}</span>
+              <Link href={`/@${post.author.name}`}>
+                <span className="font-bold">{`@${post.author.name}`}</span>
               </Link>
               <Link href={`/post/${post.id}`}>
                 <span className="font-thin">{`∙ ${dayjs(

@@ -5,9 +5,11 @@ import { authOptions } from "@/lib/auth";
 import axios from "axios";
 import { db } from "@/lib/db";
 import type { Post, Comment, User } from "@prisma/client";
+import { PostView } from "../components/PostView";
 
 type PostWithUser = Post & {
   comments: Comment[];
+  author: User;
 };
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -15,9 +17,15 @@ export default async function Home() {
   const posts: PostWithUser[] = await db.post.findMany({
     include: {
       comments: true,
-      likes: true,
+      author: true,
     },
   });
-  console.log(posts[0].comments);
-  return <main className="flex min-h-screen flex-col background">post</main>;
+  console.log(posts);
+  return (
+    <main className="flex min-h-screen flex-col background">
+      {posts.map((post) => {
+        return <PostView key={post.id} post={post} />;
+      })}
+    </main>
+  );
 }
