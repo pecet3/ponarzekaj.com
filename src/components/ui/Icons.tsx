@@ -5,6 +5,7 @@ import { BsPersonFillAdd } from "react-icons/bs";
 import { MdLogout } from "react-icons/md";
 import { FaUserFriends } from "react-icons/fa";
 import { GiConfirmed, GiCancel } from "react-icons/gi";
+import {BiError} from "react-icons/bi"
 export const Icons = {
   Logo: ({ ...props }) => {
     return <RiChatPrivateLine {...props} />;
@@ -30,4 +31,7 @@ export const Icons = {
   Reject: ({ ...props }) => {
     return <GiCancel {...props} />;
   },
+  Error: ({...props}) => {
+    return <BiError {...props} />
+  }
 };
