@@ -22,7 +22,7 @@ export default async function Home() {
   });
   console.log(posts);
   return (
-    <main className="flex min-h-screen flex-col background">
+    <main className="flex flex-col">
       {posts.map((post) => {
         return <PostView key={post.id} post={post} />;
       })}
