@@ -8,9 +8,14 @@ const nextConfig = {
                 port: '',
                 pathname: '**',
             },
+            {
+                protocol: 'https',
+                hostname: 'images2.alphacoders.com',
+                port: '',
+                pathname: '**',
+            },
         ],
     },
 
 }
-
 module.exports = nextConfig
