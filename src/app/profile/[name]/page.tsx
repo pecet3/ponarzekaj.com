@@ -36,12 +36,12 @@ const page = async ({ params }: PageProps) => {
   return <main className="flex flex-col min-h-screen m-auto mt-1 sm:mt-4 md:mt-8 justify-start items-center">
     <section className="rounded-md bg-indigo-400 flex flex-col shadow-lg shadow-indigo-600 max-w-3xl">
       <div className="relative">
-        <Image src={user.backgroundImage ?? ""} alt={`zdjęcie ${user.name}`} height={96} width={96} className="h-72 sm:h-96 rounded-t-md  w-screen" />
-        <Image src={user.image ?? ""} alt={`zdjęcie ${user.name}`} height={256} width={256} className="absolute rounded-full w-40 h-40 left-3 bottom-[-5rem] " />
+        <Image src={user.backgroundImage ?? ""} alt={`zdjęcie ${user.name}`} height={96} width={96} className="h-64 sm:h-96 rounded-t-md  w-screen" />
+        <Image src={user.image ?? ""} alt={`zdjęcie ${user.name}`} height={256} width={256} className="absolute rounded-full w-32 h-32  sm:w-40 sm:h-40 left-3 bottom-[-4rem] sm:bottom-[-5rem] " />
       </div>
-      <span className="flex justify-center flex-col ml-48">
-        <p className="text-2xl text-slate-800">{user.name}</p>
-        <p className="text-xl text-slate-600">{user.email}</p>
+      <span className="flex justify-center flex-col sm:ml-48 ml-40 mt-2">
+        <p className="text-xl sm:text-2xl text-slate-800">{user.name}</p>
+        <p className="text-base sm:text-xl text-slate-600">{user.email}</p>
       </span>
       <div className="mt-10 p-1">
         {posts.map((post) => {
