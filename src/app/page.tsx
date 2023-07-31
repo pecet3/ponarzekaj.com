@@ -23,9 +23,9 @@ export default async function Home() {
   console.log(posts);
   return (
     <main className="flex flex-col min-h-screen  ">
-      {posts.map((post) => {
+      <section className="max-w-3xl flex flex-col justify-center items-center mt-1 mx-auto w-full">{posts.map((post) => {
         return <PostView key={post.id} post={post} />;
-      })}
+      })}</section>
     </main>
   );
 }
