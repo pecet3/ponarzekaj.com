@@ -22,10 +22,20 @@ export async function POST(req: NextRequest) {
             return new Response("Unauthorized", { status: 401 })
         }
 
+        await db.post.create({
+            data: {
+                authorId,
+                emoji,
+                content,
+            }
+        })
+
+
+        return new Response("OK", { status: 200 })
     } catch (error) {
 
     }
 
 
-    return NextResponse.json({ res })
+
 }
