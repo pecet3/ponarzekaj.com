@@ -71,7 +71,7 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
     // </form>
     <form
       onSubmit={handleSubmit}
-      className="flex w-full items-center justify-center gap-1 bg-slate-900 p-1 sm:p-2 md:gap-2 rounded-md m-1 max-w-3xl"
+      className="flex w-full items-center justify-center gap-1 bg-slate-900 p-1 sm:p-2 md:gap-2 rounded-md max-w-3xl"
     >
       <Link href={`/profile/${user?.name}`}>
         <Image
