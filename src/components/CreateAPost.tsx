@@ -24,7 +24,7 @@ const emojiList = [
   },
 ];
 
-export const CreatePost: React.FC<{ user: User }> = ({ user }) => {
+export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
   const [input, setInput] = useState<{ content: string; emoji: string }>({
     content: "",
     emoji: "😐",
@@ -49,6 +49,8 @@ export const CreatePost: React.FC<{ user: User }> = ({ user }) => {
       console.log(error);
     }
   };
+
+  if (!user) return null;
   return (
     // <form onSubmit={handleSubmit}>
     //   <textarea
@@ -69,11 +71,11 @@ export const CreatePost: React.FC<{ user: User }> = ({ user }) => {
     // </form>
     <form
       onSubmit={handleSubmit}
-      className="flex w-full items-center justify-center gap-1 bg-slate-900 p-1 sm:p-2 md:gap-2 rounded-md m-1"
+      className="flex w-full items-center justify-center gap-1 bg-slate-900 p-1 sm:p-2 md:gap-2 rounded-md m-1 max-w-3xl"
     >
-      <Link href="/">
+      <Link href={`/profile/${user?.name}`}>
         <Image
-          src={user.image || ""}
+          src={user?.image || ""}
           className={`h-12 w-12 rounded-full md:h-16 md:w-16 ${
             input.content ? "hidden md:flex" : ""
           }`}
@@ -83,7 +85,7 @@ export const CreatePost: React.FC<{ user: User }> = ({ user }) => {
         />
       </Link>
       <textarea
-        placeholder="Type something what you mad about..."
+        placeholder="Wpisz to co cię wkurza..."
         rows={2}
         className="grow bg-transparent outline-none resize-none text-slate-200"
         value={input.content}
