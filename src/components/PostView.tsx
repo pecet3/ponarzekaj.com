@@ -17,10 +17,10 @@ interface Props {
 
 export const PostView: React.FC<Props> = ({ post }) => {
   return (
-    <div className="m-1 rounded-md bg-slate-700 shadow-md shadow-slate-950 text-slate-200">
+    <div className=" rounded-md bg-slate-700 shadow-md shadow-slate-950 text-slate-200 w-full">
       <div className="flex items-end">
         <div className="flex justify-start gap-2 px-1 pt-1 md:px-2 md:pt-2">
-          <Link href={`/@${post.author.name}`} className="">
+          <Link href={`/profile/${post.author.name}`} className="">
             <Image
               src={post.author.image || ""}
               alt={`@${post.author.name}'s avatar`}
@@ -31,7 +31,7 @@ export const PostView: React.FC<Props> = ({ post }) => {
           </Link>
           <div className="flex flex-col">
             <div className="flex gap-1 text-sm text-slate-300">
-              <Link href={`/@${post.author.name}`}>
+              <Link href={`/profile/${post.author.name}`}>
                 <span className="font-bold">{`@${post.author.name}`}</span>
               </Link>
               <Link href={`/post/${post.id}`}>

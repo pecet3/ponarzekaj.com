@@ -27,13 +27,10 @@ export default async function Home() {
   });
   console.log(user);
   return (
-    <main className="flex max-w-3xl m-auto flex-col items-center">
-      <CreatePost user={user as User} />
-      <section className="h-full w-full">
-        {posts.map((post) => {
-          return <PostView key={post.id} post={post} />;
-        })}
-      </section>
+    <main className="flex min-h-screen flex-col background">
+      {posts.map((post) => {
+        return <PostView key={post.id} post={post} />;
+      })}
     </main>
   );
 }
