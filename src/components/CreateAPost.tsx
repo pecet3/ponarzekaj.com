@@ -39,9 +39,10 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/add-a-post", {
+      const response = await axios.post("/api/post/create", {
         content: input.content,
         emoji: input.emoji,
+        authorId: user?.id,
       });
       // toast.success("Dodałeś Post!");
       console.log(response);
