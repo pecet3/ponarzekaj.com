@@ -46,6 +46,13 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
       });
       // toast.success("Dodałeś Post!");
       console.log(response);
+      setInput(
+        (prev) =>
+          (prev = {
+            ...prev,
+            content: "",
+          })
+      );
     } catch (error) {
       console.log(error);
     }
@@ -86,9 +93,10 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
         />
       </Link>
       <textarea
-        placeholder="Wpisz to co cię wkurza..."
+        placeholder="Wyrzuć swoje frustracje...śmiało"
         rows={2}
-        className="grow bg-transparent outline-none resize-none text-slate-200"
+        autoFocus={true}
+        className="grow bg-transparent outline-none resize-none placeholder:italic text-slate-200"
         value={input.content}
         onChange={(e) =>
           setInput(
