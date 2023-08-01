@@ -18,6 +18,7 @@ export default async function Home() {
       author: true,
       likes: true,
     },
+    orderBy: [{ createdAt: "desc" }],
   });
 
   const user = await db.user.findUnique({
