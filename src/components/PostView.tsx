@@ -8,15 +8,11 @@ import { useRouter } from "next/navigation";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { FaRegComments } from "react-icons/fa";
 import type { Post, Comment, User } from "@prisma/client";
+import type { FullPost } from "@/types/prisma";
 dayjs.extend(relativeTime);
 
-type PostWithUser = Post & {
-  comments: Comment[];
-  author: User;
-};
-
 interface Props {
-  post: PostWithUser;
+  post: FullPost;
 }
 
 export const PostView: React.FC<Props> = ({ post }) => {

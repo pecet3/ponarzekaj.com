@@ -6,26 +6,34 @@ import axios from "axios";
 import { db } from "@/lib/db";
 import type { Post, Comment, User } from "@prisma/client";
 import { PostView } from "../components/PostView";
+import type { FullPost } from "@/types/prisma";
+import { CreatePost } from "../components/CreateAPost";
 
-type PostWithUser = Post & {
-  comments: Comment[];
-  author: User;
-};
 export default async function Home() {
   const session = await getServerSession(authOptions);
 
-  const posts: PostWithUser[] = await db.post.findMany({
+  const posts = await db.post.findMany({
     include: {
       comments: true,
       author: true,
+      likes: true,
     },
   });
-  console.log(posts);
+
+  const user = await db.user.findUnique({
+    where: {
+      id: session?.user.id,
+    },
+  });
+  console.log(user);
   return (
-    <main className="flex min-h-screen flex-col background">
-      {posts.map((post) => {
-        return <PostView key={post.id} post={post} />;
-      })}
+    <main className="flex max-w-3xl m-auto flex-col items-center">
+      <CreatePost user={user as User} />
+      <section className="h-full w-full">
+        {posts.map((post) => {
+          return <PostView key={post.id} post={post} />;
+        })}
+      </section>
     </main>
   );
 }
