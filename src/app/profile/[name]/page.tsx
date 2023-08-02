@@ -33,8 +33,8 @@ const page = async ({ params }: PageProps) => {
   if (data.length === 0) return <Error />;
 
   return (
-    <main className="flex flex-col min-h-screen m-auto mt-1 sm:mt-4 md:mt-8 justify-start items-center">
-      <section className="rounded-md bg-indigo-400 flex flex-col shadow-lg shadow-indigo-600 max-w-3xl">
+    <main className="flex flex-col min-h-screen m-auto mt-1 sm:mt-2 justify-start items-center">
+      <section className="rounded-md bg-indigo-500 bg-opacity-60 flex flex-col shadow-lg shadow-indigo-600 max-w-3xl">
         <div className="relative">
           <Image
             src={user.backgroundImage ?? ""}
@@ -55,11 +55,11 @@ const page = async ({ params }: PageProps) => {
           <p className="text-xl sm:text-2xl text-slate-800">{user.name}</p>
           <p className="text-base sm:text-xl text-slate-600">{user.email}</p>
         </span>
-        <div className="mt-10 p-1">
+        <section className="mt-10 p-1 sm:p-2 flex flex-col gap-2 ">
           {posts.map((post) => {
             return <PostView post={post} key={post.id} />;
           })}
-        </div>
+        </section>
       </section>
     </main>
   );
