@@ -5,5 +5,5 @@ import type { Post, Comment, User, PostLikes, CommentLikes } from "@prisma/clien
 export type FullPost = Post & {
     comments: Comment[];
     author: User;
-
+    likes: PostLikes[]
 };
