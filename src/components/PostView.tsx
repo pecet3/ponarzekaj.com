@@ -9,6 +9,7 @@ import { IoMdAddCircleOutline } from "react-icons/io";
 import { FaRegComments } from "react-icons/fa";
 import type { Post, Comment, User } from "@prisma/client";
 import type { FullPost } from "@/types/prisma";
+import { Icons } from "./ui/Icons";
 dayjs.extend(relativeTime);
 
 interface Props {
@@ -17,7 +18,7 @@ interface Props {
 
 export const PostView: React.FC<Props> = ({ post }) => {
   return (
-    <div className=" rounded-md bg-slate-700 shadow-md shadow-slate-950 text-slate-200 w-full">
+    <div className=" rounded-md bg-slate-700 hover:bg-slate-800 duration-300 hover:scale-[1.002] shadow-md shadow-slate-950 text-slate-200 w-full">
       <div className="flex items-end">
         <div className="flex justify-start gap-2 px-1 pt-1 md:px-2 md:pt-2">
           <Link href={`/profile/${post.author.name}`} className="">
@@ -41,11 +42,19 @@ export const PostView: React.FC<Props> = ({ post }) => {
               </Link>
               <Link
                 href={`/post/${post.id}`}
-                className="mr-1 flex items-center justify-center text-right text-xs"
+                className="mr-1 flex items-center justify-center text-right text-xs bg-slate-800 rounded-xl pr-1"
               >
                 <p className="mx-1 font-thin">{` ∙`}</p>
                 <FaRegComments size={16} className="mr-1 text-blue-500" />
-                Comments({post.comments.length})
+                Komentarze({post.comments.length})
+              </Link>
+              <Link
+                href={`/post/${post.id}`}
+                className="mr-1 flex items-center justify-center text-right text-xs bg-slate-800 rounded-xl pr-1"
+              >
+                <p className="mx-1 font-thin">{` ∙`}</p>
+                <Icons.Like size={16} className="mr-1 text-blue-700" />
+                Polubienia({post.likes.length})
               </Link>
             </div>
             <Link
