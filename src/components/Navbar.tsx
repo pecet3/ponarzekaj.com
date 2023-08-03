@@ -1,6 +1,7 @@
 import { getAuthSession } from "../lib/auth";
 import Link from "next/link";
 import Image from "next/image";
+import { Icons } from "./ui/Icons";
 export const Navbar = async () => {
   const session = await getAuthSession();
 
@@ -9,6 +10,12 @@ export const Navbar = async () => {
       <div className="flex-1">
         <Link className="btn btn-ghost normal-case text-xl" href="/">
           ponarzekaj.com
+        </Link>
+      </div>
+      <div className="flex justify-end">
+        <Link className="btn btn-ghost normal-case text-lg" href="/">
+          <Icons.Chat size={24} />
+          Chat
         </Link>
       </div>
       <div className="flex-none gap-2">
