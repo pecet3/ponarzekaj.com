@@ -1,11 +1,11 @@
 import { FcGoogle } from "react-icons/fc";
-import { AiOutlineLoading } from "react-icons/ai";
+import { AiOutlineLoading, AiFillLike } from "react-icons/ai";
 import { RiChatPrivateLine } from "react-icons/ri";
-import { BsPersonFillAdd } from "react-icons/bs";
+import { BsPersonFillAdd, BsWechat } from "react-icons/bs";
 import { MdLogout } from "react-icons/md";
 import { FaUserFriends } from "react-icons/fa";
 import { GiConfirmed, GiCancel } from "react-icons/gi";
-import {BiError} from "react-icons/bi"
+import { BiError } from "react-icons/bi";
 export const Icons = {
   Logo: ({ ...props }) => {
     return <RiChatPrivateLine {...props} />;
@@ -31,7 +31,13 @@ export const Icons = {
   Reject: ({ ...props }) => {
     return <GiCancel {...props} />;
   },
-  Error: ({...props}) => {
-    return <BiError {...props} />
-  }
+  Error: ({ ...props }) => {
+    return <BiError {...props} />;
+  },
+  Chat: ({ ...props }) => {
+    return <BsWechat {...props} />;
+  },
+  Like: ({ ...props }) => {
+    return <AiFillLike {...props} />;
+  },
 };
