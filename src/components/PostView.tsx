@@ -81,13 +81,12 @@ export const PostView: React.FC<Props> = ({ post }) => {
       >
         {true ? (
           <button className="flex items-center gap-1 text-sm text-gray-500 ">
-            ❌delete
+            <Icons.Delete size={16} className="text-red-400"/> Usuń
             <i className="text-xs font-extralight text-slate-200">{`∙`}</i>
           </button>
         ) : null}
         <span className=" flex items-center justify-center text-xs ">
-          <IoMdAddCircleOutline size={16} className="text-green-500" />
-          Add a comment
+          <Icons.AddComment size={16} className="text-green-500" />{" "}Skomentuj
         </span>
       </Link>
     </div>
