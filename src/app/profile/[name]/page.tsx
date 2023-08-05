@@ -27,6 +27,7 @@ const page = async ({ params }: PageProps) => {
     include: {
       comments: true,
       author: true,
+      likes: true,
     },
   });
 
