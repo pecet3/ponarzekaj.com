@@ -12,8 +12,8 @@ export const Navbar = async () => {
           ponarzekaj.com
         </Link>
       </div>
-      <div className="flex justify-end">
-        <Link className="btn btn-ghost normal-case text-lg" href="/">
+      <div className="flex justify-end mr-1">
+        <Link className="btn btn-ghost normal-case text-lg" href="/chat">
           <Icons.Chat size={24} />
           Chat
         </Link>
