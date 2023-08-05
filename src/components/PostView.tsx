@@ -18,7 +18,7 @@ interface Props {
 
 export const PostView: React.FC<Props> = ({ post }) => {
   return (
-    <div className=" rounded-md bg-slate-700 hover:bg-slate-800 duration-300 hover:scale-[1.002] shadow-md shadow-slate-950 text-slate-200 w-full">
+    <div className=" rounded-md bg-slate-700 hover:bg-slate-800 duration-300 md:hover:scale-[1.01] shadow-md shadow-slate-950 text-slate-200 w-full">
       <div className="flex items-end">
         <div className="flex justify-start gap-2 px-1 pt-1 md:px-2 md:pt-2">
           <Link href={`/profile/${post.author.name}`} className="">
@@ -42,19 +42,23 @@ export const PostView: React.FC<Props> = ({ post }) => {
               </Link>
               <Link
                 href={`/post/${post.id}`}
-                className="mr-1 flex items-center justify-center text-right text-xs bg-slate-800 rounded-xl pr-1"
+                className=" flex items-center justify-center text-right text-xs "
               >
                 <p className="mx-1 font-thin">{` ∙`}</p>
-                <FaRegComments size={16} className="mr-1 text-blue-500" />
-                Komentarze({post.comments.length})
+               <div className="bg-zinc-900 rounded-xl px-1 flex py-0.5">
+                <FaRegComments size={16} className="mr-1 text-emerald-500" />
+                {post.comments.length}
+               </div>
               </Link>
               <Link
                 href={`/post/${post.id}`}
-                className="mr-1 flex items-center justify-center text-right text-xs bg-slate-800 rounded-xl pr-1"
+                className="mr-1 flex items-center justify-center text-right text-xs "
               >
                 <p className="mx-1 font-thin">{` ∙`}</p>
+                <div className="bg-zinc-900 rounded-xl px-1 flex py-0.5">
                 <Icons.Like size={16} className="mr-1 text-blue-700" />
-                Polubienia({post.likes?.length})
+                {post.likes?.length}
+                </div>
               </Link>
             </div>
             <Link
