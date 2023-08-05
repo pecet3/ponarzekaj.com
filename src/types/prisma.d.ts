@@ -8,6 +8,7 @@ export type FullComment = Comment & {
 export type FullPost = Post & {
     comments: Comment[];
     author: User;
-    likes: PostLikes[]
+    likes?: PostLikes[]
 };
+
 

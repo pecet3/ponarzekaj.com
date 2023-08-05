@@ -54,7 +54,7 @@ export const PostView: React.FC<Props> = ({ post }) => {
               >
                 <p className="mx-1 font-thin">{` ∙`}</p>
                 <Icons.Like size={16} className="mr-1 text-blue-700" />
-                Polubienia({post.likes.length})
+                Polubienia({post.likes?.length})
               </Link>
             </div>
             <Link
