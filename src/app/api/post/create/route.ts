@@ -1,14 +1,9 @@
 
-import { NextResponse, NextRequest } from 'next/server'
+import { NextRequest } from 'next/server'
 import { db } from '@/lib/db';
-import { z } from "zod"
+import { createPostValidator } from '@/lib/validators';
 import { getAuthSession } from '@/lib/auth';
-
-export const createPostValidator = z.object({
-    content: z.string(),
-    authorId: z.string(),
-    emoji: z.string().emoji(),
-})
+import {z} from "zod"
 
 export async function POST(req: NextRequest) {
     try {
