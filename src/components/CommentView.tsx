@@ -7,6 +7,8 @@ import { FaRegCommentDots } from "react-icons/fa";
 import Image from "next/image";
 import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
+import { getAuthSession } from "@/lib/auth";
+import { isUserThing } from "@/lib/helpers";
 dayjs.extend(relativeTime);
 
 interface Props {
@@ -14,13 +16,20 @@ interface Props {
 }
 
 export const CommentView: FunctionComponent<Props> = async ({ comment }) => {
+  const session = await getAuthSession();
   const author = await db.user.findUnique({
     where: {
       id: comment.authorId,
     },
   });
+
+  const isUserComment = isUserThing(
+    author?.id as string,
+    session?.user.id as string
+  );
+
   return (
-    <div className="rounded-md bg-slate-700 hover:bg-slate-800 duration-300 md:hover:scale-[1.008] shadow-md shadow-slate-950 text-slate-200 w-full">
+    <div className="rounded-md bg-indigo-900 hover:bg-indigo-800 duration-300 md:hover:scale-[1.008] shadow-md shadow-slate-950 text-slate-200 w-full">
       <div className="flex items-end">
         <div className="flex justify-start gap-2 px-1 pt-1 md:px-2 md:pt-2">
           <Link href={`/profile/${author?.name}`} className="">
@@ -59,13 +68,11 @@ export const CommentView: FunctionComponent<Props> = async ({ comment }) => {
         </div>
       </div>
       <div className="m-auto mb-1 mr-1 flex justify-end gap-2">
-        <button className="flex items-center gap-1 text-sm text-gray-500 ">
-          <Icons.Delete size={16} className="text-red-400" /> Usuń
-          <i className="text-xs font-extralight text-slate-200">{`∙`}</i>
-        </button>
-        <span className=" flex items-center justify-center text-xs ">
-          <Icons.AddComment size={16} className="text-green-500" /> Skomentuj
-        </span>
+        {isUserComment ? (
+          <button className="flex items-center gap-1 text-sm text-gray-500 ">
+            <Icons.Delete size={16} className="text-red-400" /> Usuń
+          </button>
+        ) : null}
       </div>
     </div>
   );
