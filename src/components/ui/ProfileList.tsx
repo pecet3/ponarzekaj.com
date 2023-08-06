@@ -3,7 +3,7 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { FunctionComponent } from "react";
 
-export const ProfileList: FunctionComponent<{ username?: string | null }> = ({
+export const ProfileList: FunctionComponent<{ username: string | null }> = ({
   username,
 }) => {
   return (
