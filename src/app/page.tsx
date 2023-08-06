@@ -25,7 +25,7 @@ export default async function Home() {
       id: session ? session?.user.id : "",
     },
   });
-  
+
   return (
     <main className="flex min-h-screen flex-col items-center background">
       <section className="w-full max-w-3xl flex flex-col gap-2 sm:mt-2 rounded-md bg-indigo-500 bg-opacity-60 p-1 sm:p-2">
