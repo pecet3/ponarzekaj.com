@@ -58,9 +58,9 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
             content: "",
           })
       );
-      router.push("/");
+      router.refresh();
     } catch (error) {
-      toast.error("Ups...Coś poszło nie");
+      toast.error("Ups...Coś poszło nie tak");
     }
   };
 
