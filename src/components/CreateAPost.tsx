@@ -41,7 +41,9 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
   }, [input]);
 
   const handleSubmit = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    e:
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+      | React.KeyboardEvent<HTMLTextAreaElement>
   ) => {
     e.preventDefault();
     try {
@@ -66,24 +68,7 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
 
   if (!user) return null;
   return (
-    // <form onSubmit={handleSubmit}>
-    //   <textarea
-    //     rows={2}
-    //     value={input.content}
-    //     className="text-black"
-    //     onChange={(e) =>
-    //       setInput(
-    //         (prev) =>
-    //           (prev = {
-    //             ...prev,
-    //             content: e.target.value,
-    //           })
-    //       )
-    //     }
-    //   />
-    //   <button>submit</button>
-    // </form>
-    <section className="flex w-full items-center justify-center gap-1 bg-slate-900 p-1 sm:p-2 md:gap-2 rounded-md max-w-3xl">
+    <section className="flex w-full items-center justify-center gap-1 bg-indigo-950 p-1 sm:p-2 md:gap-2 rounded-md max-w-3xl">
       <Link href={`/profile/${user?.name}`}>
         <Image
           src={user?.image || ""}
@@ -114,6 +99,7 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
           if (e.key === "Enter") {
             e.preventDefault();
             if (input.content !== "") {
+              handleSubmit(e);
             }
           }
         }}
