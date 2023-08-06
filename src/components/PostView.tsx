@@ -6,15 +6,20 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { FaRegComments } from "react-icons/fa";
 import type { FullPost } from "@/types/prisma";
 import { Icons } from "./ui/Icons";
+import { isUserThing } from "@/lib/helpers";
+import { getAuthSession } from "@/lib/auth";
+
 dayjs.extend(relativeTime);
 
 interface Props {
   post: FullPost;
 }
 
-export const PostView: React.FC<Props> = ({ post }) => {
+export const PostView: React.FC<Props> = async ({ post }) => {
+  const session = await getAuthSession();
+  const isUserPost = isUserThing(post.authorId, session?.user.id as string);
   return (
-    <div className="rounded-md bg-slate-700 hover:bg-slate-800 duration-300 md:hover:scale-[1.005] shadow-md shadow-slate-950 text-slate-200 w-full">
+    <div className="rounded-md bg-indigo-900 hover:bg-indigo-800 duration-300 md:hover:scale-[1.005] shadow-md shadow-slate-950 text-slate-200 w-full">
       <div className="flex items-end">
         <div className="flex justify-start gap-2 px-1 pt-1 md:px-2 md:pt-2">
           <Link href={`/profile/${post.author.name}`} className="">
@@ -75,10 +80,12 @@ export const PostView: React.FC<Props> = ({ post }) => {
         href={`/post/${post.id}`}
         className="m-auto mb-1 mr-1 flex justify-end gap-2"
       >
-        <button className="flex items-center gap-1 text-sm text-gray-500 ">
-          <Icons.Delete size={16} className="text-red-400" /> Usuń
-          <i className="text-xs font-extralight text-slate-200">{`∙`}</i>
-        </button>
+        {isUserPost ? (
+          <button className="flex items-center gap-1 text-sm text-gray-500 ">
+            <Icons.Delete size={16} className="text-red-400" /> Usuń
+            <i className="text-xs font-extralight text-slate-200">{`∙`}</i>
+          </button>
+        ) : null}
         <span className=" flex items-center justify-center text-xs ">
           <Icons.AddComment size={16} className="text-green-500" /> Skomentuj
         </span>
