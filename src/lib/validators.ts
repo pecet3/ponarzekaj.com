@@ -10,3 +10,9 @@ export const addLikeValidator = z.object({
   userId: z.string(),
   postId: z.string(),
 });
+
+export const createCommentValidator = z.object({
+  content: z.string(),
+  authorId: z.string(),
+  postId: z.string(),
+});
