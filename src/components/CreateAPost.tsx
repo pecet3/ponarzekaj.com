@@ -4,7 +4,7 @@ import Image from "next/image";
 import axios from "axios";
 import Link from "next/link";
 import type { User } from "@prisma/client";
-
+import { toast } from "react-hot-toast";
 const emojiList = [
   {
     value: "😐",
@@ -39,13 +39,12 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/post/create", {
+      await axios.post("/api/post/create", {
         content: input.content,
         emoji: input.emoji,
         authorId: user?.id,
       });
-      // toast.success("Dodałeś Post!");
-      console.log(response);
+      toast.success("Dodałeś Post!");
       setInput(
         (prev) =>
           (prev = {
