@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import Error from "@/components/Error";
 import Image from "next/image";
 import { PostView } from "@/components/PostView";
+
 interface PageProps {
   params: {
     name: string;
@@ -11,7 +12,6 @@ interface PageProps {
 
 const page = async ({ params }: PageProps) => {
   const { name } = params;
-
   const data = await db.user.findMany({
     where: {
       name: decodeURI(name),
@@ -19,10 +19,10 @@ const page = async ({ params }: PageProps) => {
   });
 
   const user = data[0];
-
+  console.log(user);
   const posts = await db.post.findMany({
     where: {
-      authorId: user.id,
+      authorId: user.id ?? "",
     },
     include: {
       comments: true,
