@@ -2,9 +2,17 @@ import { getAuthSession } from "../lib/auth";
 import Link from "next/link";
 import Image from "next/image";
 import { Icons } from "./ui/Icons";
+import { ProfileList } from "./ui/ProfileList";
+import { db } from "@/lib/db";
+
 export const Navbar = async () => {
   const session = await getAuthSession();
 
+  const user = await db.user.findUnique({
+    where: {
+      id: session ? session?.user.id : "",
+    },
+  });
   return (
     <nav className="navbar bg-base-100 text-slate-200">
       <div className="flex-1">
@@ -31,23 +39,7 @@ export const Navbar = async () => {
                 />
               </div>
             </label>
-            <ul
-              tabIndex={0}
-              className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <a className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
-                </a>
-              </li>
-              <li>
-                <a>Settings</a>
-              </li>
-              <li>
-                <a>Logout</a>
-              </li>
-            </ul>
+            <ProfileList username={user?.name ?? "Ja kub"} />
           </div>
         ) : (
           <div className="flex-1">
