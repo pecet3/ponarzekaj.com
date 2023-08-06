@@ -29,7 +29,7 @@ export const CommentView: FunctionComponent<Props> = async ({ comment }) => {
   );
 
   return (
-    <div className="rounded-md bg-indigo-900 hover:bg-indigo-800 duration-300 md:hover:scale-[1.008] shadow-md shadow-slate-950 text-slate-200 w-full">
+    <div className="rounded-md bg-indigo-900 hover:bg-indigo-800 duration-300 md:hover:scale-[1.005] shadow-md shadow-slate-950 text-slate-200 w-full">
       <div className="flex items-end">
         <div className="flex justify-start gap-2 px-1 pt-1 md:px-2 md:pt-2">
           <Link href={`/profile/${author?.name}`} className="">
