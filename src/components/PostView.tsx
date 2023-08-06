@@ -18,6 +18,9 @@ interface Props {
 export const PostView: React.FC<Props> = async ({ post }) => {
   const session = await getAuthSession();
   const isUserPost = isUserThing(post.authorId, session?.user.id as string);
+
+  const isLiked = post.likes?.find((like) => like.userId === session?.user.id);
+
   return (
     <div className="rounded-md bg-indigo-900 hover:bg-indigo-800 duration-300 md:hover:scale-[1.005] shadow-md shadow-slate-950 text-slate-200 w-full">
       <div className="flex items-end">
@@ -86,7 +89,16 @@ export const PostView: React.FC<Props> = async ({ post }) => {
             <i className="text-xs font-extralight text-slate-200">{`∙`}</i>
           </button>
         ) : null}
-        <span className=" flex items-center justify-center text-xs ">
+        {!isLiked ? (
+          <button className=" flex items-center justify-center text-xs rounded-xl px-1 bg-slate-200 text-black">
+            <Icons.Like size={16} className="text-blue-500" /> Lubię to
+          </button>
+        ) : (
+          <button className=" flex items-center justify-center text-xs rounded-xl px-1 bg-slate-300 text-black">
+            <Icons.Like size={16} className="text-blue-800" /> Polubiono
+          </button>
+        )}
+        <span className=" flex items-center justify-center text-xs rounded-xl px-1 bg-slate-900">
           <Icons.AddComment size={16} className="text-green-500" /> Skomentuj
         </span>
       </Link>
