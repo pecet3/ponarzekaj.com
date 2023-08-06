@@ -4,10 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { useRouter } from "next/navigation";
-import { IoMdAddCircleOutline } from "react-icons/io";
 import { FaRegComments } from "react-icons/fa";
-import type { Post, Comment, User } from "@prisma/client";
 import type { FullPost } from "@/types/prisma";
 import { Icons } from "./ui/Icons";
 dayjs.extend(relativeTime);
@@ -45,10 +42,10 @@ export const PostView: React.FC<Props> = ({ post }) => {
                 className=" flex items-center justify-center text-right text-xs "
               >
                 <p className="mx-1 font-thin">{` ∙`}</p>
-               <div className="bg-zinc-900 rounded-xl px-1 flex py-0.5">
-                <FaRegComments size={16} className="mr-1 text-emerald-500" />
-                {post.comments.length}
-               </div>
+                <div className="bg-zinc-900 rounded-xl px-1 flex py-0.5">
+                  <FaRegComments size={16} className="mr-1 text-emerald-500" />
+                  {post.comments.length}
+                </div>
               </Link>
               <Link
                 href={`/post/${post.id}`}
@@ -56,8 +53,8 @@ export const PostView: React.FC<Props> = ({ post }) => {
               >
                 <p className="mx-1 font-thin">{` ∙`}</p>
                 <div className="bg-zinc-900 rounded-xl px-1 flex py-0.5">
-                <Icons.Like size={16} className="mr-1 text-blue-700" />
-                {post.likes?.length}
+                  <Icons.Like size={16} className="mr-1 text-blue-700" />
+                  {post.likes?.length}
                 </div>
               </Link>
             </div>
@@ -79,14 +76,12 @@ export const PostView: React.FC<Props> = ({ post }) => {
         href={`/post/${post.id}`}
         className="m-auto mb-1 mr-1 flex justify-end gap-2"
       >
-        {true ? (
-          <button className="flex items-center gap-1 text-sm text-gray-500 ">
-            <Icons.Delete size={16} className="text-red-400"/> Usuń
-            <i className="text-xs font-extralight text-slate-200">{`∙`}</i>
-          </button>
-        ) : null}
+        <button className="flex items-center gap-1 text-sm text-gray-500 ">
+          <Icons.Delete size={16} className="text-red-400" /> Usuń
+          <i className="text-xs font-extralight text-slate-200">{`∙`}</i>
+        </button>
         <span className=" flex items-center justify-center text-xs ">
-          <Icons.AddComment size={16} className="text-green-500" />{" "}Skomentuj
+          <Icons.AddComment size={16} className="text-green-500" /> Skomentuj
         </span>
       </Link>
     </div>
