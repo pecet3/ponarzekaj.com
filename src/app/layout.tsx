@@ -2,7 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Navbar } from "../components/Navbar";
-
+import { Toaster } from "react-hot-toast";
+import Providers from "@/components/Providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -20,8 +21,10 @@ export default function RootLayout({
       <body
         className={`${inter.className} text-slate-800 dark:text-slate-200 background`}
       >
-        <Navbar />
-        {children}
+        <Providers>
+          <Navbar />
+          {children}
+        </Providers>
       </body>
     </html>
   );
