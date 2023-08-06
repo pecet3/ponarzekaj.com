@@ -10,7 +10,7 @@ import { Icons } from "@/components/ui/Icons";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { isUserThing } from "@/lib/helpers";
-
+import { CreateComment } from "@/components/CreateAComment";
 dayjs.extend(relativeTime);
 
 interface PageProps {
@@ -37,6 +37,7 @@ const page = async ({ params }: PageProps) => {
     include: {
       likes: true,
     },
+    orderBy: [{ createdAt: "desc" }],
   });
 
   const post = await db.post.findUnique({
@@ -60,7 +61,7 @@ const page = async ({ params }: PageProps) => {
     <MainTile>
       <div className="rounded-md bg-indigo-800 shadow-md shadow-slate-950 text-slate-200 w-full">
         <div className="flex items-end">
-          <div className="flex justify-start gap-2 px-1 pt-1 md:px-2 md:pt-2">
+          <div className="flex justify-start gap-2 p-1 md:p-2">
             <Link href={`/profile/${post.author.name}`} className="">
               <Image
                 src={post.author.image || ""}
@@ -103,6 +104,12 @@ const page = async ({ params }: PageProps) => {
                     {post.likes?.length}
                   </div>
                 </Link>
+                {isUserPost ? (
+                  <button className="flex items-center gap-1 text-sm text-gray-500 ">
+                    <p className="mx-1 font-thin text-xs  text-slate-200">{` ∙`}</p>
+                    <Icons.Delete size={16} className="text-red-400" /> Usuń
+                  </button>
+                ) : null}
               </div>
               <Link
                 href={`/post/${post.id}`}
@@ -118,24 +125,14 @@ const page = async ({ params }: PageProps) => {
             </div>
           </div>
         </div>
-        <Link
-          href={`/post/${post.id}`}
-          className="m-auto mb-1 mr-1 flex justify-end gap-2"
-        >
-          {isUserPost ? (
-            <button className="flex items-center gap-1 text-sm text-gray-500 ">
-              <Icons.Delete size={16} className="text-red-400" /> Usuń
-            </button>
-          ) : null}
-        </Link>
+        {session ? (
+          <CreateComment user={user} postId={id} />
+        ) : (
+          <p className="text-sm text-center italic">
+            Tylko zalogowani użytkownicy mogą komentować
+          </p>
+        )}
       </div>
-      {session ? (
-        <p>create</p>
-      ) : (
-        <p className="text-sm text-center italic">
-          Tylko zalogowani użytkownicy mogą komentować
-        </p>
-      )}
       {comments.map((comment) => (
         <CommentView key={comment.id} comment={comment} />
       ))}
