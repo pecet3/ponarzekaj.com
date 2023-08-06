@@ -5,6 +5,8 @@ import axios from "axios";
 import Link from "next/link";
 import type { User } from "@prisma/client";
 import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
+
 const emojiList = [
   {
     value: "😐",
@@ -25,6 +27,8 @@ const emojiList = [
 ];
 
 export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
+  const router = useRouter();
+
   const [input, setInput] = useState<{ content: string; emoji: string }>({
     content: "",
     emoji: "😐",
@@ -36,7 +40,9 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
     setCounter(input.content.length);
   }, [input]);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     e.preventDefault();
     try {
       await axios.post("/api/post/create", {
@@ -52,8 +58,9 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
             content: "",
           })
       );
+      router.push("/");
     } catch (error) {
-      console.log(error);
+      toast.error("Ups...Coś poszło nie");
     }
   };
 
@@ -76,10 +83,7 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
     //   />
     //   <button>submit</button>
     // </form>
-    <form
-      onSubmit={handleSubmit}
-      className="flex w-full items-center justify-center gap-1 bg-slate-900 p-1 sm:p-2 md:gap-2 rounded-md max-w-3xl"
-    >
+    <section className="flex w-full items-center justify-center gap-1 bg-slate-900 p-1 sm:p-2 md:gap-2 rounded-md max-w-3xl">
       <Link href={`/profile/${user?.name}`}>
         <Image
           src={user?.image || ""}
@@ -140,6 +144,7 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
             </div>
             <div className="flex flex-col items-center gap-1 md:flex-row">
               <button
+                onClick={handleSubmit}
                 className="m-auto rounded-md bg-slate-500 p-1 text-sm transition-all duration-300 hover:bg-slate-400 md:text-base"
                 disabled={counter > maxInputLength}
               >
@@ -156,6 +161,6 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
           </div>
         </>
       ) : null}
-    </form>
+    </section>
   );
 };

@@ -1,4 +1,3 @@
-"use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -15,7 +14,7 @@ interface Props {
 
 export const PostView: React.FC<Props> = ({ post }) => {
   return (
-    <div className=" rounded-md bg-slate-700 hover:bg-slate-800 duration-300 md:hover:scale-[1.01] shadow-md shadow-slate-950 text-slate-200 w-full">
+    <div className="rounded-md bg-slate-700 hover:bg-slate-800 duration-300 shadow-md shadow-slate-950 text-slate-200 w-full">
       <div className="flex items-end">
         <div className="flex justify-start gap-2 px-1 pt-1 md:px-2 md:pt-2">
           <Link href={`/profile/${post.author.name}`} className="">

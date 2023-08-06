@@ -34,7 +34,7 @@ const page = async ({ params }: PageProps) => {
   if (data.length === 0) return <Error />;
 
   return (
-    <main className="flex flex-col min-h-screen m-auto mt-1 sm:mt-2 justify-start items-center">
+    <main className="flex flex-col min-h-screen m-auto mt-0 sm:mt-2 justify-start items-center">
       <section className="rounded-md bg-indigo-500 bg-opacity-60 flex flex-col shadow-lg shadow-indigo-600 max-w-3xl">
         <div className="relative">
           <Image
@@ -42,7 +42,7 @@ const page = async ({ params }: PageProps) => {
             alt={`zdjęcie ${user.name}`}
             height={1280}
             width={720}
-            className="h-64 sm:h-96 rounded-t-md  w-screen"
+            className="h-64 sm:h-96 sm:rounded-t-md  w-screen"
           />
           <Image
             src={user.image ?? ""}
