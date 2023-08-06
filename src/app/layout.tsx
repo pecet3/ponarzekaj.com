@@ -21,9 +21,10 @@ export default function RootLayout({
       <body
         className={`${inter.className} text-slate-800 dark:text-slate-200 background`}
       >
-        <Toaster position="bottom-center" reverseOrder={false} />
-        <Navbar />
-        {children}
+        <Providers>
+          <Navbar />
+          {children}
+        </Providers>
       </body>
     </html>
   );
