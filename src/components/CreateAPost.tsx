@@ -45,7 +45,6 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
       | React.MouseEvent<HTMLButtonElement, MouseEvent>
       | React.KeyboardEvent<HTMLTextAreaElement>
   ) => {
-    e.preventDefault();
     try {
       await axios.post("/api/post/create", {
         content: input.content,
