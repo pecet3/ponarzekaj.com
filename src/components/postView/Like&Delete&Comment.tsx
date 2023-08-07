@@ -31,6 +31,23 @@ export const AddLikeDeleteComment: FunctionComponent<{
     }
   };
 
+  const deleteLikeHandle = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    try {
+      await axios.post("/api/post/delete-like", {
+        postId: postId,
+        userId: userId,
+      });
+
+      toast.success("Usunąłeś polubienie pod postem!");
+
+      router.refresh();
+    } catch (err) {
+      toast.error("Ups...Coś poszło nie tak");
+    }
+  };
+
   return (
     <>
       <div className="m-auto mb-1 mr-1 flex justify-end gap-2">
@@ -48,7 +65,10 @@ export const AddLikeDeleteComment: FunctionComponent<{
             <Icons.Like size={16} className="text-blue-500" /> Lubię to
           </button>
         ) : (
-          <button className=" flex items-center justify-center text-xs rounded-xl px-1 bg-slate-300 text-black">
+          <button
+            className=" flex items-center justify-center text-xs rounded-xl px-1 bg-slate-300 text-black"
+            onClick={deleteLikeHandle}
+          >
             <Icons.Like size={16} className="text-blue-800" /> Polubiono
           </button>
         )}
