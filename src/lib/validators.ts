@@ -6,7 +6,7 @@ export const createPostValidator = z.object({
   emoji: z.string().emoji(),
 });
 
-export const addLikeValidator = z.object({
+export const LikeValidator = z.object({
   userId: z.string(),
   postId: z.string(),
 });
