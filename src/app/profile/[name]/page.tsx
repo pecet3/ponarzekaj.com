@@ -2,7 +2,7 @@ import React from "react";
 import { db } from "@/lib/db";
 import Error from "@/components/Error";
 import Image from "next/image";
-import { PostView } from "@/components/PostView";
+import { PostView } from "@/components/postView/PostView";
 
 interface PageProps {
   params: {
