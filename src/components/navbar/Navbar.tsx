@@ -1,8 +1,8 @@
-import { getAuthSession } from "../lib/auth";
+import { getAuthSession } from "@/lib/auth";
 import Link from "next/link";
 import Image from "next/image";
-import { Icons } from "./ui/Icons";
-import { ProfileList } from "./ui/ProfileList";
+import { Icons } from "../ui/Icons";
+import { ProfileList } from "./ProfileList";
 import { db } from "@/lib/db";
 
 export const Navbar = async () => {
