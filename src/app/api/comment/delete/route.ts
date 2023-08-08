@@ -19,6 +19,11 @@ export async function POST(req: NextRequest) {
       return new Response("Unauthorized", { status: 401 });
     }
 
+    await db.likeComment.deleteMany({
+      where: {
+        commentId,
+      },
+    });
     await db.comment.delete({
       where: {
         id: commentId,
