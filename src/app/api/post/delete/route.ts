@@ -19,7 +19,38 @@ export async function POST(req: NextRequest) {
       return new Response("Unauthorized", { status: 401 });
     }
 
-    await db.post.delete({
+    const commentsList = await db.comment.findMany({
+      where: {
+        postId: postId,
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    const commentsArray = commentsList.map((comment) => comment.id);
+
+    for (let commentId of commentsArray) {
+      await db.likeComment.deleteMany({
+        where: {
+          commentId,
+        },
+      });
+    }
+
+    await db.comment.deleteMany({
+      where: {
+        postId: postId,
+      },
+    });
+
+    await db.likePost.deleteMany({
+      where: {
+        postId: postId,
+      },
+    });
+
+    await db.post.deleteMany({
       where: {
         id: postId,
       },
@@ -29,6 +60,6 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     if (error instanceof z.ZodError)
       return new Response("Invalid payload", { status: 422 });
-    return new Response("Invalid request", { status: 400 });
+    return new Response(error?.toString(), { status: 400 });
   }
 }
