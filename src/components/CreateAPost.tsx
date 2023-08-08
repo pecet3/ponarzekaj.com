@@ -69,7 +69,7 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
   return (
     <section
       className={`flex w-full items-center justify-center gap-1 bg-indigo-950 md:gap-2 rounded-md max-w-3xl ${
-        input.content === "" ? "p-2" : "p-1"
+        input.content === "" ? "p-2" : "p-2"
       }`}
     >
       <Link href={`/profile/${user?.name}`}>
@@ -131,10 +131,10 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
                 </button>
               ))}
             </div>
-            <div className="flex flex-col items-center gap-1 md:flex-row">
+            <div className="flex flex-col items-center  gap-1 md:flex-row">
               <button
                 onClick={handleSubmit}
-                className="m-auto rounded-md bg-slate-500 p-1 text-sm transition-all duration-300 hover:bg-slate-400 md:text-base"
+                className="m-auto text-slate-200 rounded-md bg-fuchsia-700 p-1 text-sm transition-all duration-300 hover:bg-fuchsia-600 md:text-base"
                 disabled={counter > maxInputLength}
               >
                 Dodaj
