@@ -20,12 +20,12 @@ export const Navbar = async () => {
           ponarzekaj.com
         </Link>
       </div>
-      <div className="flex justify-end mr-1">
+      {/* <div className="flex justify-end mr-1">
         <Link className="btn btn-ghost normal-case text-lg" href="/chat">
           <Icons.Chat size={24} />
           Chat
         </Link>
-      </div>
+      </div> */}
       <div className="flex-none gap-2">
         {session ? (
           <div className="dropdown dropdown-end">
