@@ -7,11 +7,14 @@ import { z } from "zod";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const session = getAuthSession();
+    const session = await getAuthSession();
 
     const { authorId, content, postId } = createCommentValidator.parse(body);
 
     if (!session) {
+      return new Response("Unauthorized", { status: 401 });
+    }
+    if (session.user.id !== authorId) {
       return new Response("Unauthorized", { status: 401 });
     }
 
