@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { db } from "@/lib/db";
-import { LikeCommentValidator } from "@/lib/validators";
+import { commentValidator } from "@/lib/validators";
 import { getAuthSession } from "@/lib/auth";
 import { z } from "zod";
 
@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
-    const { userId, commentId } = LikeCommentValidator.parse(body);
+    const { userId, commentId } = commentValidator.parse(body);
 
     const session = await getAuthSession();
 

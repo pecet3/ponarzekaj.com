@@ -6,12 +6,12 @@ export const createPostValidator = z.object({
   emoji: z.string().emoji(),
 });
 
-export const LikePostValidator = z.object({
+export const postValidator = z.object({
   userId: z.string(),
   postId: z.string(),
 });
 
-export const LikeCommentValidator = z.object({
+export const commentValidator = z.object({
   userId: z.string(),
   commentId: z.string(),
 });
