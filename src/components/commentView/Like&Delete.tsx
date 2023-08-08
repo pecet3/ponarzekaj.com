@@ -63,7 +63,10 @@ export const AddLikeDelete: FunctionComponent<{
     <>
       <div className="m-auto mb-1 mr-1 flex justify-end gap-2">
         {isUserComment ? (
-          <button className="flex items-center gap-1 text-sm text-gray-500 ">
+          <button
+            className="flex items-center gap-1 text-sm text-gray-500 "
+            onClick={deleteCommentHandle}
+          >
             <Icons.Delete size={16} className="text-red-400" /> Usuń
             <i className="text-xs font-extralight text-slate-200">{`∙`}</i>
           </button>
