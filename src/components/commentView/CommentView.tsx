@@ -2,13 +2,14 @@ import { db } from "@/lib/db";
 import { FullComment } from "@/types/prisma";
 import Link from "next/link";
 import { FunctionComponent } from "react";
-import { Icons } from "./ui/Icons";
+import { Icons } from "../ui/Icons";
 import { FaRegCommentDots } from "react-icons/fa";
 import Image from "next/image";
 import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
 import { getAuthSession } from "@/lib/auth";
 import { isUserThing } from "@/lib/helpers";
+import { AddLikeDelete } from "./Like&Delete";
 dayjs.extend(relativeTime);
 
 interface Props {
@@ -26,6 +27,10 @@ export const CommentView: FunctionComponent<Props> = async ({ comment }) => {
   const isUserComment = isUserThing(
     author?.id as string,
     session?.user.id as string
+  );
+
+  const isLiked = comment.likes?.find(
+    (like) => like.userId === session?.user.id
   );
 
   return (
@@ -68,11 +73,12 @@ export const CommentView: FunctionComponent<Props> = async ({ comment }) => {
         </div>
       </div>
       <div className="m-auto mb-1 mr-1 flex justify-end gap-2">
-        {isUserComment ? (
-          <button className="flex items-center gap-1 text-sm text-gray-500 ">
-            <Icons.Delete size={16} className="text-red-400" /> Usuń
-          </button>
-        ) : null}
+        <AddLikeDelete
+          commentId={comment.id}
+          userId={session?.user.id}
+          isLiked={isLiked}
+          isUserComment={isUserComment}
+        />
       </div>
     </div>
   );
