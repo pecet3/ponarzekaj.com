@@ -3,7 +3,7 @@ import { db } from "@/lib/db";
 import Error from "@/components/Error";
 import Image from "next/image";
 import { getAuthSession } from "@/lib/auth";
-import { CommentView } from "@/components/CommentView";
+import { CommentView } from "@/components/commentView/CommentView";
 import { MainTile } from "@/components/MainTile";
 import Link from "next/link";
 import { Icons } from "@/components/ui/Icons";
@@ -71,8 +71,8 @@ const page = async ({ params }: PageProps) => {
                 height={48}
               />
             </Link>
-            <div className="flex flex-col">
-              <div className="flex gap-1 text-sm text-slate-300">
+            <div className="flex flex-col break-words">
+              <div className="flex sm:gap-1 text-sm text-slate-300">
                 <Link href={`/profile/${post.author.name}`}>
                   <span className="font-bold">{`@${post.author.name}`}</span>
                 </Link>
@@ -107,7 +107,8 @@ const page = async ({ params }: PageProps) => {
                 {isUserPost ? (
                   <button className="flex items-center gap-1 text-sm text-gray-500 ">
                     <p className="mx-1 font-thin text-xs  text-slate-200">{` ∙`}</p>
-                    <Icons.Delete size={16} className="text-red-400" /> Usuń
+                    <Icons.Delete size={16} className="text-red-400" />{" "}
+                    <p className="hidden sm:block">Usuń</p>
                   </button>
                 ) : null}
               </div>
