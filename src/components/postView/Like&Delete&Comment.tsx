@@ -14,9 +14,7 @@ export const AddLikeDeleteComment: FunctionComponent<{
 }> = ({ isLiked, isUserPost, postId, userId }) => {
   const router = useRouter();
 
-  const addLikeHandle = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  const addLikeHandle = async () => {
     try {
       await axios.post("/api/post/add-like", {
         postId: postId,
@@ -31,16 +29,14 @@ export const AddLikeDeleteComment: FunctionComponent<{
     }
   };
 
-  const deleteLikeHandle = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  const deleteLikeHandle = async () => {
     try {
       await axios.post("/api/post/delete-like", {
         postId: postId,
         userId: userId,
       });
 
-      toast.success("Usunąłeś polubienie pod postem!");
+      toast.success("Usunąłeś polubienie!");
 
       router.refresh();
     } catch (err) {
