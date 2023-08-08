@@ -44,11 +44,29 @@ export const AddLikeDeleteComment: FunctionComponent<{
     }
   };
 
+  const deletePostHandle = async () => {
+    try {
+      await axios.post("/api/post/delete", {
+        postId: postId,
+        userId: userId,
+      });
+
+      toast.success("Usunąłeś post!");
+
+      router.refresh();
+    } catch (err) {
+      toast.error("Ups...Coś poszło nie tak");
+    }
+  };
+
   return (
     <>
       <div className="m-auto mb-1 mr-1 flex justify-end gap-2">
         {isUserPost ? (
-          <button className="flex items-center gap-1 text-sm text-gray-500 ">
+          <button
+            className="flex items-center gap-1 text-sm text-gray-500 "
+            onClick={deletePostHandle}
+          >
             <Icons.Delete size={16} className="text-red-400" /> Usuń
             <i className="text-xs font-extralight text-slate-200">{`∙`}</i>
           </button>
