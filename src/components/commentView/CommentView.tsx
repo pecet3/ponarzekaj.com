@@ -42,8 +42,8 @@ export const CommentView: FunctionComponent<Props> = async ({ comment }) => {
               src={author?.image || ""}
               alt={`@${author?.name}'s avatar`}
               className="h-10 w-10 rounded-full md:h-12 md:w-12"
-              width={48}
-              height={48}
+              width={96}
+              height={96}
             />
           </Link>
           <div className="flex flex-col">

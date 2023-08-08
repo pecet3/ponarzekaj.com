@@ -33,8 +33,8 @@ export const Navbar = async () => {
               <div className="w-10 rounded-full">
                 <Image
                   src={session.user.image ?? ""}
-                  height={16}
-                  width={16}
+                  height={96}
+                  width={96}
                   alt="Your avatar"
                 />
               </div>

@@ -79,8 +79,8 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
             input.content ? "hidden md:flex" : ""
           }`}
           alt="Your profile photo"
-          width={64}
-          height={64}
+          width={96}
+          height={96}
         />
       </Link>
       <textarea

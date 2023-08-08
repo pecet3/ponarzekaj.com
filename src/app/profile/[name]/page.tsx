@@ -19,7 +19,7 @@ const page = async ({ params }: PageProps) => {
   });
 
   const user = data[0];
-  console.log(user);
+
   const posts = await db.post.findMany({
     where: {
       authorId: user.id ?? "",
@@ -47,8 +47,8 @@ const page = async ({ params }: PageProps) => {
           <Image
             src={user.image ?? ""}
             alt={`zdjęcie ${user.name}`}
-            height={256}
-            width={256}
+            height={700}
+            width={700}
             className="absolute rounded-full w-32 h-32  sm:w-40 sm:h-40 left-3 bottom-[-4rem] sm:bottom-[-5rem] "
           />
         </div>
