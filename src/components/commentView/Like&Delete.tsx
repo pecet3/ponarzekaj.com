@@ -44,6 +44,21 @@ export const AddLikeDelete: FunctionComponent<{
     }
   };
 
+  const deleteCommentHandle = async () => {
+    try {
+      await axios.post("/api/comment/delete", {
+        commentId,
+        userId,
+      });
+
+      toast.success("Usunąłeś komentarz!");
+
+      router.refresh();
+    } catch (err) {
+      toast.error("Ups...Coś poszło nie tak");
+    }
+  };
+
   return (
     <>
       <div className="m-auto mb-1 mr-1 flex justify-end gap-2">
