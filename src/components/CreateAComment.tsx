@@ -33,7 +33,7 @@ export const CreateComment: React.FC<{ user: User | null; postId: string }> = ({
         postId,
         authorId: user?.id,
       });
-      toast.success("Dodałeś Post!");
+      toast.success("Dodałeś komentarz!");
       setInput("");
       router.refresh();
     } catch (error) {
