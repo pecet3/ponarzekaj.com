@@ -34,7 +34,7 @@ const page = async ({ params }: PageProps) => {
   if (data.length === 0 || !posts) return <Error />;
 
   return (
-    <main className="flex flex-col min-h-screen m-auto mt-0 sm:mt-2 justify-start items-center">
+    <main className="flex flex-col min-h-screen m-auto sm:my-2 justify-start items-center">
       <section className="rounded-md bg-indigo-500 bg-opacity-60 flex flex-col shadow-lg shadow-indigo-600 max-w-3xl">
         <div className="relative">
           <Image
