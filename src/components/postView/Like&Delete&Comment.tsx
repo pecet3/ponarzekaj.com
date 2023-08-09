@@ -88,7 +88,7 @@ export const AddLikeDeleteComment: FunctionComponent<{
         )}
         <Link
           href={`/post/${postId}`}
-          className="flex items-center justify-center text-xs rounded-xl px-1 bg-slate-900"
+          className="flex items-center justify-center text-xs rounded-xl px-1 bg-slate-200 text-black"
         >
           <Icons.AddComment size={16} className="text-green-500" /> Skomentuj
         </Link>
