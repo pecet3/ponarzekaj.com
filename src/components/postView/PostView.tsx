@@ -36,9 +36,9 @@ export const PostView: React.FC<Props> = async ({ post }) => {
             />
           </Link>
           <div className="flex flex-col">
-            <div className="flex gap-1 text-sm text-slate-300">
+            <div className="flex gap-0.5 sm:gap-1 text-xs sm:text-sm text-slate-300 ">
               <Link href={`/profile/${post.author.name}`}>
-                <span className="font-bold">{`@${post.author.name}`}</span>
+                <span className="font-thin">{`@${post.author.name}`}</span>
               </Link>
               <Link href={`/post/${post.id}`}>
                 <span className="font-thin">{`∙ ${dayjs(
@@ -50,19 +50,19 @@ export const PostView: React.FC<Props> = async ({ post }) => {
                 className=" flex items-center justify-center text-right text-xs "
               >
                 <p className="mx-1 font-thin">{` ∙`}</p>
-                <div className="bg-zinc-900 rounded-xl px-1 flex py-0.5">
-                  <FaRegComments size={16} className="mr-1 text-emerald-500" />
-                  {post.comments.length}
-                </div>
-              </Link>
-              <Link
-                href={`/post/${post.id}`}
-                className="mr-1 flex items-center justify-center text-right text-xs "
-              >
-                <p className="mx-1 font-thin">{` ∙`}</p>
-                <div className="bg-zinc-900 rounded-xl px-1 flex py-0.5">
-                  <Icons.Like size={16} className="mr-1 text-blue-700" />
-                  {post.likes?.length}
+                <div className="bg-fuchsia-950 rounded-xl px-1 flex py-0.5 gap-1">
+                  <span className="flex">
+                    <Icons.Like size={16} className=" text-blue-700 mr-0.5" />
+                    {post.likes?.length}
+                  </span>
+                  |
+                  <span className="flex">
+                    <FaRegComments
+                      size={16}
+                      className="mr-1 text-emerald-500"
+                    />
+                    {post.comments.length}
+                  </span>
                 </div>
               </Link>
             </div>
