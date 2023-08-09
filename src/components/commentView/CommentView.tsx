@@ -80,7 +80,9 @@ export const CommentView: FunctionComponent<Props> = async ({ comment }) => {
             isLiked={isLiked}
             isUserComment={isUserComment}
           />
-        ) : null}
+        ) : (
+          <div className="opacity-0 p-1"></div>
+        )}
       </div>
     </div>
   );

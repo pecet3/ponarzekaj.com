@@ -87,7 +87,9 @@ export const PostView: React.FC<Props> = async ({ post }) => {
           isUserPost={isUserPost}
           userId={session?.user.id}
         />
-      ) : null}
+      ) : (
+        <div className="opacity-0 p-1"></div>
+      )}
     </div>
   );
 };
