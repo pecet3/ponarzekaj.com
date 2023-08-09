@@ -80,13 +80,14 @@ export const PostView: React.FC<Props> = async ({ post }) => {
           </div>
         </div>
       </div>
-
-      <AddLikeDeleteComment
-        postId={post.id}
-        isLiked={isLiked}
-        isUserPost={isUserPost}
-        userId={session?.user.id}
-      />
+      {session ? (
+        <AddLikeDeleteComment
+          postId={post.id}
+          isLiked={isLiked}
+          isUserPost={isUserPost}
+          userId={session?.user.id}
+        />
+      ) : null}
     </div>
   );
 };
