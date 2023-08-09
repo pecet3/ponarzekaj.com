@@ -36,14 +36,14 @@ export const PostView: React.FC<Props> = async ({ post }) => {
             />
           </Link>
           <div className="flex flex-col">
-            <div className="flex gap-0.5 sm:gap-1 text-xs sm:text-sm text-slate-300 ">
+            <div className="flex gap-0.5 sm:gap-1 text-xs sm:text-sm text-slate-300 items-center">
               <Link href={`/profile/${post.author.name}`}>
-                <span className="font-thin">{`@${post.author.name}`}</span>
+                <span className="font-bold">{`@${post.author.name}`}</span>
               </Link>
               <Link href={`/post/${post.id}`}>
-                <span className="font-thin">{`∙ ${dayjs(
+                <p className="font-thin">{`∙ ${dayjs(
                   post.createdAt
-                ).fromNow()}`}</span>
+                ).fromNow()}`}</p>
               </Link>
               <Link
                 href={`/post/${post.id}`}
