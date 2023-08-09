@@ -8,8 +8,13 @@ import { PostView } from "@/components/postView/PostView";
 import type { FullPost } from "@/types/prisma";
 import { CreatePost } from "../components/CreateAPost";
 import { MainTile } from "@/components/MainTile";
+import PaginationControls from "@/components/PaginationControls";
 
-export default async function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   const session = await getAuthSession();
 
   const posts = await db.post.findMany({
@@ -27,6 +32,16 @@ export default async function Home() {
     },
   });
 
+  // pagination things
+
+  const page = searchParams["page"] ?? "1";
+  const per_page = searchParams["per_page"] ?? "10";
+
+  const start = (Number(page) - 1) * Number(per_page);
+  const end = start + Number(per_page);
+
+  const entries = posts.slice(start, end);
+
   return (
     <MainTile>
       {session ? (
@@ -36,9 +51,13 @@ export default async function Home() {
           Tylko zalogowani użytkownicy mogą wstawiać posty
         </p>
       )}
-      {posts.map((post) => {
+      {entries.map((post) => {
         return <PostView key={post.id} post={post} />;
       })}
+      <PaginationControls
+        hasNextPage={end < posts.length}
+        hasPrevPage={start > 0}
+      />
     </MainTile>
   );
 }
