@@ -61,10 +61,10 @@ export const AddLikeDeleteComment: FunctionComponent<{
 
   return (
     <>
-      <div className="m-auto mb-1 mr-1 flex justify-end gap-2">
+      <div className="m-auto mb-1 mr-1 flex justify-end gap-2 text-xs">
         {isUserPost ? (
           <button
-            className="flex items-center gap-1 text-sm text-gray-500 "
+            className="flex items-center gap-1 text-gray-500 "
             onClick={deletePostHandle}
           >
             <Icons.Delete size={16} className="text-red-400" /> Usuń
@@ -73,14 +73,14 @@ export const AddLikeDeleteComment: FunctionComponent<{
         ) : null}
         {!isLiked ? (
           <button
-            className=" flex items-center justify-center text-xs rounded-xl px-1 bg-slate-200 text-black"
+            className=" flex items-center justify-center rounded-xl px-1 py-0.5 bg-slate-200 text-black"
             onClick={addLikeHandle}
           >
             <Icons.Like size={16} className="text-blue-500" /> Lubię to
           </button>
         ) : (
           <button
-            className=" flex items-center justify-center text-xs rounded-xl px-1 bg-slate-300 text-black"
+            className=" flex items-center justify-center rounded-xl px-1 py-0.5 bg-slate-300 text-black"
             onClick={deleteLikeHandle}
           >
             <Icons.Like size={16} className="text-blue-800" /> Polubiono
@@ -88,7 +88,7 @@ export const AddLikeDeleteComment: FunctionComponent<{
         )}
         <Link
           href={`/post/${postId}`}
-          className="flex items-center justify-center text-xs rounded-xl px-1 bg-slate-200 text-black"
+          className="flex items-center justify-center  rounded-xl px-1 py-0.5 bg-slate-200 text-black"
         >
           <Icons.AddComment size={16} className="text-green-500" /> Skomentuj
         </Link>
