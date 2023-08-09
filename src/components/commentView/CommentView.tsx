@@ -73,12 +73,14 @@ export const CommentView: FunctionComponent<Props> = async ({ comment }) => {
         </div>
       </div>
       <div className="m-auto mb-1 mr-1 flex justify-end gap-2">
-        <AddLikeDelete
-          commentId={comment.id}
-          userId={session?.user.id}
-          isLiked={isLiked}
-          isUserComment={isUserComment}
-        />
+        {session ? (
+          <AddLikeDelete
+            commentId={comment.id}
+            userId={session?.user.id}
+            isLiked={isLiked}
+            isUserComment={isUserComment}
+          />
+        ) : null}
       </div>
     </div>
   );
