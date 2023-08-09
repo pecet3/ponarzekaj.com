@@ -67,11 +67,7 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
 
   if (!user) return null;
   return (
-    <section
-      className={`flex w-full items-center justify-center gap-1 bg-indigo-950 md:gap-2 rounded-md max-w-3xl ${
-        input.content === "" ? "p-2" : "p-2"
-      }`}
-    >
+    <section className="flex w-full items-center justify-center gap-1 bg-indigo-950 md:gap-2 rounded-md max-w-3xl p-2">
       <Link href={`/profile/${user?.name}`}>
         <Image
           src={user?.image || ""}
@@ -140,7 +136,7 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
                 Dodaj
               </button>
               <p
-                className={`text-[10px] text-slate-200 ${
+                className={`text-[10px] text-slate-200 w-8 ${
                   counter > maxInputLength ? "text-red-400" : ""
                 }`}
               >
