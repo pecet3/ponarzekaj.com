@@ -21,7 +21,7 @@ const PaginationControls: FC<PaginationControlsProps> = ({
   return (
     <div className="flex gap-2 justify-center m-auto bg-fuchsia-900 bg-opacity-70 rounded-lg p-1">
       <button
-        className="text-teal-500"
+        className="text-teal-400"
         disabled={!hasPrevPage}
         onClick={() => {
           router.push(`/?page=${Number(page) - 1}&per_page=${per_page}`);
@@ -35,7 +35,7 @@ const PaginationControls: FC<PaginationControlsProps> = ({
       </div>
 
       <button
-        className="text-teal-500"
+        className="text-teal-400"
         disabled={!hasNextPage}
         onClick={() => {
           router.push(`/?page=${Number(page) + 1}&per_page=${per_page}`);
