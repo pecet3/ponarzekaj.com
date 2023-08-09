@@ -112,17 +112,14 @@ const page = async ({ params }: PageProps) => {
                   </button>
                 ) : null}
               </div>
-              <Link
-                href={`/post/${post.id}`}
-                className="max-w-[16rem] grow sm:max-w-md md:max-w-[36rem]"
-              >
+              <div className="max-w-[16rem] grow sm:max-w-md md:max-w-[36rem]">
                 <span className=" break-words text-base md:text-lg">
                   {post.content}
                 </span>
                 <span className="mx-1 text-xl font-bold text-slate-400">{` ∙ ${
                   post.emoji ?? "😐"
                 }`}</span>
-              </Link>
+              </div>
             </div>
           </div>
         </div>
