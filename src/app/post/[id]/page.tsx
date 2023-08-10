@@ -138,6 +138,7 @@ const page = async ({ params, searchParams }: PageProps) => {
         hasNextPage={end < comments.length}
         hasPrevPage={start > 0}
         postId={post.id}
+        length={comments.length}
       />
     </MainTile>
   );

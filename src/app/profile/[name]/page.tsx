@@ -3,18 +3,22 @@ import { db } from "@/lib/db";
 import Error from "@/components/Error";
 import Image from "next/image";
 import { PostView } from "@/components/postView/PostView";
+import PaginationControls from "@/components/PaginationControls";
+import { MainTile } from "@/components/MainTile";
 
 interface PageProps {
   params: {
     name: string;
   };
+  searchParams: { [key: string]: string | string[] | undefined };
 }
 
-const page = async ({ params }: PageProps) => {
+const page = async ({ params, searchParams }: PageProps) => {
   const { name } = params;
+  const decodedName = decodeURI(name);
   const data = await db.user.findMany({
     where: {
-      name: decodeURI(name),
+      name: decodedName,
     },
   });
 
@@ -33,36 +37,50 @@ const page = async ({ params }: PageProps) => {
 
   if (data.length === 0 || !posts) return <Error />;
 
+  // pagination things
+
+  const page = searchParams["page"] ?? "1";
+  const per_page = searchParams["per_page"] ?? "10";
+
+  const start = (Number(page) - 1) * Number(per_page);
+  const end = start + Number(per_page);
+
+  const entries = posts.slice(start, end);
+
   return (
-    <main className="flex flex-col min-h-screen m-auto sm:my-2 justify-start items-center">
-      <section className="rounded-md bg-indigo-500 bg-opacity-60 flex flex-col shadow-lg shadow-indigo-600 max-w-3xl">
-        <div className="relative">
-          <Image
-            src={user.backgroundImage ?? ""}
-            alt={`zdjęcie ${user.name}`}
-            height={1280}
-            width={720}
-            className="h-64 sm:h-96 sm:rounded-t-md  w-screen"
-          />
-          <Image
-            src={user.image ?? ""}
-            alt={`zdjęcie ${user.name}`}
-            height={700}
-            width={700}
-            className="absolute rounded-full w-32 h-32  sm:w-40 sm:h-40 left-3 bottom-[-4rem] sm:bottom-[-5rem] "
-          />
-        </div>
-        <span className="flex justify-center flex-col sm:ml-48 ml-40 mt-2">
-          <p className="text-xl sm:text-2xl text-slate-800">{user.name}</p>
-          <p className="text-base sm:text-xl text-slate-600">{user.email}</p>
-        </span>
-        <section className="mt-10 p-1 sm:p-2 flex flex-col gap-2 ">
-          {posts.map((post) => {
-            return <PostView post={post} key={post.id} />;
-          })}
-        </section>
-      </section>
-    </main>
+    <MainTile noPadding>
+      <div className="relative">
+        <Image
+          src={user.backgroundImage ?? ""}
+          alt={`zdjęcie ${user.name}`}
+          height={1280}
+          width={720}
+          className="h-64 sm:h-96 sm:rounded-t-md  w-screen"
+        />
+        <Image
+          src={user.image ?? ""}
+          alt={`zdjęcie ${user.name}`}
+          height={700}
+          width={700}
+          className="absolute rounded-full w-32 h-32  sm:w-40 sm:h-40 left-3 bottom-[-4rem] sm:bottom-[-5rem] "
+        />
+      </div>
+      <span className="flex justify-center flex-col sm:ml-48 ml-40 mt-2">
+        <p className="text-xl sm:text-2xl text-slate-800">{user.name}</p>
+        <p className="text-base sm:text-xl text-slate-600">{user.email}</p>
+      </span>
+      <div className="mt-10 p-1 sm:p-2 flex flex-col gap-2 ">
+        {entries.map((post) => {
+          return <PostView post={post} key={post.id} />;
+        })}
+      </div>
+      <PaginationControls
+        hasNextPage={end < posts.length}
+        hasPrevPage={start > 0}
+        postId={decodedName}
+        length={posts.length}
+      />
+    </MainTile>
   );
 };
 
