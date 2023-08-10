@@ -31,7 +31,8 @@ const PaginationControls: FC<PaginationControlsProps> = ({
       </button>
 
       <div className="text-slate-200">
-        {page} / {Math.ceil((2 * Number(per_page)) / Number(per_page))}
+        {page} /{" "}
+        {Math.ceil((Number(page) * Number(per_page)) / Number(per_page))}
       </div>
 
       <button
