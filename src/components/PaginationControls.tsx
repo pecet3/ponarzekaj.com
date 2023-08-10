@@ -6,11 +6,13 @@ import { BsCaretRightSquareFill, BsCaretLeftSquareFill } from "react-icons/bs";
 interface PaginationControlsProps {
   hasNextPage: boolean;
   hasPrevPage: boolean;
+  postId?: string;
 }
 
 const PaginationControls: FC<PaginationControlsProps> = ({
   hasNextPage,
   hasPrevPage,
+  postId,
 }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -20,30 +22,58 @@ const PaginationControls: FC<PaginationControlsProps> = ({
 
   return (
     <div className="flex gap-2 justify-center m-auto bg-fuchsia-900 bg-opacity-70 rounded-lg p-1">
-      <button
-        className="text-teal-400"
-        disabled={!hasPrevPage}
-        onClick={() => {
-          router.push(`/?page=${Number(page) - 1}&per_page=${per_page}`);
-        }}
-      >
-        <BsCaretLeftSquareFill size={24} />
-      </button>
+      {postId ? (
+        <button
+          className="text-teal-400"
+          disabled={!hasPrevPage}
+          onClick={() => {
+            router.push(
+              `/post/${postId}/?page=${Number(page) - 1}&per_page=${per_page}`
+            );
+          }}
+        >
+          <BsCaretLeftSquareFill size={24} />
+        </button>
+      ) : (
+        <button
+          className="text-teal-400"
+          disabled={!hasPrevPage}
+          onClick={() => {
+            router.push(`/?page=${Number(page) - 1}&per_page=${per_page}`);
+          }}
+        >
+          <BsCaretLeftSquareFill size={24} />
+        </button>
+      )}
 
       <div className="text-slate-200">
         {page} /{" "}
         {Math.ceil((Number(page) * Number(per_page)) / Number(per_page))}
       </div>
 
-      <button
-        className="text-teal-400"
-        disabled={!hasNextPage}
-        onClick={() => {
-          router.push(`/?page=${Number(page) + 1}&per_page=${per_page}`);
-        }}
-      >
-        <BsCaretRightSquareFill size={24} />
-      </button>
+      {postId ? (
+        <button
+          className="text-teal-400"
+          disabled={!hasNextPage}
+          onClick={() => {
+            router.push(
+              `/post/${postId}/?page=${Number(page) + 1}&per_page=${per_page}`
+            );
+          }}
+        >
+          <BsCaretRightSquareFill size={24} />
+        </button>
+      ) : (
+        <button
+          className="text-teal-400"
+          disabled={!hasNextPage}
+          onClick={() => {
+            router.push(`/?page=${Number(page) + 1}&per_page=${per_page}`);
+          }}
+        >
+          <BsCaretRightSquareFill size={24} />
+        </button>
+      )}
     </div>
   );
 };
