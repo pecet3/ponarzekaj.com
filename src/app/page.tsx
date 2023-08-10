@@ -55,6 +55,7 @@ export default async function Home({
         return <PostView key={post.id} post={post} />;
       })}
       <PaginationControls
+        length={posts.length}
         hasNextPage={end < posts.length}
         hasPrevPage={start > 0}
       />
