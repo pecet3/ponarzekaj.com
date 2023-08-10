@@ -72,38 +72,33 @@ const page = async ({ params }: PageProps) => {
               />
             </Link>
             <div className="flex flex-col break-words">
-              <div className="flex sm:gap-1 text-sm text-slate-300">
+              <div className="flex gap-0.5 sm:gap-1 text-xs sm:text-sm text-slate-300 items-center">
                 <Link href={`/profile/${post.author.name}`}>
                   <span className="font-bold">{`@${post.author.name}`}</span>
                 </Link>
-                <Link href={`/post/${post.id}`}>
-                  <span className="font-thin">{`∙ ${dayjs(
-                    post.createdAt
-                  ).fromNow()}`}</span>
-                </Link>
-                <Link
-                  href={`/post/${post.id}`}
-                  className=" flex items-center justify-center text-right text-xs "
-                >
+
+                <p className="font-thin">{`∙ ${dayjs(
+                  post.createdAt
+                ).fromNow()}`}</p>
+
+                <div className=" flex items-center justify-center text-right text-xs ">
                   <p className="mx-1 font-thin">{` ∙`}</p>
-                  <div className="bg-zinc-900 rounded-xl px-1 flex py-0.5">
-                    <Icons.Comments
-                      size={16}
-                      className="mr-1 text-emerald-500"
-                    />
-                    {post.comments.length}
+                  <div className="bg-fuchsia-950 rounded-xl px-1 flex py-0.5 gap-1">
+                    <span className="flex">
+                      <Icons.Like size={16} className=" text-blue-500 mr-0.5" />
+                      {post.likes?.length}
+                    </span>
+                    |
+                    <span className="flex">
+                      <Icons.Comments
+                        size={16}
+                        className="mr-1 text-emerald-500"
+                      />
+                      {post.comments.length}
+                    </span>
                   </div>
-                </Link>
-                <Link
-                  href={`/post/${post.id}`}
-                  className="mr-1 flex items-center justify-center text-right text-xs "
-                >
-                  <p className="mx-1 font-thin">{` ∙`}</p>
-                  <div className="bg-zinc-900 rounded-xl px-1 flex py-0.5">
-                    <Icons.Like size={16} className="mr-1 text-blue-700" />
-                    {post.likes?.length}
-                  </div>
-                </Link>
+                </div>
+
                 {isUserPost ? (
                   <button className="flex items-center gap-1 text-sm text-gray-500 ">
                     <p className="mx-1 font-thin text-xs  text-slate-200">{` ∙`}</p>
@@ -123,13 +118,7 @@ const page = async ({ params }: PageProps) => {
             </div>
           </div>
         </div>
-        {session ? (
-          <CreateComment user={user} postId={id} />
-        ) : (
-          <p className="text-sm text-center italic">
-            Tylko zalogowani użytkownicy mogą komentować
-          </p>
-        )}
+        {session ? <CreateComment user={user} postId={id} /> : null}
       </div>
       {comments.map((comment) => (
         <CommentView key={comment.id} comment={comment} />
