@@ -11,15 +11,17 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { isUserThing } from "@/lib/helpers";
 import { CreateComment } from "@/components/CreateAComment";
+import PaginationControls from "@/components/PaginationControls";
 dayjs.extend(relativeTime);
 
 interface PageProps {
   params: {
     id: string;
   };
+  searchParams: { [key: string]: string | string[] | undefined };
 }
 
-const page = async ({ params }: PageProps) => {
+const page = async ({ params, searchParams }: PageProps) => {
   const session = await getAuthSession();
 
   const user = await db.user.findUnique({
@@ -56,6 +58,15 @@ const page = async ({ params }: PageProps) => {
     post?.authorId as string
   );
 
+  // pagination things
+
+  const page = searchParams["page"] ?? "1";
+  const per_page = searchParams["per_page"] ?? "10";
+
+  const start = (Number(page) - 1) * Number(per_page);
+  const end = start + Number(per_page);
+
+  const entries = comments.slice(start, end);
   if (!post) return null;
   return (
     <MainTile>
@@ -120,9 +131,14 @@ const page = async ({ params }: PageProps) => {
         </div>
         {session ? <CreateComment user={user} postId={id} /> : null}
       </div>
-      {comments.map((comment) => (
+      {entries.map((comment) => (
         <CommentView key={comment.id} comment={comment} />
       ))}
+      <PaginationControls
+        hasNextPage={end < comments.length}
+        hasPrevPage={start > 0}
+        postId={post.id}
+      />
     </MainTile>
   );
 };
