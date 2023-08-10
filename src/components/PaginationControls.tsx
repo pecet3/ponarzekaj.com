@@ -4,15 +4,19 @@ import { FC } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { BsCaretRightSquareFill, BsCaretLeftSquareFill } from "react-icons/bs";
 interface PaginationControlsProps {
+  length: number;
   hasNextPage: boolean;
   hasPrevPage: boolean;
   postId?: string;
+  userName?: string;
 }
 
 const PaginationControls: FC<PaginationControlsProps> = ({
+  length,
   hasNextPage,
   hasPrevPage,
   postId,
+  userName,
 }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -34,6 +38,20 @@ const PaginationControls: FC<PaginationControlsProps> = ({
         >
           <BsCaretLeftSquareFill size={24} />
         </button>
+      ) : userName ? (
+        <button
+          className="text-teal-400"
+          disabled={!hasPrevPage}
+          onClick={() => {
+            router.push(
+              `/profile/${userName}?page=${
+                Number(page) - 1
+              }&per_page=${per_page}`
+            );
+          }}
+        >
+          <BsCaretLeftSquareFill size={24} />
+        </button>
       ) : (
         <button
           className="text-teal-400"
@@ -47,8 +65,7 @@ const PaginationControls: FC<PaginationControlsProps> = ({
       )}
 
       <div className="text-slate-200">
-        {page} /{" "}
-        {Math.ceil((Number(page) * Number(per_page)) / Number(per_page))}
+        {page} / {Math.ceil(length / Number(per_page))}
       </div>
 
       {postId ? (
@@ -58,6 +75,20 @@ const PaginationControls: FC<PaginationControlsProps> = ({
           onClick={() => {
             router.push(
               `/post/${postId}/?page=${Number(page) + 1}&per_page=${per_page}`
+            );
+          }}
+        >
+          <BsCaretRightSquareFill size={24} />
+        </button>
+      ) : userName ? (
+        <button
+          className="text-teal-400"
+          disabled={!hasNextPage}
+          onClick={() => {
+            router.push(
+              `/profile/${userName}?page=${
+                Number(page) + 1
+              }&per_page=${per_page}`
             );
           }}
         >
