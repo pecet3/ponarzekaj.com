@@ -61,7 +61,7 @@ export const AddLikeDeleteComment: FunctionComponent<{
 
   return (
     <>
-      <div className="m-auto mb-1 mr-1 flex justify-end gap-2 text-xs">
+      <div className="m-auto mt-3 mb-1 mr-1 flex justify-end gap-2 text-xs">
         {isUserPost ? (
           <button
             className="flex items-center gap-1 text-gray-500 "
