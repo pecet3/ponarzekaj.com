@@ -68,14 +68,14 @@ export const PostView: React.FC<Props> = async ({ post }) => {
             </div>
             <Link
               href={`/post/${post.id}`}
-              className="max-w-[16rem] grow sm:max-w-md md:max-w-[36rem] flex flex-1 items-center"
+              className="max-w-[16rem] grow sm:max-w-md md:max-w-[36rem]"
             >
               <span className=" break-words text-base md:text-lg">
                 {post.content}
               </span>
-              <span className="mx-1 text-xl font-bold text-slate-400  rounded-full flex">
-                {`${post.emoji ?? "😐"}`}
-              </span>
+              <span className="mx-1 text-xl font-bold text-slate-400">{` ∙ ${
+                post.emoji ?? "😐"
+              }`}</span>
             </Link>
           </div>
         </div>

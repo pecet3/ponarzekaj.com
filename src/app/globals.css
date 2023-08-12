@@ -10,10 +10,17 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    background-color: #E8F6FF;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 1000'%3E%3Cg fill-opacity='0.92'%3E%3Ccircle fill='%23E8F6FF' cx='50' cy='0' r='50'/%3E%3Cg fill='%23e5ecff' %3E%3Ccircle cx='0' cy='50' r='50'/%3E%3Ccircle cx='100' cy='50' r='50'/%3E%3C/g%3E%3Ccircle fill='%23e2e2ff' cx='50' cy='100' r='50'/%3E%3Cg fill='%23dfd8ff' %3E%3Ccircle cx='0' cy='150' r='50'/%3E%3Ccircle cx='100' cy='150' r='50'/%3E%3C/g%3E%3Ccircle fill='%23dbceff' cx='50' cy='200' r='50'/%3E%3Cg fill='%23d8c4ff' %3E%3Ccircle cx='0' cy='250' r='50'/%3E%3Ccircle cx='100' cy='250' r='50'/%3E%3C/g%3E%3Ccircle fill='%23d4baff' cx='50' cy='300' r='50'/%3E%3Cg fill='%23d0b0ff' %3E%3Ccircle cx='0' cy='350' r='50'/%3E%3Ccircle cx='100' cy='350' r='50'/%3E%3C/g%3E%3Ccircle fill='%23cca6ff' cx='50' cy='400' r='50'/%3E%3Cg fill='%23c89cff' %3E%3Ccircle cx='0' cy='450' r='50'/%3E%3Ccircle cx='100' cy='450' r='50'/%3E%3C/g%3E%3Ccircle fill='%23c392ff' cx='50' cy='500' r='50'/%3E%3Cg fill='%23bf88fe' %3E%3Ccircle cx='0' cy='550' r='50'/%3E%3Ccircle cx='100' cy='550' r='50'/%3E%3C/g%3E%3Ccircle fill='%23ba7efe' cx='50' cy='600' r='50'/%3E%3Cg fill='%23b573fe' %3E%3Ccircle cx='0' cy='650' r='50'/%3E%3Ccircle cx='100' cy='650' r='50'/%3E%3C/g%3E%3Ccircle fill='%23af69fd' cx='50' cy='700' r='50'/%3E%3Cg fill='%23aa5dfd' %3E%3Ccircle cx='0' cy='750' r='50'/%3E%3Ccircle cx='100' cy='750' r='50'/%3E%3C/g%3E%3Ccircle fill='%23a452fc' cx='50' cy='800' r='50'/%3E%3Cg fill='%239e45fc' %3E%3Ccircle cx='0' cy='850' r='50'/%3E%3Ccircle cx='100' cy='850' r='50'/%3E%3C/g%3E%3Ccircle fill='%239738fb' cx='50' cy='900' r='50'/%3E%3Cg fill='%239027fb' %3E%3Ccircle cx='0' cy='950' r='50'/%3E%3Ccircle cx='100' cy='950' r='50'/%3E%3C/g%3E%3Ccircle fill='%23890EFA' cx='50' cy='1000' r='50'/%3E%3C/g%3E%3C/svg%3E");
-    background-attachment: fixed;
-    background-size: contain;
+
+/*
+* Created with https://www.css-gradient.com
+* Gradient link: https://www.css-gradient.com/?c1=daceff&c2=8919f2&gt=l&gd=dbb
+*/
+/*
+* Created with https://www.css-gradient.com
+* Gradient link: https://www.css-gradient.com/?c1=e4dcff&c2=7a19f2&gt=l&gd=dbb
+*/
+background: #E4DCFF;
+background: linear-gradient(0deg, #E4DCFF, #7A19F2);
   }
 }
 
