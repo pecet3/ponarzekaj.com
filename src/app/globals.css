@@ -10,17 +10,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-
-/*
-* Created with https://www.css-gradient.com
-* Gradient link: https://www.css-gradient.com/?c1=daceff&c2=8919f2&gt=l&gd=dbb
-*/
-/*
-* Created with https://www.css-gradient.com
-* Gradient link: https://www.css-gradient.com/?c1=e4dcff&c2=7a19f2&gt=l&gd=dbb
-*/
-background: #E4DCFF;
-background: linear-gradient(0deg, #E4DCFF, #7A19F2);
+background: #000000;
+background: linear-gradient(180deg, #000000, #8a2dfd);
   }
 }
 
