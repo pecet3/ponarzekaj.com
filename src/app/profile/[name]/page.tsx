@@ -48,7 +48,7 @@ const page = async ({ params, searchParams }: PageProps) => {
   const entries = posts.slice(start, end);
 
   return (
-    <MainTile noPadding>
+    <MainTile paddingBottom>
       <div className="relative">
         <Image
           src={user.backgroundImage ?? ""}
@@ -65,9 +65,9 @@ const page = async ({ params, searchParams }: PageProps) => {
           className="absolute rounded-full w-32 h-32  sm:w-40 sm:h-40 left-3 bottom-[-4rem] sm:bottom-[-5rem] "
         />
       </div>
-      <span className="flex justify-center flex-col sm:ml-48 ml-40 mt-2">
-        <p className="text-xl sm:text-2xl text-slate-800">{user.name}</p>
-        <p className="text-base sm:text-xl text-slate-600">{user.email}</p>
+      <span className="flex justify-center flex-col sm:ml-48 ml-40 mt-2 text-slate-200">
+        <p className="text-xl sm:text-2xl  font-bold">{user.name}</p>
+        <p className="text-base sm:text-xl ">{user.email}</p>
       </span>
       <div className="mt-10 p-1 sm:p-2 flex flex-col gap-2 ">
         {entries.map((post) => {
