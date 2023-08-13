@@ -68,6 +68,17 @@ model User {
   accounts        Account[]
   sessions        Session[]
   posts           Post[]
+  friends         Friend[]  @relation("UserFriend")
+}
+
+model Friend {
+  id       String  @id @default(cuid())
+  user     User    @relation("UserFriend", fields: [userId], references: [id])
+  userId   String
+  friendId String
+  accepted Boolean @default(false)
+
+  @@index([userId])
 }
 
 model Post {
@@ -89,6 +100,8 @@ model LikePost {
   userId    String
   postId    String
   post      Post     @relation(fields: [postId], references: [id])
+
+  @@index([postId])
 }
 
 model LikeComment {
@@ -97,6 +110,8 @@ model LikeComment {
   userId    String
   commentId String
   comment   Comment  @relation(fields: [commentId], references: [id])
+
+  @@index([commentId])
 }
 
 model Comment {
