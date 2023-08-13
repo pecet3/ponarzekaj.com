@@ -24,12 +24,12 @@ export default function RootLayout({
         <Providers>
           <Navbar />
           {children}
-          <footer className="bg-indigo-500 bg-opacity-80 text-slate-300 text-sm flex flex-col items-center p-2 justify-center mt-8 ">
+          <footer className="bg-purple-800 text-slate-300 text-sm flex flex-col items-center p-2 justify-center mt-8 ">
             <p className="">Strona powstała w celu nauki oraz zabawy.</p>
             <p>
               <a
                 href="https://github.com/pecet3"
-                className="text-indigo-900 font-bold"
+                className="text-slate-900 font-bold"
               >
                 @Jakub Pacewicz
               </a>
