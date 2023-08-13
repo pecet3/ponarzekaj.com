@@ -4,6 +4,7 @@ import { postValidator } from "@/lib/validators";
 import { getAuthSession } from "@/lib/auth";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -30,7 +31,7 @@ export async function POST(req: NextRequest) {
 
     const commentsArray = commentsList.map((comment) => comment.id);
 
-    for (let commentId of commentsArray) {
+    for (const commentId of commentsArray) {
       await db.likeComment.deleteMany({
         where: {
           commentId,
