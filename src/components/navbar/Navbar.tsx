@@ -14,9 +14,9 @@ export const Navbar = async () => {
     },
   });
   return (
-    <nav className="navbar bg-base-100 text-slate-200">
+    <nav className="navbar bg-slate-700 text-slate-200">
       <div className="flex-1">
-        <Link className="btn btn-ghost normal-case text-xl" href="/">
+        <Link className="btn btn-ghost normal-case text-xl p-1 sm:p-2" href="/">
           ponarzekaj.com
         </Link>
       </div>
