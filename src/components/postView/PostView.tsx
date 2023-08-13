@@ -23,7 +23,7 @@ export const PostView: React.FC<Props> = async ({ post }) => {
   const isLiked = post.likes?.find((like) => like.userId === session?.user.id);
 
   return (
-    <div className="rounded-md bg-indigo-900 hover:bg-indigo-800 duration-300 hover:shadow-slate-900 shadow-md shadow-slate-800 text-slate-200 w-full">
+    <div className="rounded-md bg-indigo-900 hover:bg-indigo-800 duration-300 hover:shadow-none shadow-md shadow-slate-800 text-slate-200 w-full">
       <div className="flex items-end">
         <div className="flex justify-start gap-2 px-1 pt-1 md:px-2 md:pt-2">
           <Link href={`/profile/${post.author.name}`} className="">
