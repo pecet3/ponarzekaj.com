@@ -1,7 +1,7 @@
 import { FcGoogle } from "react-icons/fc";
 import { AiOutlineLoading, AiFillLike } from "react-icons/ai";
 import { RiChatPrivateLine } from "react-icons/ri";
-import { BsWechat } from "react-icons/bs";
+import { BsWechat, BsPersonAdd } from "react-icons/bs";
 import { MdLogout, MdDeleteForever } from "react-icons/md";
 import { FaUserFriends } from "react-icons/fa";
 import { GiConfirmed, GiCancel } from "react-icons/gi";
@@ -47,5 +47,8 @@ export const Icons = {
   },
   Comments: ({ ...props }) => {
     return <FaRegComments {...props} />;
+  },
+  AddFriend: ({ ...props }) => {
+    return <BsPersonAdd {...props} />;
   },
 };
