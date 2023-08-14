@@ -2,7 +2,7 @@ import React from "react";
 import { db } from "@/lib/db";
 import Error from "@/components/Error";
 import Image from "next/image";
-import { PostView } from "@/components/postView/PostView";
+import { PostView } from "@/components/post/PostView";
 import PaginationControls from "@/components/PaginationControls";
 import { MainTile } from "@/components/MainTile";
 import { Icons } from "@/components/ui/Icons";
