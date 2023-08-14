@@ -9,6 +9,7 @@ import { Icons } from "../ui/Icons";
 import { isUserThing } from "@/lib/helpers";
 import { getAuthSession } from "@/lib/auth";
 import { AddLikeDeleteComment } from "./Like&Delete&Comment";
+import { LikesCommentsInfo } from "../LikesCommentsInfo";
 
 dayjs.extend(relativeTime);
 
@@ -23,7 +24,10 @@ export const PostView: React.FC<Props> = async ({ post }) => {
   const isLiked = post.likes?.find((like) => like.userId === session?.user.id);
 
   return (
-    <div className="rounded-md bg-indigo-900 hover:bg-indigo-800 duration-300 hover:shadow-none shadow-md shadow-slate-800 text-slate-200 w-full">
+    <div
+      className=" bg-slate-900 hover:bg-slate-950 duration-300 text-slate-200 w-full
+    border-b-2 border-slate-400"
+    >
       <div className="flex items-end">
         <div className="flex justify-start gap-2 px-1 pt-1 md:px-2 md:pt-2">
           <Link href={`/profile/${post.author.name}`} className="">
@@ -50,20 +54,11 @@ export const PostView: React.FC<Props> = async ({ post }) => {
                 className=" flex items-center justify-center text-right text-xs "
               >
                 <p className="mx-1 font-thin">{` ∙`}</p>
-                <div className="bg-fuchsia-950 rounded-xl px-1 flex py-0.5 gap-1">
-                  <span className="flex">
-                    <Icons.Like size={16} className=" text-blue-500 mr-0.5" />
-                    {post.likes?.length}
-                  </span>
-                  |
-                  <span className="flex">
-                    <FaRegComments
-                      size={16}
-                      className="mr-1 text-emerald-500"
-                    />
-                    {post.comments.length}
-                  </span>
-                </div>
+
+                <LikesCommentsInfo
+                  commentsLength={post.comments.length}
+                  likesLength={post.comments.length}
+                />
               </Link>
             </div>
             <Link
