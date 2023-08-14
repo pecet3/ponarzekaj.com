@@ -12,6 +12,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { isUserThing } from "@/lib/helpers";
 import { CreateComment } from "@/components/CreateAComment";
 import PaginationControls from "@/components/PaginationControls";
+import { LikesCommentsInfo } from "@/components/LikesCommentsInfo";
 dayjs.extend(relativeTime);
 
 interface PageProps {
@@ -70,7 +71,7 @@ const page = async ({ params, searchParams }: PageProps) => {
   if (!post) return null;
   return (
     <MainTile>
-      <div className="rounded-md bg-indigo-800 shadow-md shadow-slate-950 text-slate-200 w-full">
+      <div className="rounded-md bg-slate-950 text-slate-200 w-full">
         <div className="flex items-end">
           <div className="flex justify-start gap-2 p-1 md:p-2">
             <Link href={`/profile/${post.author.name}`} className="">
@@ -94,20 +95,10 @@ const page = async ({ params, searchParams }: PageProps) => {
 
                 <div className=" flex items-center justify-center text-right text-xs ">
                   <p className="mx-1 font-thin">{` ∙`}</p>
-                  <div className="bg-fuchsia-950 rounded-xl px-1 flex py-0.5 gap-1">
-                    <span className="flex">
-                      <Icons.Like size={16} className=" text-blue-500 mr-0.5" />
-                      {post.likes?.length}
-                    </span>
-                    |
-                    <span className="flex">
-                      <Icons.Comments
-                        size={16}
-                        className="mr-1 text-emerald-500"
-                      />
-                      {post.comments.length}
-                    </span>
-                  </div>
+                  <LikesCommentsInfo
+                    commentsLength={post.comments.length}
+                    likesLength={post.comments.length}
+                  />
                 </div>
 
                 {isUserPost ? (
