@@ -7,6 +7,7 @@ import PaginationControls from "@/components/PaginationControls";
 import { MainTile } from "@/components/MainTile";
 import { Icons } from "@/components/ui/Icons";
 import { getAuthSession } from "@/lib/auth";
+import { isUserThing } from "@/lib/helpers";
 
 interface PageProps {
   params: {
@@ -44,9 +45,11 @@ const page = async ({ params, searchParams }: PageProps) => {
 
   if (data.length === 0 || !posts) return <Error />;
 
+  const isUserProfile = isUserThing(session?.user.id as string, user.id);
+
   async function addFriend() {
     "use server";
-    if (!session) return;
+    if (!session || isUserProfile) return;
 
     await db.friend.create({
       data: {
@@ -84,16 +87,18 @@ const page = async ({ params, searchParams }: PageProps) => {
           className="absolute rounded-full w-32 h-32  sm:w-40 sm:h-40 left-3 bottom-[-4rem] sm:bottom-[-5rem] "
         />
       </div>
-      <span className="flex justify-center flex-col sm:ml-48 ml-40 mt-2 text-slate-200">
-        <p className="text-xl sm:text-2xl  font-bold">{user.name}</p>
-        <p className="text-base sm:text-xl ">{user.email}</p>
+      <div className="flex justify-center flex-col sm:ml-48 ml-40 mt-2 text-slate-200">
+        <span>
+          <p className="text-xl sm:text-2xl  font-bold">{user.name}</p>
+          <p className="text-base sm:text-xl ">{user.email}</p>
+        </span>
         <form action={addFriend}>
           <button type="submit" className="text-white ">
             <Icons.AddFriend size={16} />
           </button>
         </form>
-      </span>
-      <div className="mt-10 p-1 sm:p-2 flex flex-col gap-2 ">
+      </div>
+      <div className="mt-10  flex flex-col border-t-2 border-slate-400">
         {entries.map((post) => {
           return <PostView post={post} key={post.id} />;
         })}
