@@ -25,10 +25,10 @@ const PaginationControls: FC<PaginationControlsProps> = ({
   const per_page = searchParams.get("per_page") ?? "10";
 
   return (
-    <div className="flex gap-2 justify-center m-auto bg-indigo-800 rounded-lg p-1 mt-1">
+    <div className="flex gap-2 justify-center m-auto bg-slate-900 rounded-lg p-1 my-3">
       {postId ? (
         <button
-          className="text-blue-400"
+          className="text-slate-300"
           disabled={!hasPrevPage}
           onClick={() => {
             router.push(
@@ -40,7 +40,7 @@ const PaginationControls: FC<PaginationControlsProps> = ({
         </button>
       ) : userName ? (
         <button
-          className="text-blue-400"
+          className="text-slate-300"
           disabled={!hasPrevPage}
           onClick={() => {
             router.push(
@@ -54,7 +54,7 @@ const PaginationControls: FC<PaginationControlsProps> = ({
         </button>
       ) : (
         <button
-          className="text-blue-400"
+          className="text-slate-300"
           disabled={!hasPrevPage}
           onClick={() => {
             router.push(`/?page=${Number(page) - 1}&per_page=${per_page}`);
@@ -70,7 +70,7 @@ const PaginationControls: FC<PaginationControlsProps> = ({
 
       {postId ? (
         <button
-          className="text-blue-400"
+          className="text-slate-300"
           disabled={!hasNextPage}
           onClick={() => {
             router.push(
@@ -82,7 +82,7 @@ const PaginationControls: FC<PaginationControlsProps> = ({
         </button>
       ) : userName ? (
         <button
-          className="text-blue-400"
+          className="text-slate-300"
           disabled={!hasNextPage}
           onClick={() => {
             router.push(
@@ -96,7 +96,7 @@ const PaginationControls: FC<PaginationControlsProps> = ({
         </button>
       ) : (
         <button
-          className="text-blue-400"
+          className="text-slate-300"
           disabled={!hasNextPage}
           onClick={() => {
             router.push(`/?page=${Number(page) + 1}&per_page=${per_page}`);
