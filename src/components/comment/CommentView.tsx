@@ -34,9 +34,9 @@ export const CommentView: FunctionComponent<Props> = async ({ comment }) => {
   );
 
   return (
-    <div className="border-b-2 border-slate-400 bg-slate-900 hover:bg-slate-950 duration-300 text-slate-200 w-full">
+    <div className="border-b-2 border-slate-400 bg-slate-900 hover:bg-slate-950 duration-300 text-slate-200 w-full p-1 sm:p-1.5">
       <div className="flex items-end">
-        <div className="flex justify-start gap-2 px-1 pt-1 md:px-2 md:pt-2">
+        <div className="flex justify-start gap-2">
           <Link href={`/profile/${author?.name}`} className="">
             <Image
               src={author?.image || ""}
@@ -58,13 +58,13 @@ export const CommentView: FunctionComponent<Props> = async ({ comment }) => {
 
               <div className="mr-1 flex items-center justify-center text-right text-xs ">
                 <p className="mx-1 font-thin">{` ∙`}</p>
-                <div className="bg-zinc-900 rounded-xl px-1 flex py-0.5">
-                  <Icons.Like size={16} className="mr-1 text-blue-700" />
+                <div className="bg-zinc-200 rounded-xl px-1 flex py-0.5 font-semibold text-slate-800">
+                  <Icons.Like size={16} className=" text-blue-600" />
                   {comment.likes?.length}
                 </div>
               </div>
             </div>
-            <div className="max-w-[16rem] grow sm:max-w-md md:max-w-[36rem]">
+            <div className="max-w-[17rem] grow sm:max-w-md md:max-w-[36rem]">
               <span className=" break-words text-base md:text-lg">
                 {comment.content}
               </span>

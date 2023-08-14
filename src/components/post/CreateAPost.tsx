@@ -67,7 +67,10 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
 
   if (!user) return null;
   return (
-    <section className="flex w-full items-center justify-center gap-1 bg-slate-800 md:gap-2 sm:rounded-t-md max-w-3xl p-2 border-b-2 border-slate-400">
+    <section
+      className="flex w-full items-center justify-center gap-1 bg-slate-800 md:gap-2 sm:rounded-t-md max-w-3xl
+     p-2 border-b-2 border-slate-400 sm:border-t-0 border-t"
+    >
       <Link href={`/profile/${user?.name}`}>
         <Image
           src={user?.image || ""}
