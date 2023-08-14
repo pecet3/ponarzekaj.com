@@ -3,14 +3,14 @@ import { db } from "@/lib/db";
 import Error from "@/components/Error";
 import Image from "next/image";
 import { getAuthSession } from "@/lib/auth";
-import { CommentView } from "@/components/commentView/CommentView";
+import { CommentView } from "@/components/comment/CommentView";
 import { MainTile } from "@/components/MainTile";
 import Link from "next/link";
 import { Icons } from "@/components/ui/Icons";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { isUserThing } from "@/lib/helpers";
-import { CreateComment } from "@/components/CreateAComment";
+import { CreateComment } from "@/components/comment/CreateAComment";
 import PaginationControls from "@/components/PaginationControls";
 import { LikesCommentsInfo } from "@/components/LikesCommentsInfo";
 dayjs.extend(relativeTime);
@@ -71,7 +71,7 @@ const page = async ({ params, searchParams }: PageProps) => {
   if (!post) return null;
   return (
     <MainTile>
-      <div className="rounded-md bg-slate-950 text-slate-200 w-full">
+      <div className="sm:rounded-md bg-slate-950 text-slate-200 w-full sm:border-t-0 border-t border-slate-400">
         <div className="flex items-end">
           <div className="flex justify-start gap-2 p-1 md:p-2">
             <Link href={`/profile/${post.author.name}`} className="">
