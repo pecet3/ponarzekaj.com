@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from "react";
+import { Main } from "./Main";
 
 interface Props {
   children: React.ReactNode;
@@ -10,14 +11,14 @@ export const MainTile: FunctionComponent<Props> = ({
   paddingBottom,
 }) => {
   return (
-    <main className="flex min-h-screen flex-col items-center sm:my-2 ">
+    <Main>
       <section
-        className={`w-full max-w-3xl flex flex-col sm:rounded-md bg-transparent sm:bg-slate-800 sm:shadow-lg shadow-gray-800 ${
+        className={`w-full max-w-3xl flex flex-col sm:rounded-md bg-transparent sm:bg-slate-800 sm:shadow-md shadow-black ${
           paddingBottom ? "" : ""
         }`}
       >
         {children}
       </section>
-    </main>
+    </Main>
   );
 };
