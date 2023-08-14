@@ -44,7 +44,7 @@ export const CreateComment: React.FC<{ user: User | null; postId: string }> = ({
 
   if (!user) return null;
   return (
-    <section className="flex w-full items-center justify-center gap-1 bg-indigo-950 p-1 sm:p-2 md:gap-2 rounded-b-md max-w-3xl">
+    <section className="flex w-full items-center justify-center gap-1 bg-slate-800 md:gap-2 max-w-3xl p-2 border-b-2 border-t border-slate-400">
       <textarea
         placeholder="Skomentuj..."
         rows={2}
@@ -67,7 +67,7 @@ export const CreateComment: React.FC<{ user: User | null; postId: string }> = ({
             <div className="flex flex-col items-center gap-1 justify-center">
               <button
                 onClick={handleSubmit}
-                className="m-auto text-slate-200 rounded-md bg-fuchsia-700 p-1 text-sm transition-all duration-300 hover:bg-fuchsia-600 md:text-base"
+                className="m-auto text-slate-800 rounded-md bg-slate-200 p-1 text-sm transition-all duration-300 hover:bg-slate-50 md:text-base"
                 disabled={counter > maxInputLength}
               >
                 Dodaj
