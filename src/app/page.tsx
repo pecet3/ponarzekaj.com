@@ -4,9 +4,9 @@ import { getAuthSession } from "@/lib/auth";
 import axios from "axios";
 import { db } from "@/lib/db";
 import type { Post, Comment, User } from "@prisma/client";
-import { PostView } from "@/components/postView/PostView";
+import { PostView } from "@/components/post/PostView";
 import type { FullPost } from "@/types/prisma";
-import { CreatePost } from "../components/CreateAPost";
+import { CreatePost } from "@/components/post/CreateAPost";
 import { MainTile } from "@/components/MainTile";
 import PaginationControls from "@/components/PaginationControls";
 
