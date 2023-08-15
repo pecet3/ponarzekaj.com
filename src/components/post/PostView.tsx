@@ -21,6 +21,9 @@ export const PostView: React.FC<Props> = async ({ post }) => {
   const session = await getAuthSession();
   const isUserPost = isUserThing(post.authorId, session?.user.id as string);
 
+  const likesLength = post.likes?.length;
+  const commentsLength = post.comments.length;
+
   const isLiked = post.likes?.find((like) => like.userId === session?.user.id);
 
   return (
@@ -56,8 +59,8 @@ export const PostView: React.FC<Props> = async ({ post }) => {
                 <p className="mx-1 font-thin">{` ∙`}</p>
 
                 <LikesCommentsInfo
-                  commentsLength={post.comments.length}
-                  likesLength={post.comments.length}
+                  commentsLength={commentsLength}
+                  likesLength={likesLength!}
                 />
               </Link>
             </div>

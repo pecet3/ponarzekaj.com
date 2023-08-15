@@ -59,6 +59,9 @@ const page = async ({ params, searchParams }: PageProps) => {
     post?.authorId as string
   );
 
+  const likesLength = post?.likes.length;
+  const commentsLength = post?.comments.length;
+
   // pagination things
 
   const page = searchParams["page"] ?? "1";
@@ -71,7 +74,7 @@ const page = async ({ params, searchParams }: PageProps) => {
   if (!post) return null;
   return (
     <MainTile>
-      <div className="sm:rounded-md bg-slate-950 text-slate-200 w-full sm:border-t-0 border-t border-slate-400">
+      <div className="sm:rounded-xl bg-slate-950 text-slate-200 w-full sm:border-t-0 border-t border-slate-400">
         <div className="flex items-end">
           <div className="flex justify-start gap-2 p-1 md:p-2">
             <Link href={`/profile/${post.author.name}`} className="">
@@ -96,8 +99,8 @@ const page = async ({ params, searchParams }: PageProps) => {
                 <div className=" flex items-center justify-center text-right text-xs ">
                   <p className="mx-1 font-thin">{` ∙`}</p>
                   <LikesCommentsInfo
-                    commentsLength={post.comments.length}
-                    likesLength={post.comments.length}
+                    commentsLength={commentsLength!}
+                    likesLength={likesLength!}
                   />
                 </div>
 
