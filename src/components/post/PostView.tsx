@@ -26,7 +26,7 @@ export const PostView: React.FC<Props> = async ({ post }) => {
   return (
     <div
       className=" bg-slate-900 hover:bg-slate-950 duration-300 text-slate-200 w-full
-    border-b-2 border-slate-400 p-1 sm:p-1.5"
+    border-b-2 border-slate-400 px-1 py-2 sm:px-1.5 sm:py-2"
     >
       <div className="flex items-end">
         <div className="flex justify-start gap-2 ">
@@ -68,7 +68,7 @@ export const PostView: React.FC<Props> = async ({ post }) => {
               <span className=" break-words text-base md:text-lg">
                 {post.content}
               </span>
-              <span className="mx-1 text-xl font-bold text-slate-400">{` ∙ ${
+              <span className="mx-1 text-lg font-bold text-slate-400">{` ∙ ${
                 post.emoji ?? "😐"
               }`}</span>
             </Link>
