@@ -113,7 +113,7 @@ const page = async ({ params, searchParams }: PageProps) => {
                 <span className=" break-words text-base md:text-lg">
                   {post.content}
                 </span>
-                <span className="mx-1 text-xl font-bold text-slate-400">{` ∙ ${
+                <span className="mx-1 text-lg font-bold text-slate-400">{` ∙ ${
                   post.emoji ?? "😐"
                 }`}</span>
               </div>
