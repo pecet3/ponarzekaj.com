@@ -77,7 +77,7 @@ const page = async ({ params, searchParams }: PageProps) => {
           alt={`zdjęcie ${user.name}`}
           height={1280}
           width={720}
-          className="h-56 sm:h-96 sm:rounded-t-md  w-screen"
+          className="h-56 sm:h-96 sm:rounded-t-xl  w-screen"
         />
         <Image
           src={user.image ?? ""}

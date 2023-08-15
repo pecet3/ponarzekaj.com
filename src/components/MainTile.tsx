@@ -13,7 +13,7 @@ export const MainTile: FunctionComponent<Props> = ({
   return (
     <Main>
       <section
-        className={`w-full max-w-3xl flex flex-col sm:rounded-md bg-transparent sm:bg-slate-800 sm:shadow-md shadow-black ${
+        className={`w-full max-w-3xl flex flex-col sm:rounded-xl bg-transparent sm:bg-slate-800 sm:shadow-md shadow-black ${
           paddingBottom ? "" : ""
         }`}
       >
