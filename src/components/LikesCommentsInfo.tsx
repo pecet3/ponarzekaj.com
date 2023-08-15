@@ -11,9 +11,9 @@ export const LikesCommentsInfo: FunctionComponent<PageProps> = ({
   commentsLength,
 }) => {
   return (
-    <div className="bg-slate-200 text-slate-800 rounded-xl px-1 flex py-0.5 gap-1 font-semibold">
+    <div className="bg-blue-950 text-slate-200 rounded-xl px-1 flex py-0.5 gap-1 font-semibold">
       <span className="flex">
-        <Icons.Like size={16} className=" text-blue-600 mr-0.5" />
+        <Icons.Like size={16} className=" text-blue-500 mr-0.5" />
         {likesLength}
       </span>
       |
