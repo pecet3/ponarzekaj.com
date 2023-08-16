@@ -59,16 +59,17 @@ model VerificationToken {
 ////////////////////////////////////////////////////////////////////////////
 
 model User {
-  id              String    @id @default(cuid())
+  id              String         @id @default(cuid())
   name            String?
-  email           String?   @unique
+  email           String?        @unique
   emailVerified   DateTime?
   image           String?
-  backgroundImage String?   @default("https://images2.alphacoders.com/941/thumb-1920-941898.jpg")
+  backgroundImage String?        @default("https://images2.alphacoders.com/941/thumb-1920-941898.jpg")
   accounts        Account[]
   sessions        Session[]
   posts           Post[]
-  friends         Friend[]  @relation("UserFriend")
+  friends         Friend[]       @relation("UserFriend")
+  notifications   Notification[]
 }
 
 model Friend {
@@ -124,4 +125,14 @@ model Comment {
   likes     LikeComment[]
 
   @@index([postId])
+}
+
+model Notification {
+  id      String @id @default(cuid())
+  link    String
+  content String
+  user    User   @relation(fields: [userId], references: [id])
+  userId  String
+
+  @@index([userId])
 }
