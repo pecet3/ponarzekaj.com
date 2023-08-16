@@ -58,16 +58,14 @@ export const CommentView: FunctionComponent<Props> = async ({ comment }) => {
 
               <div className="mr-1 flex items-center justify-center text-right text-xs ">
                 <p className="mx-1 font-thin">{` ∙`}</p>
-                <div className="bg-zinc-200 rounded-xl px-1 flex py-0.5 font-semibold text-slate-800">
+                <div className="bg-blue-950 rounded-xl px-1 flex py-0.5 font-semibold text-slate-200">
                   <Icons.Like size={16} className=" text-blue-600" />
                   {comment.likes?.length}
                 </div>
               </div>
             </div>
             <div className="max-w-[17rem] grow sm:max-w-md md:max-w-[36rem]">
-              <span className=" break-words text-base md:text-lg">
-                {comment.content}
-              </span>
+              <span className=" break-words text-lg">{comment.content}</span>
             </div>
           </div>
         </div>
