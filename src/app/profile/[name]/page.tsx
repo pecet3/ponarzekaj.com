@@ -88,16 +88,20 @@ const page = async ({ params, searchParams }: PageProps) => {
           className="absolute rounded-full w-32 h-32  sm:w-40 sm:h-40 left-3 bottom-[-4rem] sm:bottom-[-5rem] "
         />
       </div>
-      <div className="flex justify-center flex-col sm:ml-48 ml-40 mt-2 text-slate-200">
-        <span>
+      <div className="flex flex-col sm:ml-48 ml-40 mt-2 text-slate-200">
+        <span className="flex justify-between items-end">
           <p className="text-xl sm:text-2xl  font-bold">{user.name}</p>
-          <p className="text-base sm:text-xl ">{user.email}</p>
+          <form
+            action={addFriend}
+            className="bg-slate-700 rounded-lg p-0.5 mx-2"
+          >
+            <button type="submit" className="text-slate-200 flex gap-1">
+              <Icons.AddFriend size={20} className="text-blue-400" />
+              Dodaj
+            </button>
+          </form>
         </span>
-        <form action={addFriend}>
-          <button type="submit" className="text-white ">
-            <Icons.AddFriend size={16} />
-          </button>
-        </form>
+        <p className="text-base sm:text-xl ">{user.email}</p>
       </div>
       <div className="mt-10  flex flex-col border-t-2 border-slate-400">
         {entries.map((post) => {
