@@ -68,9 +68,7 @@ export const PostView: React.FC<Props> = async ({ post }) => {
               href={`/post/${post.id}`}
               className="max-w-[17rem] grow sm:max-w-md md:max-w-[36rem] my-2"
             >
-              <span className=" break-words text-base md:text-lg">
-                {post.content}
-              </span>
+              <span className=" break-words text-lg">{post.content}</span>
               <span className="mx-1 text-lg font-bold text-slate-400">{` ∙ ${
                 post.emoji ?? "😐"
               }`}</span>
