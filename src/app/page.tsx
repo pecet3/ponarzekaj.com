@@ -47,8 +47,14 @@ export default async function Home({
       {session ? (
         <CreatePost user={user} />
       ) : (
-        <p className="text-sm text-center italic">
-          Tylko zalogowani użytkownicy mogą wstawiać posty
+        <p className="text-sm text-center italic text-white ">
+          Nie masz konta?{" "}
+          <Link
+            href="/sign-in&first-time"
+            className="border-b-sky-600 text-sky-600"
+          >
+            Zarejestruj się
+          </Link>
         </p>
       )}
       {entries.map((post) => {
