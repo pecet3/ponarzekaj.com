@@ -15,3 +15,8 @@
   }
 }
 
+@media (max-width: 648px){
+  :root{
+    background: rgb(30 41 59)
+  }
+}
