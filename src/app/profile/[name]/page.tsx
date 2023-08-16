@@ -41,6 +41,7 @@ const page = async ({ params, searchParams }: PageProps) => {
       author: true,
       likes: true,
     },
+    orderBy: [{ createdAt: "desc" }],
   });
 
   if (data.length === 0 || !posts) return <Error />;
