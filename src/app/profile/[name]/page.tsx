@@ -93,7 +93,7 @@ const page = async ({ params, searchParams }: PageProps) => {
           <p className="text-xl sm:text-2xl  font-bold">{user.name}</p>
           <form
             action={addFriend}
-            className="bg-slate-700 rounded-lg p-0.5 mx-2"
+            className="bg-slate-900 rounded-lg p-1 mx-2 hover:bg-slate-950 duration-300"
           >
             <button type="submit" className="text-slate-200 flex gap-1">
               <Icons.AddFriend size={20} className="text-blue-400" />
