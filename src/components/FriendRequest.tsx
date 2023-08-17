@@ -29,6 +29,13 @@ export const FriendRequest: React.FunctionComponent<IProvidersProps> = async ({
         accepted: true,
       },
     });
+    await db.notification.create({
+      data: {
+        userId: friend.friendId,
+        content: `Użytkownik ${user.name} dodał Cię do znajomych`,
+        link: "/profile/friends",
+      },
+    });
     revalidatePath("/profile/friends");
   };
   return (
