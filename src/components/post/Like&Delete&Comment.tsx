@@ -73,24 +73,24 @@ export const AddLikeDeleteComment: FunctionComponent<{
         ) : null}
         {!isLiked ? (
           <button
-            className=" flex items-center justify-center rounded-xl px-1 py-0.5 bg-slate-200 text-black"
+            className=" flex items-center justify-center rounded-xl px-1 py-0.5 bg-slate-200 dark text-black dark:bg-blue-900 dark:text-white"
             onClick={addLikeHandle}
           >
-            <Icons.Like size={16} className="text-blue-600" /> Lubię to
+            <Icons.Like size={16} className="text-blue-500" /> Lubię to
           </button>
         ) : (
           <button
-            className=" flex items-center justify-center rounded-xl px-1 py-0.5 bg-slate-400 text-black"
+            className=" flex items-center justify-center rounded-xl px-1 py-0.5 dark:bg-slate-2400 dark:text-black bg-blue-900 text-white"
             onClick={deleteLikeHandle}
           >
-            <Icons.Like size={16} className="text-blue-800" /> Polubiono
+            <Icons.Like size={16} className="text-blue-500" /> Polubiono
           </button>
         )}
         <Link
           href={`/post/${postId}`}
           className="flex items-center justify-center  rounded-xl px-1 py-0.5 bg-slate-200 text-black"
         >
-          <Icons.AddComment size={16} className="text-green-500" /> Skomentuj
+          <Icons.AddComment size={16} className="text-slate-800" /> Skomentuj
         </Link>
       </div>
     </>
