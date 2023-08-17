@@ -50,12 +50,19 @@ const page = async ({ params, searchParams }: PageProps) => {
 
   async function addFriend() {
     "use server";
-    if (!session || isUserProfile) return;
+    if (!session) return;
 
     await db.friend.create({
       data: {
         userId: user.id,
         friendId: session?.user.id,
+      },
+    });
+    await db.notification.create({
+      data: {
+        userId: user.id,
+        content: `${session.user.username} dodał Cię do znajomych`,
+        link: `/profile/friends`,
       },
     });
   }
