@@ -74,7 +74,7 @@ const page = async ({ params, searchParams }: PageProps) => {
   if (!post) return null;
   return (
     <MainTile>
-      <div className="sm:rounded-xl bg-slate-950 text-slate-200 w-full sm:border-t-0 border-t border-slate-400">
+      <div className="sm:rounded-t-xl bg-slate-950 text-slate-200 w-full sm:border-t-0 border-t border-slate-400">
         <div className="flex items-end">
           <div className="flex justify-start gap-2 p-1 md:p-2">
             <Link href={`/profile/${post.author.name}`} className="">
