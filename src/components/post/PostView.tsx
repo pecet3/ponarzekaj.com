@@ -32,7 +32,7 @@ export const PostView: React.FC<Props> = async ({ post }) => {
     border-b-2 border-slate-400 px-1 py-2 sm:px-1.5 sm:py-2"
     >
       <div className="flex items-end">
-        <div className="flex justify-start gap-2 ">
+        <div className="flex justify-start gap-2 mb-2.5">
           <Link href={`/profile/${post.author.name}`} className="">
             <Image
               src={post.author.image || ""}
@@ -66,7 +66,7 @@ export const PostView: React.FC<Props> = async ({ post }) => {
             </div>
             <Link
               href={`/post/${post.id}`}
-              className="max-w-[17rem] grow sm:max-w-md md:max-w-[36rem] my-2"
+              className="max-w-[17rem] grow sm:max-w-md md:max-w-[36rem] my-0.5 sm:my-0"
             >
               <span className=" break-words text-lg">{post.content}</span>
               <span className="mx-1 text-lg font-bold text-slate-400">{` ∙ ${
