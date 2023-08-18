@@ -39,16 +39,16 @@ export const Navbar = async () => {
           <>
             <div className="dropdown dropdown-end bg-slate-700">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                <div className="m-auto">
+                <div className="m-auto relative">
                   <Icons.Notification size={32} />
-                  <div className="bg-red-700 text-slate-50 rounded-full">
-                    {notificationsLength}
+                  <div className="bg-red-700 text-slate-50 rounded-full absolute">
+                    {notificationsLength} 1
                   </div>
                 </div>
               </label>
               <ul
                 tabIndex={0}
-                className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-64"
+                className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-64 flex-col flex gap-1"
               >
                 {user?.notifications.map((notification) => (
                   <NotificationView
