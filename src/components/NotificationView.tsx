@@ -1,13 +1,31 @@
 import { FunctionComponent } from "react";
 import { Notification } from "@prisma/client";
 import Link from "next/link";
+import { db } from "@/lib/db";
+import Image from "next/image";
 export const NotificationView: FunctionComponent<{
   notification: Notification;
-}> = ({ notification }) => {
+}> = async ({ notification }) => {
+  const author = await db.user.findUnique({
+    where: {
+      id: notification.authorId,
+    },
+  });
+  if (!author) return null;
   return (
-    <div className="rounded-lg bg-slate-700 flex gap-2 ">
-      <p>{notification.content}</p>
-      <Link href={notification.link ?? "Wejdź"}></Link>
-    </div>
+    <li className="rounded-lg bg-slate-700 hover:bg-slate-800 ">
+      <Link href={notification.link ?? "/"} className="flex justify-between">
+        <Image
+          src={author?.image ?? ""}
+          height={64}
+          width={64}
+          alt=""
+          className="rounded-full w-8 h-8"
+        />
+        <p>
+          {author?.name} {notification.content}
+        </p>
+      </Link>
+    </li>
   );
 };
