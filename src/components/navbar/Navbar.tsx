@@ -18,6 +18,8 @@ export const Navbar = async () => {
     },
   });
 
+  const notificationsLength = user?.notifications.length;
+
   console.log(user?.notifications);
   return (
     <nav className="navbar bg-slate-700 text-slate-200">
@@ -37,6 +39,27 @@ export const Navbar = async () => {
           <>
             <div className="dropdown dropdown-end bg-slate-700">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="m-auto">
+                  <Icons.Notification size={32} />
+                  <div className="bg-red-700 text-slate-50 rounded-full">
+                    {notificationsLength}
+                  </div>
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-64"
+              >
+                {user?.notifications.map((notification) => (
+                  <NotificationView
+                    key={notification.id}
+                    notification={notification}
+                  />
+                ))}
+              </ul>
+            </div>
+            <div className="dropdown dropdown-end bg-slate-700">
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
                   <Image
                     src={session.user.image ?? ""}
@@ -46,25 +69,13 @@ export const Navbar = async () => {
                   />
                 </div>
               </label>
+
               <ProfileList username={user?.name ?? "Ja kub"} />
-            </div>
-            <div className="dropdown dropdown-end bg-slate-700">
-              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                <div className="w-10 rounded-full">
-                  <Icons.Comments size={24} />
-                </div>
-              </label>
-              {user?.notifications.map((notification) => (
-                <NotificationView
-                  key={notification.id}
-                  notification={notification}
-                />
-              ))}
             </div>
           </>
         ) : (
           <Link
-            className="rounded-md p-1 text-xl bg-blue-600 text-slate-300 font-semibold hover:bg-sky-600 duration-300"
+            className="rounded-md p-1 text-xl bg-blue-600 text-slate-100 font-semibold hover:bg-sky-600 duration-300"
             href="/sign-in"
           >
             Zaloguj się
