@@ -8,6 +8,7 @@ import { GiConfirmed, GiCancel } from "react-icons/gi";
 import { BiError, BiCommentAdd } from "react-icons/bi";
 import { HiPencilAlt } from "react-icons/hi";
 import { FaRegComments } from "react-icons/fa";
+import { IoMdNotifications } from "react-icons/io";
 export const Icons = {
   Logo: ({ ...props }) => {
     return <RiChatPrivateLine {...props} />;
@@ -50,5 +51,8 @@ export const Icons = {
   },
   AddFriend: ({ ...props }) => {
     return <BsPersonAdd {...props} />;
+  },
+  Notification: ({ ...props }) => {
+    return <IoMdNotifications {...props} />;
   },
 };
