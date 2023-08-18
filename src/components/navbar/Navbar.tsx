@@ -48,7 +48,7 @@ export const Navbar = async () => {
               </label>
               <ul
                 tabIndex={0}
-                className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-64 flex-col flex gap-1"
+                className="mt-3 z-[1] p-2 shadow menu-sm dropdown-content bg-base-100 rounded-box w-64 flex-col flex gap-1"
               >
                 {user?.notifications.map((notification) => (
                   <NotificationView
