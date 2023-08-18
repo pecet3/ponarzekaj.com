@@ -34,6 +34,7 @@ export const FriendRequest: React.FunctionComponent<IProvidersProps> = async ({
         userId: friend.friendId,
         content: `Użytkownik ${user.name} dodał Cię do znajomych`,
         link: "/profile/friends",
+        authorId: "session.user.id",
       },
     });
     revalidatePath("/profile/friends");
