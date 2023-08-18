@@ -3,13 +3,12 @@ import { signIn } from "next-auth/react";
 import * as React from "react";
 import { FC } from "react";
 import { Icons } from "../../../components/ui/Icons";
+import { useSearchParams } from "next/navigation";
 
-const UserAuthForm: React.FunctionComponent<{ searchParams: string }> = ({
-  searchParams,
-}) => {
-  const firstTime = searchParams;
+const UserAuthForm: React.FunctionComponent = ({}) => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
-
+  const searchParams = useSearchParams();
+  const firstTime = searchParams.get("first-time");
   const loginWithGoogle = async () => {
     setIsLoading(true);
 
