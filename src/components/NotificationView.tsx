@@ -13,13 +13,16 @@ export const NotificationView: FunctionComponent<{
   });
   if (!author) return null;
   return (
-    <li className="rounded-lg bg-slate-700 hover:bg-slate-800 ">
-      <Link href={notification.link ?? "/"} className="flex justify-between">
+    <li className="rounded-lg bg-slate-700 hover:bg-slate-800 duration-300 m-auto">
+      <Link
+        href={notification.link ?? "/"}
+        className="flex justify-between gap-2 items-center"
+      >
         <Image
           src={author?.image ?? ""}
           height={64}
           width={64}
-          alt=""
+          alt="zdjęcie osoby odpowiedzialnej za powiadomienie"
           className="rounded-full w-8 h-8"
         />
         <p>
