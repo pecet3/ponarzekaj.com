@@ -61,7 +61,8 @@ const page = async ({ params, searchParams }: PageProps) => {
     await db.notification.create({
       data: {
         userId: user.id,
-        content: `${session.user.username} dodał Cię do znajomych`,
+        authorId: session.user.id,
+        content: "Wysłał Ci zaproszenie do znajomych",
         link: `/profile/friends`,
       },
     });
