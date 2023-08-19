@@ -58,6 +58,12 @@ const page = async ({ params, searchParams }: PageProps) => {
         friendId: session?.user.id,
       },
     });
+    await db.friend.create({
+      data: {
+        userId: session?.user.id,
+        friendId: user.id,
+      },
+    });
     await db.notification.create({
       data: {
         userId: user.id,
