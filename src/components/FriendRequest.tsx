@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import Image from "next/image";
 import { Icons } from "./ui/Icons";
 import { revalidatePath } from "next/cache";
+import { getAuthSession } from "@/lib/auth";
 interface IProvidersProps {
   friend: Friend;
 }
@@ -11,6 +12,7 @@ interface IProvidersProps {
 export const FriendRequest: React.FunctionComponent<IProvidersProps> = async ({
   friend,
 }) => {
+  const session = await getAuthSession();
   const user = await db.user.findUnique({
     where: {
       id: friend.friendId,
@@ -21,9 +23,10 @@ export const FriendRequest: React.FunctionComponent<IProvidersProps> = async ({
   const acceptFriend = async () => {
     "use server";
 
-    await db.friend.update({
+    await db.friend.updateMany({
       where: {
-        id: friend.id,
+        friendId: friend.id,
+        userId: session?.user.id,
       },
       data: {
         accepted: true,
