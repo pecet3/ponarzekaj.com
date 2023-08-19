@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { db } from "@/lib/db";
 import Error from "@/components/Error";
 import Image from "next/image";
@@ -12,14 +12,13 @@ import { FriendRequest } from "@/components/FriendRequest";
 import { Main } from "@/components/Main";
 
 interface PageProps {
-  params: {
-    name: string;
-  };
   searchParams: { [key: string]: string | string[] | undefined };
 }
 
-const page = async () => {
+const page: FunctionComponent<PageProps> = async ({ searchParams }) => {
   const session = await getAuthSession();
+
+  const notificationId = searchParams["notificationId"] ?? "";
 
   const friends = await db.friend.findMany({
     where: {
@@ -31,7 +30,11 @@ const page = async () => {
     <Main>
       <section className="flex max-w-3xl w-full flex-col gap-2">
         {friends.map((friend) => (
-          <FriendRequest key={friend.id} friend={friend} />
+          <FriendRequest
+            key={friend.id}
+            friend={friend}
+            notificationId={notificationId[0]}
+          />
         ))}
       </section>
     </Main>
