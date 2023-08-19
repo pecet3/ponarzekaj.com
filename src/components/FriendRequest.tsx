@@ -44,6 +44,7 @@ export const FriendRequest: React.FunctionComponent<IProvidersProps> = async ({
         accepted: true,
       },
     });
+
     await db.notification.create({
       data: {
         userId: friend.friendId,
@@ -52,7 +53,13 @@ export const FriendRequest: React.FunctionComponent<IProvidersProps> = async ({
         authorId: session?.user.id as string,
       },
     });
-
+    if (notificationId) {
+      await db.notification.delete({
+        where: {
+          id: notificationId,
+        },
+      });
+    }
     revalidatePath("/profile");
   };
   const denyFriend = async () => {
