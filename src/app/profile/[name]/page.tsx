@@ -8,6 +8,7 @@ import { MainTile } from "@/components/MainTile";
 import { Icons } from "@/components/ui/Icons";
 import { getAuthSession } from "@/lib/auth";
 import { isUserThing } from "@/lib/helpers";
+import { revalidatePath } from "next/cache";
 
 interface PageProps {
   params: {
@@ -31,7 +32,7 @@ const page = async ({ params, searchParams }: PageProps) => {
   });
 
   const user = data[0];
-  console.log(user);
+
   const posts = await db.post.findMany({
     where: {
       authorId: user.id ?? "",
@@ -72,6 +73,7 @@ const page = async ({ params, searchParams }: PageProps) => {
         link: `/profile/friends`,
       },
     });
+    revalidatePath("/");
   }
 
   // pagination things
