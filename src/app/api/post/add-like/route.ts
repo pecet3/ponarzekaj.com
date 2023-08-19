@@ -20,6 +20,17 @@ export async function POST(req: NextRequest) {
       return new Response("Unauthorized", { status: 401 });
     }
 
+    const likes = await db.likePost.findMany({
+      where: {
+        postId,
+        userId,
+      },
+    });
+
+    if (likes.length !== 0) {
+      return new Response("Server error", { status: 500 });
+    }
+
     await db.likePost.create({
       data: {
         userId,
