@@ -25,8 +25,17 @@ export const FriendRequest: React.FunctionComponent<IProvidersProps> = async ({
 
     await db.friend.updateMany({
       where: {
-        friendId: friend.id,
-        userId: session?.user.id,
+        friendId: session?.user.id,
+        userId: friend.friendId,
+      },
+      data: {
+        accepted: true,
+      },
+    });
+
+    await db.friend.update({
+      where: {
+        id: friend.id,
       },
       data: {
         accepted: true,
@@ -38,6 +47,22 @@ export const FriendRequest: React.FunctionComponent<IProvidersProps> = async ({
         content: `Użytkownik ${user.name} dodał Cię do znajomych`,
         link: "/profile/friends",
         authorId: "session.user.id",
+      },
+    });
+    revalidatePath("/profile/friends");
+  };
+  const denyFriend = async () => {
+    "use server";
+
+    await db.friend.deleteMany({
+      where: {
+        friendId: session?.user.id,
+        userId: friend.friendId,
+      },
+    });
+    await db.friend.delete({
+      where: {
+        id: friend.id,
       },
     });
     revalidatePath("/profile/friends");
@@ -55,10 +80,15 @@ export const FriendRequest: React.FunctionComponent<IProvidersProps> = async ({
         <p className="text-lg sm:text-xl font-semibold">{user.name}</p>
         <p className="text-base sm:text-sm text-slate-300">{user.email}</p>
       </span>
-      <span className="flex items-center justify-self-end">
+      <span className="flex items-center justify-self-end gap-2">
         <form action={acceptFriend}>
           <button type="submit">
-            <Icons.Confirm size={24} />
+            <Icons.Confirm size={28} />
+          </button>
+        </form>
+        <form action={denyFriend}>
+          <button type="submit">
+            <Icons.Reject size={28} />
           </button>
         </form>
       </span>
