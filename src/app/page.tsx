@@ -9,6 +9,7 @@ import type { FullPost } from "@/types/prisma";
 import { CreatePost } from "@/components/post/CreateAPost";
 import { MainTile } from "@/components/MainTile";
 import PaginationControls from "@/components/PaginationControls";
+import { Icons } from "@/components/ui/Icons";
 
 export default async function Home({
   searchParams,
@@ -31,7 +32,16 @@ export default async function Home({
       id: session ? session?.user.id : "",
     },
   });
-
+  if (!session || !user || !posts) {
+    return (
+      <MainTile>
+        <Icons.Spinner
+          size={124}
+          className="animate-spin duration-300 text-slate-200 flex m-auto justify-center my-96"
+        />
+      </MainTile>
+    );
+  }
   // pagination things
 
   const page = searchParams["page"] ?? "1";
