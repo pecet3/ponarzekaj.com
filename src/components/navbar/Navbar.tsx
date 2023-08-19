@@ -18,6 +18,8 @@ export const Navbar = async () => {
     },
   });
 
+  const notifications = user?.notifications;
+
   return (
     <nav className="navbar bg-slate-700 text-slate-200">
       <div className="flex-1">
