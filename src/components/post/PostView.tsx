@@ -43,7 +43,7 @@ export const PostView: React.FC<Props> = async ({ post }) => {
             />
           </Link>
           <div className="flex flex-col">
-            <div className="flex gap-0.5 sm:gap-1 text-xs sm:text-sm text-slate-300 items-center">
+            <div className="flex gap-0.5 sm:gap-1 text-xs sm:text-sm text-slate-300 items-center flex-wrap">
               <Link href={`/profile/${post.author.name}`}>
                 <span className="font-bold">{`@${post.author.name}`}</span>
               </Link>
