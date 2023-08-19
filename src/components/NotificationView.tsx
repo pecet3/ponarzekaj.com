@@ -12,38 +12,48 @@ export const NotificationView: FunctionComponent<{
       id: notification.authorId,
     },
   });
-  await db.notification.update({
-    where: {
-      id: notification.id,
-    },
-    data: {
-      visited: true,
-    },
-  });
+  const visitedHandle = async () => {
+    "use server";
+
+    await db.notification.update({
+      where: {
+        id: notification.id,
+      },
+      data: {
+        visited: true,
+      },
+    });
+  };
   if (!author) return null;
   return (
     <li
       className={`rounded-lg ${
         notification.visited
-          ? "bg-slate-600 hover:bg-slate-700"
+          ? "bg-slate-500 hover:bg-slate-600"
           : "bg-slate-700 hover:bg-slate-800"
       } duration-300 m-auto`}
     >
-      <Link
-        href={`${notification.link}?notificationId=${notification?.id}` ?? "/"}
-        className="flex justify-between gap-2 items-center"
-      >
-        <Image
-          src={author?.image ?? ""}
-          height={64}
-          width={64}
-          alt="zdjęcie osoby odpowiedzialnej za powiadomienie"
-          className="rounded-full w-8 h-8"
-        />
-        <p>
-          {author?.name} {notification.content}
-        </p>
-      </Link>
+      <form action={visitedHandle}>
+        <button type="submit">
+          <Link
+            href={
+              `${notification.link}?notificationId=${notification?.id}` ?? "/"
+            }
+            className="flex justify-between gap-2 items-center"
+          >
+            <Image
+              src={author?.image ?? ""}
+              height={64}
+              width={64}
+              alt="zdjęcie osoby odpowiedzialnej za powiadomienie"
+              className="rounded-full w-8 h-8"
+            />
+            <p>
+              {author?.name} {notification.content}
+            </p>
+          </Link>
+        </button>
+      </form>
     </li>
   );
 };
