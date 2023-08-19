@@ -15,15 +15,13 @@ export const NotificationView: FunctionComponent<{
   const visitedHandle = async () => {
     "use server";
 
-    await db.notification.update({
+    await db.notification.delete({
       where: {
         id: notification.id,
       },
-      data: {
-        visited: true,
-      },
     });
   };
+
   if (!author) return null;
   return (
     <li
@@ -34,25 +32,24 @@ export const NotificationView: FunctionComponent<{
       } duration-300 m-auto`}
     >
       <form action={visitedHandle}>
-        <button type="submit">
-          <Link
-            href={
-              `${notification.link}?notificationId=${notification?.id}` ?? "/"
-            }
-            className="flex justify-between gap-2 items-center"
-          >
-            <Image
-              src={author?.image ?? ""}
-              height={64}
-              width={64}
-              alt="zdjęcie osoby odpowiedzialnej za powiadomienie"
-              className="rounded-full w-8 h-8"
-            />
-            <p>
-              {author?.name} {notification.content}
-            </p>
-          </Link>
-        </button>
+        <button type="submit">visited</button>
+        <Link
+          href={
+            `${notification.link}?notificationId=${notification?.id}` ?? "/"
+          }
+          className="flex justify-between gap-2 items-center"
+        >
+          <Image
+            src={author?.image ?? ""}
+            height={64}
+            width={64}
+            alt="zdjęcie osoby odpowiedzialnej za powiadomienie"
+            className="rounded-full w-8 h-8"
+          />
+          <p>
+            {author?.name} {notification.content}
+          </p>
+        </Link>
       </form>
     </li>
   );
