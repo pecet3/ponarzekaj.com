@@ -59,17 +59,18 @@ model VerificationToken {
 ////////////////////////////////////////////////////////////////////////////
 
 model User {
-  id              String         @id @default(cuid())
-  name            String?
-  email           String?        @unique
-  emailVerified   DateTime?
-  image           String?
-  backgroundImage String?        @default("https://images2.alphacoders.com/941/thumb-1920-941898.jpg")
-  accounts        Account[]
-  sessions        Session[]
-  posts           Post[]
-  friends         Friend[]       @relation("UserFriend")
-  notifications   Notification[]
+  id                  String         @id @default(cuid())
+  name                String?
+  email               String?        @unique
+  emailVerified       DateTime?
+  image               String?
+  backgroundImage     String?        @default("https://images2.alphacoders.com/941/thumb-1920-941898.jpg")
+  accounts            Account[]
+  sessions            Session[]
+  posts               Post[]
+  friends             Friend[]       @relation("UserFriend")
+  notifications       Notification[]
+  notificationsLength Int?
 }
 
 model Friend {
