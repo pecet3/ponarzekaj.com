@@ -18,9 +18,7 @@ export const Navbar = async () => {
     },
   });
 
-  const notificationsLength = user?.notifications.length;
-
-  console.log(user?.notifications);
+  console.log(user);
   return (
     <nav className="navbar bg-slate-700 text-slate-200">
       <div className="flex-1">
@@ -41,9 +39,6 @@ export const Navbar = async () => {
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="m-auto relative">
                   <Icons.Notification size={32} />
-                  <div className="bg-red-700 text-slate-50 rounded-full absolute">
-                    {notificationsLength} 1
-                  </div>
                 </div>
               </label>
               <ul
