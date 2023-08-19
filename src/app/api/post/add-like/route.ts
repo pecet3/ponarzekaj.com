@@ -27,6 +27,23 @@ export async function POST(req: NextRequest) {
       },
     });
 
+    const post = await db.post.findUnique({
+      where: {
+        id: postId,
+      },
+    });
+    if (!post) {
+      return new Response("Server error", { status: 500 });
+    }
+    await db.notification.create({
+      data: {
+        userId: post?.authorId,
+        content: "dał Ci Like pod postem",
+        link: `/post/${postId}`,
+        authorId: userId,
+      },
+    });
+
     return new Response("OK", { status: 200 });
   } catch (error) {
     if (error instanceof z.ZodError)
