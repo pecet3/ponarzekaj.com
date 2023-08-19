@@ -7,12 +7,15 @@ import { revalidatePath } from "next/cache";
 import { getAuthSession } from "@/lib/auth";
 interface IProvidersProps {
   friend: Friend;
+  notificationId?: string;
 }
 
 export const FriendRequest: React.FunctionComponent<IProvidersProps> = async ({
   friend,
+  notificationId,
 }) => {
   const session = await getAuthSession();
+  if (!session) return null;
   const user = await db.user.findUnique({
     where: {
       id: friend.friendId,
@@ -45,11 +48,21 @@ export const FriendRequest: React.FunctionComponent<IProvidersProps> = async ({
       data: {
         userId: friend.friendId,
         content: `Użytkownik ${user.name} dodał Cię do znajomych`,
-        link: "/profile/friends",
-        authorId: "session.user.id",
+        link: `/profile/${user.name}`,
+        authorId: session?.user.id as string,
       },
     });
-    revalidatePath("/profile/friends");
+    if (notificationId) {
+      await db.notification.update({
+        where: {
+          id: notificationId,
+        },
+        data: {
+          visited: true,
+        },
+      });
+    }
+    revalidatePath("/");
   };
   const denyFriend = async () => {
     "use server";
@@ -65,7 +78,12 @@ export const FriendRequest: React.FunctionComponent<IProvidersProps> = async ({
         id: friend.id,
       },
     });
-    revalidatePath("/profile/friends");
+    await db.notification.delete({
+      where: {
+        id: notificationId,
+      },
+    });
+    revalidatePath("/");
   };
   return (
     <div className="bg-slate-800 text-slate-200 rounded-md shadow-md shadow-gray-800 w-full p-2 flex gap-2">
@@ -80,15 +98,15 @@ export const FriendRequest: React.FunctionComponent<IProvidersProps> = async ({
         <p className="text-lg sm:text-xl font-semibold">{user.name}</p>
         <p className="text-base sm:text-sm text-slate-300">{user.email}</p>
       </span>
-      <span className="flex items-center justify-self-end gap-2">
+      <span className="flex items-center justify-self-end gap-6">
         <form action={acceptFriend}>
           <button type="submit">
-            <Icons.Confirm size={28} />
+            <Icons.Confirm size={32} />
           </button>
         </form>
         <form action={denyFriend}>
           <button type="submit">
-            <Icons.Reject size={28} />
+            <Icons.Reject size={32} />
           </button>
         </form>
       </span>
