@@ -74,11 +74,13 @@ model User {
 }
 
 model Friend {
-  id       String  @id @default(cuid())
-  user     User    @relation("UserFriend", fields: [userId], references: [id])
-  userId   String
-  friendId String
-  accepted Boolean @default(false)
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation("UserFriend", fields: [userId], references: [id])
+  userId    String
+  friendId  String
+  accepted  Boolean  @default(false)
 
   @@index([userId])
 }
