@@ -47,22 +47,20 @@ export const FriendRequest: React.FunctionComponent<IProvidersProps> = async ({
     await db.notification.create({
       data: {
         userId: friend.friendId,
-        content: `Użytkownik ${user.name} dodał Cię do znajomych`,
+        content: `zaakceptował Twoje zaproszenie`,
         link: `/profile/${user.name}`,
         authorId: session?.user.id as string,
       },
     });
+
     if (notificationId) {
-      await db.notification.update({
+      await db.notification.delete({
         where: {
           id: notificationId,
         },
-        data: {
-          visited: true,
-        },
       });
     }
-    revalidatePath("/");
+    revalidatePath("/profile");
   };
   const denyFriend = async () => {
     "use server";
@@ -83,7 +81,7 @@ export const FriendRequest: React.FunctionComponent<IProvidersProps> = async ({
         id: notificationId,
       },
     });
-    revalidatePath("/");
+    revalidatePath("/profile");
   };
   return (
     <div className="bg-slate-800 text-slate-200 rounded-md shadow-md shadow-gray-800 w-full p-2 flex gap-2">
