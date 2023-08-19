@@ -32,7 +32,7 @@ export default async function Home({
       id: session ? session?.user.id : "",
     },
   });
-  if (!session || !user || !posts) {
+  if (!posts) {
     return (
       <MainTile>
         <Icons.Spinner
