@@ -27,7 +27,7 @@ const UserAuthForm: React.FunctionComponent = ({}) => {
           <h1 className="font-bold mb-2 text-xl">Zaloguj się za pomocą:</h1>
           <button
             type="button"
-            className="rounded-md p-1 text-xl bg-blue-700 text-slate-300 font-semibold hover:bg-sky-700 duration-300 flex justify-center"
+            className="rounded-md p-1 text-xl bg-blue-700 text-slate-300 font-semibold hover:bg-blue-600 duration-300 flex justify-center"
             onClick={loginWithGoogle}
             disabled={isLoading}
           >
@@ -48,7 +48,7 @@ const UserAuthForm: React.FunctionComponent = ({}) => {
           </p>
           <button
             type="button"
-            className="rounded-md p-1 text-xl bg-blue-700 text-slate-300 font-semibold hover:bg-sky-700 duration-300 flex justify-center"
+            className="rounded-md p-1 text-xl bg-blue-700 text-slate-300 font-semibold hover:bg-blue-600 duration-300 flex justify-center"
             onClick={loginWithGoogle}
             disabled={isLoading}
           >
