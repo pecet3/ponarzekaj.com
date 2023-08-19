@@ -53,13 +53,6 @@ export const FriendRequest: React.FunctionComponent<IProvidersProps> = async ({
       },
     });
 
-    if (notificationId) {
-      await db.notification.delete({
-        where: {
-          id: notificationId,
-        },
-      });
-    }
     revalidatePath("/profile");
   };
   const denyFriend = async () => {
@@ -76,11 +69,13 @@ export const FriendRequest: React.FunctionComponent<IProvidersProps> = async ({
         id: friend.id,
       },
     });
-    await db.notification.delete({
-      where: {
-        id: notificationId,
-      },
-    });
+    if (notificationId) {
+      await db.notification.delete({
+        where: {
+          id: notificationId,
+        },
+      });
+    }
     revalidatePath("/profile");
   };
   return (
