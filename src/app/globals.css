@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .majorButton{
+    @apply rounded-lg p-1 text-xl bg-blue-700 text-slate-100 font-semibold hover:bg-blue-600 duration-300 ring-1 ring-blue-600
+  }
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
