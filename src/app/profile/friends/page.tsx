@@ -26,6 +26,7 @@ const page: FunctionComponent<PageProps> = async ({ searchParams }) => {
       accepted: false,
     },
   });
+
   return (
     <Main>
       <section className="flex max-w-3xl w-full flex-col gap-2">
@@ -33,7 +34,7 @@ const page: FunctionComponent<PageProps> = async ({ searchParams }) => {
           <FriendRequest
             key={friend.id}
             friend={friend}
-            notificationId={notificationId[0]}
+            notificationId={notificationId as string}
           />
         ))}
       </section>
