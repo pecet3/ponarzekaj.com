@@ -18,7 +18,6 @@ export const Navbar = async () => {
     },
   });
 
-  console.log(user);
   return (
     <nav className="navbar bg-slate-700 text-slate-200">
       <div className="flex-1">
@@ -69,10 +68,7 @@ export const Navbar = async () => {
             </div>
           </>
         ) : (
-          <Link
-            className="rounded-md p-1 text-xl bg-blue-600 text-slate-100 font-semibold hover:bg-sky-600 duration-300"
-            href="/sign-in"
-          >
+          <Link className="majorButton" href="/sign-in">
             Zaloguj się
           </Link>
         )}
