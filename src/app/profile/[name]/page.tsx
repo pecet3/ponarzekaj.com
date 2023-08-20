@@ -64,11 +64,11 @@ const page = async ({ params, searchParams }: PageProps) => {
     },
   });
   const isAlreadyFriendLength = isAlreadyFriendList?.friends.length;
-  console.log(isAlreadyFriendLength);
 
   const isAlreadyFriend = isAlreadyFriendLength === 0 ? false : true;
-  console.log(isAlreadyFriend);
-  console.log("sessionUser", isAlreadyFriendList?.friends);
+
+  const displayAddFriendButton =
+    isAlreadyFriend || isUserProfile ? false : true;
 
   async function addFriend() {
     "use server";
@@ -130,7 +130,7 @@ const page = async ({ params, searchParams }: PageProps) => {
       <div className="flex flex-col sm:ml-48 ml-40 mt-2 text-slate-200">
         <span className="flex justify-between items-end">
           <p className="text-xl sm:text-2xl  font-bold">{user.name}</p>
-          {!isUserProfile || !isAlreadyFriend ? (
+          {displayAddFriendButton ? (
             <form
               action={addFriend}
               className="bg-slate-900 rounded-lg p-1 mx-2 hover:bg-slate-950 duration-300"
