@@ -15,9 +15,7 @@ export const Navbar = async () => {
       id: session ? session?.user.id : "",
     },
     include: {
-      notifications: {
-        take: 15,
-      },
+      notifications: true,
     },
   });
 

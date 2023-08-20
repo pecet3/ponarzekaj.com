@@ -50,7 +50,7 @@ const page = async ({ params, searchParams }: PageProps) => {
   const isUserProfile = isUserThing(session?.user.id as string, user.id);
 
   const isAlreadyFriend = user.friends.find(
-    (friend) => friend.id === session?.user.id
+    (friend) => friend.id === session?.user.id && friend.accepted === true
   );
 
   console.log(isAlreadyFriend, "isAlready friend");
