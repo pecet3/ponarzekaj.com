@@ -9,6 +9,7 @@ import { Icons } from "@/components/ui/Icons";
 import { getAuthSession } from "@/lib/auth";
 import { isUserThing } from "@/lib/helpers";
 import { revalidatePath } from "next/cache";
+import { toast } from "react-hot-toast";
 
 interface PageProps {
   params: {
@@ -53,33 +54,38 @@ const page = async ({ params, searchParams }: PageProps) => {
     (friend) => friend.id === session?.user.id && friend.accepted === true
   );
 
-  console.log(isAlreadyFriend, "isAlready friend");
+  console.log(isAlreadyFriend, "isAlready friend", user.friends);
 
   async function addFriend() {
     "use server";
     if (!session || isUserProfile || isAlreadyFriend) return;
 
-    await db.friend.create({
-      data: {
-        userId: user.id,
-        friendId: session?.user.id,
-      },
-    });
-    await db.friend.create({
-      data: {
-        userId: session?.user.id,
-        friendId: user.id,
-      },
-    });
-    await db.notification.create({
-      data: {
-        userId: user.id,
-        authorId: session.user.id,
-        content: "Wysłał Ci zaproszenie do znajomych",
-        link: `/profile/friends`,
-      },
-    });
-    revalidatePath("/");
+    try {
+      await db.friend.create({
+        data: {
+          userId: user.id,
+          friendId: session?.user.id,
+        },
+      });
+      await db.friend.create({
+        data: {
+          userId: session?.user.id,
+          friendId: user.id,
+        },
+      });
+      await db.notification.create({
+        data: {
+          userId: user.id,
+          authorId: session.user.id,
+          content: "Wysłał Ci zaproszenie do znajomych",
+          link: `/profile/friends`,
+        },
+      });
+      revalidatePath("/");
+      toast.success("Wysłałeś zaproszenie!");
+    } catch {
+      toast.error("Ups... coś poszło nie tak");
+    }
   }
 
   // pagination things
