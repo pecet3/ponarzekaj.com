@@ -50,42 +50,53 @@ const page = async ({ params, searchParams }: PageProps) => {
 
   const isUserProfile = isUserThing(session?.user.id as string, user.id);
 
-  const isAlreadyFriend = user.friends.find(
-    (friend) => friend.id === session?.user.id && friend.accepted === true
-  );
-
-  console.log(isAlreadyFriend, "isAlready friend", user.friends);
-
-  async function addFriend() {
-    "use server";
-    if (!session || isUserProfile || isAlreadyFriend) return;
-
-    try {
-      await db.friend.create({
-        data: {
-          userId: user.id,
-          friendId: session?.user.id,
-        },
-      });
-      await db.friend.create({
-        data: {
+  const isAlreadyFriendList = await db.user.findUnique({
+    where: {
+      id: session?.user.id,
+    },
+    select: {
+      friends: {
+        where: {
           userId: session?.user.id,
           friendId: user.id,
         },
-      });
-      await db.notification.create({
-        data: {
-          userId: user.id,
-          authorId: session.user.id,
-          content: "Wysłał Ci zaproszenie do znajomych",
-          link: `/profile/friends`,
-        },
-      });
-      revalidatePath("/");
-      toast.success("Wysłałeś zaproszenie!");
-    } catch {
-      toast.error("Ups... coś poszło nie tak");
-    }
+      },
+    },
+  });
+  const isAlreadyFriendLength = isAlreadyFriendList?.friends.length;
+  console.log(isAlreadyFriendLength);
+
+  const isAlreadyFriend = isAlreadyFriendLength === 0 ? false : true;
+  console.log(isAlreadyFriend);
+  console.log("sessionUser", isAlreadyFriendList?.friends);
+
+  async function addFriend() {
+    "use server";
+
+    if (!session || isUserProfile || isAlreadyFriend)
+      return console.log("nieudalo sie");
+
+    await db.friend.create({
+      data: {
+        userId: user.id,
+        friendId: session?.user.id,
+      },
+    });
+    await db.friend.create({
+      data: {
+        userId: session?.user.id,
+        friendId: user.id,
+      },
+    });
+    await db.notification.create({
+      data: {
+        userId: user.id,
+        authorId: session.user.id,
+        content: "Wysłał Ci zaproszenie do znajomych",
+        link: `/profile/friends`,
+      },
+    });
+    revalidatePath("/");
   }
 
   // pagination things
@@ -119,15 +130,17 @@ const page = async ({ params, searchParams }: PageProps) => {
       <div className="flex flex-col sm:ml-48 ml-40 mt-2 text-slate-200">
         <span className="flex justify-between items-end">
           <p className="text-xl sm:text-2xl  font-bold">{user.name}</p>
-          <form
-            action={addFriend}
-            className="bg-slate-900 rounded-lg p-1 mx-2 hover:bg-slate-950 duration-300"
-          >
-            <button type="submit" className="text-slate-200 flex gap-1">
-              <Icons.AddFriend size={20} className="text-blue-400" />
-              Dodaj
-            </button>
-          </form>
+          {!isUserProfile || !isAlreadyFriend ? (
+            <form
+              action={addFriend}
+              className="bg-slate-900 rounded-lg p-1 mx-2 hover:bg-slate-950 duration-300"
+            >
+              <button type="submit" className="text-slate-200 flex gap-1">
+                <Icons.AddFriend size={20} className="text-blue-400" />
+                Dodaj
+              </button>
+            </form>
+          ) : null}
         </span>
         <p className="text-base sm:text-xl ">{user.email}</p>
       </div>
