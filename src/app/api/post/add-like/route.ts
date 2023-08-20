@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
     });
 
     if (likes.length !== 0) {
-      return new Response("Server error", { status: 500 });
+      return new Response("User already liked it", { status: 403 });
     }
 
     await db.likePost.create({
