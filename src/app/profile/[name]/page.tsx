@@ -49,9 +49,15 @@ const page = async ({ params, searchParams }: PageProps) => {
 
   const isUserProfile = isUserThing(session?.user.id as string, user.id);
 
+  const isAlreadyFriend = user.friends.find(
+    (friend) => friend.id === session?.user.id
+  );
+
+  console.log(isAlreadyFriend, "isAlready friend");
+
   async function addFriend() {
     "use server";
-    if (!session) return;
+    if (!session || isUserProfile || isAlreadyFriend) return;
 
     await db.friend.create({
       data: {
