@@ -16,7 +16,7 @@ export const Navbar = async () => {
     },
     include: {
       notifications: {
-        take: 10,
+        take: 15,
       },
     },
   });
@@ -30,17 +30,20 @@ export const Navbar = async () => {
 
   const visitedNotificationsLength = visitedNotifications.length;
 
-  async function markVisitedNotificationAsTrue() {
+  async function markVisitedNotificationsAsTrue() {
     "use server";
-    await db.notification.updateMany({
-      where: {
-        userId: session?.user.id,
-      },
-      data: {
-        visited: true,
-      },
-    });
-    revalidatePath("/");
+    if (visitedNotificationsLength > 0) {
+      console.log("visited true");
+      await db.notification.updateMany({
+        where: {
+          userId: session?.user.id,
+        },
+        data: {
+          visited: true,
+        },
+      });
+      revalidatePath("/");
+    }
   }
 
   return (
@@ -59,7 +62,7 @@ export const Navbar = async () => {
       <div className="flex-none gap-2">
         {session ? (
           <>
-            <form action={markVisitedNotificationAsTrue}>
+            <form action={markVisitedNotificationsAsTrue}>
               <button type="submit">
                 <div className="dropdown dropdown-end bg-slate-700">
                   <label
@@ -70,14 +73,14 @@ export const Navbar = async () => {
                       <Icons.Notification size={32} />
                     </div>
                     {visitedNotificationsLength > 0 ? (
-                      <p className="absolute z-10 top-2 right-2 rounded-full px-1 text-slate-100 bg-red-700">
+                      <p className="absolute z-10 top-2 right-2 rounded-full text-xs px-1 text-slate-100 bg-red-700">
                         {visitedNotificationsLength}
                       </p>
                     ) : null}
                   </label>
                   <ul
                     tabIndex={0}
-                    className="mt-3 z-[1] p-2 shadow menu-sm dropdown-content bg-base-100 rounded-box w-64 flex-col flex gap-1"
+                    className="mt-3 z-[1] p-2 shadow menu-sm dropdown-content bg-base-100 rounded-box w-64 flex-col flex gap-1 max-h-80 overflow-y-scroll"
                   >
                     {user?.notifications.map((notification) => (
                       <NotificationView
