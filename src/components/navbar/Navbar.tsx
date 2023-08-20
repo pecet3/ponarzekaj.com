@@ -107,7 +107,7 @@ export const Navbar = async () => {
             </div>
           </>
         ) : (
-          <Link className="majorButton mr-2" href="/sign-in">
+          <Link className="majorButton mr-2" href="/sign-up">
             Zaloguj się
           </Link>
         )}
