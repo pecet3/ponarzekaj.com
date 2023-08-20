@@ -5,6 +5,7 @@ import { Icons } from "../ui/Icons";
 import { ProfileList } from "./ProfileList";
 import { db } from "@/lib/db";
 import { NotificationView } from "../NotificationView";
+import { revalidatePath } from "next/cache";
 
 export const Navbar = async () => {
   const session = await getAuthSession();
@@ -39,6 +40,7 @@ export const Navbar = async () => {
         visited: true,
       },
     });
+    revalidatePath("/");
   }
 
   return (
@@ -67,8 +69,8 @@ export const Navbar = async () => {
                     <div className="m-auto">
                       <Icons.Notification size={32} />
                     </div>
-                    {true ? (
-                      <p className="absolute z-10 top-2 right-2 rounded-full px-0.5 text-slate-100 bg-red-700">
+                    {visitedNotificationsLength > 0 ? (
+                      <p className="absolute z-10 top-2 right-2 rounded-full px-1 text-slate-100 bg-red-700">
                         {visitedNotificationsLength}
                       </p>
                     ) : null}
