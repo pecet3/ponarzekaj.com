@@ -53,7 +53,7 @@ export const FriendRequest: React.FunctionComponent<IProvidersProps> = async ({
         authorId: session?.user.id as string,
       },
     });
-    if (notificationId) {
+    if (!!notificationId) {
       await db.notification.delete({
         where: {
           id: notificationId,
