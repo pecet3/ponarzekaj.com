@@ -64,19 +64,18 @@ export const FriendRequest: React.FunctionComponent<IProvidersProps> = async ({
   };
   const denyFriend = async () => {
     "use server";
-
+    await db.friend.delete({
+      where: {
+        id: friend.id,
+      },
+    });
     await db.friend.deleteMany({
       where: {
         friendId: session?.user.id,
         userId: friend.friendId,
       },
     });
-    await db.friend.delete({
-      where: {
-        id: friend.id,
-      },
-    });
-    if (notificationId) {
+    if (!!notificationId) {
       await db.notification.delete({
         where: {
           id: notificationId,
