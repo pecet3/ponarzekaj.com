@@ -75,12 +75,19 @@ export const FriendRequest: React.FunctionComponent<IProvidersProps> = async ({
         userId: friend.friendId,
       },
     });
-    if (!!notificationId) {
-      await db.notification.delete({
+    if (notificationId) {
+      const notification = await db.notification.findUnique({
         where: {
           id: notificationId,
         },
       });
+
+      notification &&
+        (await db.notification.delete({
+          where: {
+            id: notificationId,
+          },
+        }));
     }
     revalidatePath("/profile");
   };
