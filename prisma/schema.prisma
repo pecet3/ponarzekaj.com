@@ -131,13 +131,14 @@ model Comment {
 }
 
 model Notification {
-  id       String  @id @default(cuid())
-  link     String
-  content  String
-  authorId String
-  user     User    @relation(fields: [userId], references: [id])
-  userId   String
-  visited  Boolean @default(false)
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  link      String
+  content   String
+  authorId  String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  visited   Boolean  @default(false)
 
   @@index([userId])
 }
