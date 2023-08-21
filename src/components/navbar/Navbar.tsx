@@ -15,11 +15,11 @@ export const Navbar = async () => {
       id: session ? session?.user.id : "",
     },
     include: {
-      notifications: true,
+      notifications: {
+        orderBy: [{ createdAt: "desc" }],
+      },
     },
   });
-
-  //createdAt DateTime      @default(now())
 
   const visitedNotifications = await db.notification.findMany({
     where: {
