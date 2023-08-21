@@ -19,6 +19,8 @@ export const Navbar = async () => {
     },
   });
 
+  //createdAt DateTime      @default(now())
+
   const visitedNotifications = await db.notification.findMany({
     where: {
       userId: session?.user.id,
