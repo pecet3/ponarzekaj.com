@@ -49,8 +49,17 @@ export const Navbar = async () => {
   return (
     <nav className="navbar bg-slate-700 text-slate-200 p-0.5">
       <div className="flex-1">
-        <Link className="btn btn-ghost normal-case text-xl p-1 sm:p-2" href="/">
-          ponarzekaj.com
+        <Link className="" href="/">
+          <img
+            src="/logo.png"
+            alt="logo"
+            className="h-16 w-auto hidden sm:flex"
+          />
+          <img
+            className="h-16 w-auto flex sm:hidden"
+            src="/logo_mobile.png"
+            alt="logo"
+          />
         </Link>
       </div>
       {/* <div className="flex justify-end mr-1">
