@@ -80,10 +80,10 @@ export const AddLikeDelete: FunctionComponent<{
           </button>
         ) : (
           <button
-            className=" flex items-center justify-center text-xs rounded-xl px-1 bg-slate-300 text-black"
+            className=" flex items-center justify-center text-xs rounded-xl px-1 bg-blue-900 text-white"
             onClick={deleteLikeHandle}
           >
-            <Icons.Like size={16} className="text-blue-800" /> Polubiono
+            <Icons.Like size={16} className="text-blue-500" /> Polubiono
           </button>
         )}
       </div>
