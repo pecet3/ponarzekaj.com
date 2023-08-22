@@ -18,7 +18,22 @@ export async function POST(req: NextRequest) {
     if (session.user.id !== userId) {
       return new Response("Unauthorized", { status: 401 });
     }
-
+    const comment = await db.comment.findUnique({
+      where: {
+        id: commentId,
+      },
+    });
+    if (!comment) {
+      return new Response("Server error", { status: 500 });
+    }
+    await db.notification.create({
+      data: {
+        userId: comment.authorId,
+        authorId: userId,
+        content: "polubił Ci komentarz!",
+        link: `/post/%${comment.postId}`,
+      },
+    });
     await db.likeComment.create({
       data: {
         userId,
