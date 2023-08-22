@@ -1,5 +1,6 @@
 import { getAuthSession } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { ratelimit } from "@/lib/redis";
 import { createCommentValidator } from "@/lib/validators";
 import { NextRequest } from "next/server";
 import { z } from "zod";
@@ -20,6 +21,11 @@ export async function POST(req: NextRequest) {
     }
     if (session.user.id !== commentAuthorId) {
       return new Response("Unauthorized", { status: 401 });
+    }
+    const { success } = await ratelimit.comment.limit(commentAuthorId);
+
+    if (!success) {
+      return new Response("TOO MANY REQUESTS", { status: 403 });
     }
 
     await db.comment.create({
