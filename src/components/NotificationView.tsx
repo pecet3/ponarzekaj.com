@@ -15,10 +15,10 @@ export const NotificationView: FunctionComponent<{
     },
   });
 
-  if (!author) return null;
+  if (!author || !session) return null;
   return (
     <li
-      className={`rounded-lg bg-slate-700 hover:bg-slate-600 duration-300 m-auto`}
+      className={`rounded-lg bg-slate-700 hover:bg-slate-600 duration-300 m-auto text-sm`}
     >
       <Link
         href={`${notification.link}?notificationId=${notification?.id}` ?? "/"}
