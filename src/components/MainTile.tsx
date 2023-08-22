@@ -3,20 +3,12 @@ import { Main } from "./Main";
 
 interface Props {
   children: React.ReactNode;
-  paddingBottom?: boolean;
 }
 
-export const MainTile: FunctionComponent<Props> = ({
-  children,
-  paddingBottom,
-}) => {
+export const MainTile: FunctionComponent<Props> = ({ children }) => {
   return (
     <Main>
-      <section
-        className={`w-full max-w-3xl flex flex-col sm:rounded-xl bg-transparent sm:bg-slate-800 sm:shadow-md shadow-black ${
-          paddingBottom ? "" : ""
-        }`}
-      >
+      <section className="w-full max-w-3xl flex flex-col lg:rounded-xl bg-transparent sm:bg-slate-800 sm:shadow-md shadow-black ">
         {children}
       </section>
     </Main>
