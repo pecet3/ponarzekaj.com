@@ -34,7 +34,7 @@ export const CommentView: FunctionComponent<Props> = async ({ comment }) => {
   );
 
   return (
-    <div className="border-b-2 border-slate-400 bg-slate-900 hover:bg-slate-950 duration-300 text-slate-200 w-full p-1 sm:p-1.5">
+    <div className="border-b-2 border-slate-400 bg-slate-900 hover:bg-slate-950 duration-300 text-slate-200 w-full p-1 sm:p-2">
       <div className="flex items-end">
         <div className="flex justify-start gap-2">
           <Link href={`/profile/${author?.name}`} className="">
