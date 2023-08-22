@@ -16,4 +16,10 @@ export const ratelimit = {
     prefix: "ratelimit:comment",
     limiter: Ratelimit.slidingWindow(1, "10s"),
   }),
+  notification: new Ratelimit({
+    redis,
+    analytics: true,
+    prefix: "ratelimit:like",
+    limiter: Ratelimit.slidingWindow(2, "10s"),
+  }),
 };
