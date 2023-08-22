@@ -23,22 +23,34 @@ const page: FunctionComponent<PageProps> = async ({ searchParams }) => {
   const friends = await db.friend.findMany({
     where: {
       userId: session?.user.id,
-      accepted: false,
     },
   });
 
   return (
-    <Main>
-      <section className="flex max-w-3xl w-full flex-col gap-2">
-        {friends.map((friend) => (
-          <FriendRequest
-            key={friend.id}
-            friend={friend}
-            notificationId={notificationId as string}
-          />
-        ))}
-      </section>
-    </Main>
+    <MainTile>
+      <div className="flex max-w-3xl w-full flex-col gap-2">
+        {friends.map((friend) => {
+          if (friend.accepted === true) return;
+          return (
+            <FriendRequest
+              key={friend.id}
+              friend={friend}
+              notificationId={notificationId as string}
+            />
+          );
+        })}
+      </div>
+      {/* <div className="flex max-w-3xl w-full flex-col gap-2">
+        {friends.map((friend) => {
+          if (friend.accepted === false) return;
+          return (
+           <div className="rounded-lg bg-gray-900 flex gap-2" key={friend.id}>
+            
+           </div>
+          );
+        })}
+      </div> */}
+    </MainTile>
   );
 };
 
