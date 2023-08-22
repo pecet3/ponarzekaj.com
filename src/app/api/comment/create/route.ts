@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
     });
 
     if (!postAuthor) {
-      return new Response("SERVER ERROR", { status: 400 });
+      return new Response("SERVER ERROR", { status: 500 });
     }
     await db.notification.create({
       data: {
