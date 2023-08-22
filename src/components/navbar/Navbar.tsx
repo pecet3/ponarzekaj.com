@@ -71,6 +71,9 @@ export const Navbar = async () => {
       <div className="flex-none gap-2">
         {session ? (
           <>
+            <Link href="/friends">
+              <Icons.Friend size={32} />
+            </Link>
             <form action={markVisitedNotificationsAsTrue}>
               <button type="submit">
                 <div className="dropdown dropdown-end bg-slate-700">
