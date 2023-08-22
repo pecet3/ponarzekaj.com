@@ -92,7 +92,7 @@ export const FriendRequest: React.FunctionComponent<IProvidersProps> = async ({
     revalidatePath("/profile");
   };
   return (
-    <div className="bg-slate-800 text-slate-200 rounded-md shadow-md shadow-gray-800 w-full p-2 flex gap-2">
+    <div className="bg-blue-900 text-slate-200 rounded-lg shadow-md shadow-gray-800 w-full p-2 flex gap-2">
       <Image
         src={user.image ?? ""}
         width={96}
