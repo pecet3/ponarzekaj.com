@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
     await db.notification.create({
       data: {
         userId: post?.authorId,
-        content: "dał Ci Like pod postem",
+        content: "polubił Twój post",
         link: `/post/${postId}`,
         authorId: userId,
       },
