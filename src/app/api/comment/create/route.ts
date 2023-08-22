@@ -9,20 +9,42 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const session = await getAuthSession();
 
-    const { authorId, content, postId } = createCommentValidator.parse(body);
+    const {
+      authorId: commentAuthorId,
+      content,
+      postId,
+    } = createCommentValidator.parse(body);
 
     if (!session) {
       return new Response("Unauthorized", { status: 401 });
     }
-    if (session.user.id !== authorId) {
+    if (session.user.id !== commentAuthorId) {
       return new Response("Unauthorized", { status: 401 });
     }
 
     await db.comment.create({
       data: {
-        authorId,
+        authorId: commentAuthorId,
         content,
         postId,
+      },
+    });
+
+    const postAuthor = await db.post.findUnique({
+      where: {
+        id: postId,
+      },
+    });
+
+    if (!postAuthor) {
+      return new Response("SERVER ERROR", { status: 500 });
+    }
+    await db.notification.create({
+      data: {
+        userId: postAuthor?.authorId,
+        content: "skomentował Twój post",
+        link: `/post/${postId}`,
+        authorId: session?.user.id,
       },
     });
     return new Response("OK", { status: 200 });
