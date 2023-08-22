@@ -93,7 +93,7 @@ const page = async ({ params, searchParams }: PageProps) => {
         userId: user.id,
         authorId: session.user.id,
         content: "Wysłał Ci zaproszenie do znajomych",
-        link: `/profile/friends`,
+        link: `/friends`,
       },
     });
     revalidatePath("/");
@@ -110,7 +110,7 @@ const page = async ({ params, searchParams }: PageProps) => {
   const entries = posts.slice(start, end);
 
   return (
-    <MainTile paddingBottom>
+    <MainTile>
       <div className="relative">
         <Image
           src={user.backgroundImage ?? ""}
