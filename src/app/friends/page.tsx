@@ -11,6 +11,7 @@ import { isUserThing } from "@/lib/helpers";
 import { FriendRequest } from "@/components/FriendRequest";
 import { Main } from "@/components/Main";
 import { FriendView } from "@/components/FriendView";
+import { SearchUser } from "@/components/SearchAUser";
 interface PageProps {
   searchParams: { [key: string]: string | string[] | undefined };
 }
@@ -46,6 +47,7 @@ const page: FunctionComponent<PageProps> = async ({ searchParams }) => {
           return <FriendView key={friend.id} friend={friend} />;
         })}
       </div>
+      {/* <SearchUser /> */}
     </MainTile>
   );
 };
