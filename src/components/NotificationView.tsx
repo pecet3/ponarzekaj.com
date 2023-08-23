@@ -18,7 +18,7 @@ export const NotificationView: FunctionComponent<{
   if (!author || !session) return null;
   return (
     <li
-      className={`rounded-lg  duration-300 m-auto text-sm
+      className={`rounded-lg  duration-300 m-0 text-sm 
       ${
         !notification.visited
           ? "text-slate-800 hover:bg-slate-300 bg-slate-200"
