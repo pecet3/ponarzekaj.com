@@ -33,7 +33,7 @@ const page = async ({ params, searchParams }: PageProps) => {
           id: notificationId as string,
         },
       })
-    : false;
+    : null;
 
   if (notification) {
     await db.notification.delete({
