@@ -10,7 +10,7 @@ import { getAuthSession } from "@/lib/auth";
 import { isUserThing } from "@/lib/helpers";
 import { FriendRequest } from "@/components/FriendRequest";
 import { Main } from "@/components/Main";
-
+import { FriendView } from "@/components/FriendView";
 interface PageProps {
   searchParams: { [key: string]: string | string[] | undefined };
 }
@@ -40,15 +40,10 @@ const page: FunctionComponent<PageProps> = async ({ searchParams }) => {
           );
         })}
       </div>
-      <div className="flex max-w-3xl w-full flex-col gap-2 bg-slate-800 p-3 h-64 rounded-b-lg">
+      <div className="flex max-w-3xl w-full flex-col bg-slate-800 p-3 h-64 rounded-b-lg overflow-y-scroll">
         {friends.map((friend) => {
           if (friend.accepted === false) return;
-          return (
-            <div
-              className="rounded-lg bg-gray-900 flex gap-2"
-              key={friend.id}
-            ></div>
-          );
+          return <FriendView key={friend.id} friend={friend} />;
         })}
       </div>
     </MainTile>
