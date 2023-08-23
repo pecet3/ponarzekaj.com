@@ -25,7 +25,7 @@ export const FriendView: React.FunctionComponent<IProvidersProps> = async ({
 
   const encodedUsername = encodeURIComponent(user.name as string);
   return (
-    <li className="">
+    <li className="list-none">
       <Link
         href={`/profile/${encodedUsername}`}
         className="bg-blue-900 text-slate-200 rounded-lg
