@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
         userId: comment.authorId,
         authorId: userId,
         content: "polubił Ci komentarz!",
-        link: `/post/%${comment.postId}`,
+        link: `/post/${comment.postId}`,
       },
     });
     await db.likeComment.create({
