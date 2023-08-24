@@ -33,7 +33,6 @@ export const Navbar = async () => {
   async function markVisitedNotificationsAsTrue() {
     "use server";
     if (visitedNotificationsLength > 0) {
-      console.log("visited true");
       await db.notification.updateMany({
         where: {
           userId: session?.user.id,
@@ -42,7 +41,6 @@ export const Navbar = async () => {
           visited: true,
         },
       });
-      revalidatePath("/");
     }
   }
 
