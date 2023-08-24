@@ -24,8 +24,6 @@ const page: FunctionComponent<PageProps> = async ({ searchParams }) => {
   const friends = await db.friend.findMany({
     where: {
       userId: session?.user.id,
-      accepted: false,
-      initiator: false,
     },
   });
 
@@ -34,6 +32,7 @@ const page: FunctionComponent<PageProps> = async ({ searchParams }) => {
       <div className="flex max-w-3xl w-full flex-col gap-2 bg-slate-800 p-3 h-64 rounded-t-lg border-b-2 border-slate-400 overflow-y-scroll">
         <p>Zaproszenia do znajomych</p>
         {friends.map((friend) => {
+          if (friend.accepted === true || friend.initiator === true) return;
           return (
             <FriendRequest
               key={friend.id}
