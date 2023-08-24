@@ -50,25 +50,36 @@ const page = async ({ params, searchParams }: PageProps) => {
 
   const isUserProfile = isUserThing(session?.user.id as string, user.id);
 
-  const isAlreadyFriendList = await db.user.findUnique({
-    where: {
-      id: session?.user.id,
-    },
-    select: {
-      friends: {
-        where: {
-          userId: session?.user.id,
-          friendId: user.id,
-        },
-      },
-    },
-  });
-  const isAlreadyFriendLength = isAlreadyFriendList?.friends.length;
+  const isAlreadyFriendList = user.friends.filter(
+    (friend) => friend.friendId === session?.user.id
+  );
+  const pageUserFriend = isAlreadyFriendList[0];
+
+  const isAlreadyFriendLength = isAlreadyFriendList?.length;
 
   const isAlreadyFriend = isAlreadyFriendLength === 0 ? false : true;
 
   const displayAddFriendButton =
-    isAlreadyFriend || isUserProfile ? false : true;
+    isAlreadyFriend || isUserProfile || pageUserFriend?.accepted === true
+      ? false
+      : true;
+
+  const displayNotifications =
+    pageUserFriend?.accepted && !isUserProfile ? true : false;
+
+  const notificationAcceptFriend =
+    !pageUserFriend?.accepted &&
+    !isUserProfile &&
+    pageUserFriend?.initiator === true
+      ? true
+      : false;
+
+  const notificationsIsInvited =
+    !pageUserFriend?.accepted &&
+    !isUserProfile &&
+    pageUserFriend?.initiator === false
+      ? true
+      : false;
 
   const addFriend = async function addFriend() {
     "use server";
@@ -86,7 +97,7 @@ const page = async ({ params, searchParams }: PageProps) => {
       data: {
         userId: session?.user.id,
         friendId: user.id,
-        accepted: true,
+        initiator: true,
       },
     });
     await db.notification.create({
@@ -141,6 +152,28 @@ const page = async ({ params, searchParams }: PageProps) => {
                 Dodaj
               </button>
             </form>
+          ) : notificationAcceptFriend ? (
+            <div className="bg-slate-900 rounded-lg p-1 mx-2 hover:bg-slate-950 duration-300">
+              <button
+                type="submit"
+                className="text-slate-200 flex gap-1"
+                disabled={true}
+              >
+                Akceptuj zaproszenie
+              </button>
+            </div>
+          ) : notificationsIsInvited ? (
+            <div className="bg-slate-900 rounded-lg p-1 mx-2 hover:bg-slate-950 duration-300">
+              <button
+                type="submit"
+                className="text-slate-200 flex gap-1"
+                disabled={true}
+              >
+                Wysłano zaproszenie
+              </button>
+            </div>
+          ) : displayNotifications ? (
+            <p>Jesteście znajomymi</p>
           ) : null}
         </span>
         <p className="text-base sm:text-xl ">{user.email}</p>
