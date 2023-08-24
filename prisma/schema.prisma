@@ -57,20 +57,26 @@ model VerificationToken {
 }
 
 ////////////////////////////////////////////////////////////////////////////
+enum UserRole {
+  ADMIN
+  MOD
+  PREMIUM
+  USER
+}
 
 model User {
-  id                  String         @id @default(cuid())
-  name                String?
-  email               String?        @unique
-  emailVerified       DateTime?
-  image               String?
-  backgroundImage     String?        @default("https://images2.alphacoders.com/941/thumb-1920-941898.jpg")
-  accounts            Account[]
-  sessions            Session[]
-  posts               Post[]
-  friends             Friend[]       @relation("UserFriend")
-  notifications       Notification[]
-  notificationsLength Int?
+  id              String         @id @default(cuid())
+  name            String?
+  email           String?        @unique
+  emailVerified   DateTime?
+  image           String?
+  backgroundImage String?        @default("https://images2.alphacoders.com/941/thumb-1920-941898.jpg")
+  accounts        Account[]
+  sessions        Session[]
+  posts           Post[]
+  friends         Friend[]       @relation("UserFriend")
+  notifications   Notification[]
+  rank            UserRole       @default(USER)
 }
 
 model Friend {
@@ -81,6 +87,7 @@ model Friend {
   userId    String
   friendId  String
   accepted  Boolean  @default(false)
+  initiator Boolean  @default(false)
 
   @@index([userId])
 }
