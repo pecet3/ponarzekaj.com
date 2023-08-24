@@ -70,7 +70,7 @@ const page = async ({ params, searchParams }: PageProps) => {
   const displayAddFriendButton =
     isAlreadyFriend || isUserProfile ? false : true;
 
-  async function addFriend() {
+  const addFriend = async function addFriend() {
     "use server";
 
     if (!session || isUserProfile || isAlreadyFriend)
@@ -86,6 +86,7 @@ const page = async ({ params, searchParams }: PageProps) => {
       data: {
         userId: session?.user.id,
         friendId: user.id,
+        accepted: true,
       },
     });
     await db.notification.create({
@@ -97,7 +98,7 @@ const page = async ({ params, searchParams }: PageProps) => {
       },
     });
     revalidatePath("/");
-  }
+  };
 
   // pagination things
 
