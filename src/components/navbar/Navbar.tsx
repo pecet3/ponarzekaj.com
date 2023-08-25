@@ -42,6 +42,7 @@ export const Navbar = async () => {
         },
       });
     }
+    revalidatePath("/");
   }
 
   return (
