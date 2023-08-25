@@ -12,12 +12,12 @@ export const postValidator = z.object({
 });
 
 export const commentValidator = z.object({
-  userId: z.string().min(1).max(280),
+  userId: z.string(),
   commentId: z.string(),
 });
 
 export const createCommentValidator = z.object({
-  content: z.string(),
+  content: z.string().min(1).max(280),
   authorId: z.string(),
   postId: z.string(),
 });
