@@ -79,6 +79,7 @@ const page = async ({ params, searchParams }: PageProps) => {
   const likesLength = post?.likes.length;
   const commentsLength = post?.comments.length;
 
+  const revertedComments = comments.reverse();
   // pagination things
 
   const page = searchParams["page"] ?? "1";
