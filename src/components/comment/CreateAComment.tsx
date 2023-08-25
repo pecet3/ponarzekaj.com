@@ -28,7 +28,7 @@ export const CreateComment: React.FC<{ user: User | null; postId: string }> = ({
   ) => {
     e.preventDefault();
     try {
-      if (input.length >= maxInputLength) return;
+      if (input.length > maxInputLength) return;
       await axios.post("/api/comment/create", {
         content: input,
         postId,
