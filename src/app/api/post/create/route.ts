@@ -5,6 +5,7 @@ import { getAuthSession } from "@/lib/auth";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { ratelimit } from "@/lib/redis";
+import { FaBaby } from "react-icons/fa";
 
 export async function POST(req: NextRequest) {
   try {
@@ -23,7 +24,7 @@ export async function POST(req: NextRequest) {
       return new Response("TOO MANY REQUESTS", { status: 403 });
     }
 
-    await db.post.create({
+    const post = await db.post.create({
       data: {
         authorId,
         emoji,
@@ -31,7 +32,30 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    revalidatePath("/");
+    const user = await db.user.findUnique({
+      where: {
+        id: authorId,
+      },
+      select: {
+        friends: {
+          where: {
+            accepted: true,
+          },
+        },
+      },
+    });
+    if (!user) return;
+
+    for (const friend of user.friends) {
+      await db.notification.create({
+        data: {
+          userId: friend.friendId,
+          content: "opublikował post",
+          link: `/post/${post.id}`,
+          authorId: authorId,
+        },
+      });
+    }
 
     return NextResponse.json({ revalidated: true, now: Date.now() });
   } catch (error) {
