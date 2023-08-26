@@ -14,7 +14,7 @@ export const SearchUser: FC<PageProps> = ({}) => {
   const searchHandle = async () => {
     {
       try {
-        const response = await axios.get(`api/user/get-by-name?user=${input}`);
+        const response = await axios.get(`api/user/get-by-name?name=${input}`);
 
         setResults(response.data);
       } catch {
