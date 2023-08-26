@@ -44,12 +44,16 @@ export const FriendRequest: React.FunctionComponent<IProvidersProps> = async ({
         accepted: true,
       },
     });
-
+    const friendData = await db.user.findUnique({
+      where: {
+        id: friend.id,
+      },
+    });
     await db.notification.create({
       data: {
         userId: friend.friendId,
         content: `zaakceptował Twoje zaproszenie`,
-        link: `/profile/${user.name}`,
+        link: `/profile/${friendData?.name}`,
         authorId: session?.user.id as string,
       },
     });
