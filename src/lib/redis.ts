@@ -8,7 +8,7 @@ export const ratelimit = {
     redis,
     analytics: true,
     prefix: "ratelimit:post",
-    limiter: Ratelimit.slidingWindow(1, "3m"),
+    limiter: Ratelimit.slidingWindow(1, "30s"),
   }),
   comment: new Ratelimit({
     redis,
