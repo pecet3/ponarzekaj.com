@@ -36,18 +36,18 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    const postAuthor = await db.post.findUnique({
+    const post = await db.post.findUnique({
       where: {
         id: postId,
       },
     });
 
-    if (!postAuthor) {
+    if (!post) {
       return new Response("SERVER ERROR", { status: 500 });
     }
     await db.notification.create({
       data: {
-        userId: postAuthor?.authorId,
+        userId: post?.authorId,
         content: "skomentował Twój post",
         link: `/post/${postId}`,
         authorId: session?.user.id,
