@@ -35,13 +35,11 @@ export const FriendView: React.FunctionComponent<IProvidersProps> = async ({
           src={user.image ?? ""}
           width={96}
           height={96}
-          className="rounded-full h-14 w-14"
+          className="rounded-full h-8 sm:h-14 w-auto"
           alt="Zdjęcie użytkownika co chce dodać Cię do znajomych"
         />
-        <span>
-          <p className="text-lg sm:text-xl font-semibold">{user.name}</p>
-          <p className="text-base sm:text-sm text-slate-400">{user.email}</p>
-        </span>
+
+        <p className="text-lg sm:text-xl font-semibold">{user.name}</p>
       </Link>
     </li>
   );
