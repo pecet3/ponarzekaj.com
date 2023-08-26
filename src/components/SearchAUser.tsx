@@ -6,6 +6,7 @@ import { BsCaretRightSquareFill, BsCaretLeftSquareFill } from "react-icons/bs";
 import { db } from "@/lib/db";
 import { User } from "@prisma/client";
 import Image from "next/image";
+import { SearchResults } from "./SearchResults";
 interface PageProps {}
 
 export const SearchUser: FC<PageProps> = ({}) => {
@@ -44,6 +45,7 @@ export const SearchUser: FC<PageProps> = ({}) => {
             ))
           : null}
       </div>
+      <SearchResults name={input} />
     </section>
   );
 };
