@@ -10,6 +10,7 @@ import { getAuthSession } from "@/lib/auth";
 import { isUserThing } from "@/lib/helpers";
 import { revalidatePath } from "next/cache";
 import { toast } from "react-hot-toast";
+import Link from "next/link";
 
 interface PageProps {
   params: {
@@ -154,23 +155,15 @@ const page = async ({ params, searchParams }: PageProps) => {
             </form>
           ) : notificationAcceptFriend ? (
             <div className="bg-slate-900 rounded-lg p-1 mx-2 hover:bg-slate-950 duration-300">
-              <button
-                type="submit"
-                className="text-slate-200 flex gap-1"
-                disabled={true}
-              >
+              <Link href="/friends" className="text-slate-200 flex gap-1">
                 Akceptuj zaproszenie
-              </button>
+              </Link>
             </div>
           ) : notificationsIsInvited ? (
             <div className="bg-slate-900 rounded-lg p-1 mx-2 hover:bg-slate-950 duration-300">
-              <button
-                type="submit"
-                className="text-slate-200 flex gap-1"
-                disabled={true}
-              >
+              <Link href="/friends" className="text-slate-200 flex gap-1">
                 Wysłano zaproszenie
-              </button>
+              </Link>
             </div>
           ) : displayNotifications ? (
             <p>Jesteście znajomymi</p>
