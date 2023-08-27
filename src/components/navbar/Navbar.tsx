@@ -78,7 +78,7 @@ export const Navbar = async () => {
                 <div className="dropdown dropdown-end bg-slate-700">
                   <label
                     tabIndex={0}
-                    className="relative btn btn-ghost btn-circle avatar"
+                    className="relative btn btn-ghost btn-circle"
                   >
                     <div className="m-auto">
                       <Icons.Notification size={32} />
@@ -105,18 +105,18 @@ export const Navbar = async () => {
             </form>
 
             <div className="dropdown dropdown-end bg-slate-700">
-              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+              <label tabIndex={0} className="btn btn-ghost btn-circle">
                 <div className="w-10 rounded-full">
                   <Image
                     src={session.user.image ?? ""}
                     height={96}
                     width={96}
-                    alt="Your avatar"
+                    alt="Twój awatar"
                   />
                 </div>
               </label>
 
-              <ProfileList username={user?.name ?? "Ja kub"} />
+              <ProfileList username={user?.name ?? ""} />
             </div>
           </>
         ) : (
