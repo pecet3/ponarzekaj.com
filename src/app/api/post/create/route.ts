@@ -3,9 +3,7 @@ import { db } from "@/lib/db";
 import { createPostValidator } from "@/lib/validators";
 import { getAuthSession } from "@/lib/auth";
 import { z } from "zod";
-import { revalidatePath } from "next/cache";
 import { ratelimit } from "@/lib/redis";
-import { FaBaby } from "react-icons/fa";
 
 export async function POST(req: NextRequest) {
   try {
@@ -18,6 +16,7 @@ export async function POST(req: NextRequest) {
     if (!session) {
       return new Response("Unauthorized", { status: 401 });
     }
+
     const { success } = await ratelimit.post.limit(authorId);
 
     if (!success) {
