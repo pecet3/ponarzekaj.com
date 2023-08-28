@@ -45,14 +45,18 @@ export async function POST(req: NextRequest) {
     if (!post) {
       return new Response("SERVER ERROR", { status: 500 });
     }
-    await db.notification.create({
-      data: {
-        userId: post?.authorId,
-        content: "skomentował Twój post",
-        link: `/post/${postId}`,
-        authorId: session?.user.id,
-      },
-    });
+
+    if (session.user.id !== commentAuthorId) {
+      await db.notification.create({
+        data: {
+          userId: post?.authorId,
+          content: "skomentował Twój post",
+          link: `/post/${postId}`,
+          authorId: session?.user.id,
+        },
+      });
+    }
+
     return new Response("OK", { status: 200 });
   } catch (error) {
     if (error instanceof z.ZodError)

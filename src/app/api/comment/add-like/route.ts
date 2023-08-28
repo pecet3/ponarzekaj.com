@@ -26,14 +26,17 @@ export async function POST(req: NextRequest) {
     if (!comment) {
       return new Response("Server error", { status: 500 });
     }
-    await db.notification.create({
-      data: {
-        userId: comment.authorId,
-        authorId: userId,
-        content: "polubił Ci komentarz!",
-        link: `/post/${comment.postId}`,
-      },
-    });
+    if (session.user.id !== comment.authorId) {
+      await db.notification.create({
+        data: {
+          userId: comment.authorId,
+          authorId: userId,
+          content: "polubił Ci komentarz!",
+          link: `/post/${comment.postId}`,
+        },
+      });
+    }
+
     await db.likeComment.create({
       data: {
         userId,
