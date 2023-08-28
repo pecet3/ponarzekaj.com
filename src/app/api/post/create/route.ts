@@ -4,6 +4,7 @@ import { createPostValidator } from "@/lib/validators";
 import { getAuthSession } from "@/lib/auth";
 import { z } from "zod";
 import { ratelimit } from "@/lib/redis";
+import { revalidatePath } from "next/cache";
 
 export async function POST(req: NextRequest) {
   try {
@@ -55,7 +56,7 @@ export async function POST(req: NextRequest) {
         },
       });
     }
-
+    revalidatePath("/");
     return NextResponse.json({ revalidated: true, now: Date.now() });
   } catch (error) {
     if (error instanceof z.ZodError)
