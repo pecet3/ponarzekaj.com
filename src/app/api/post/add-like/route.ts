@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import { postValidator } from "@/lib/validators";
 import { getAuthSession } from "@/lib/auth";
 import { z } from "zod";
+import { revalidatePath } from "next/cache";
 
 export async function POST(req: NextRequest) {
   try {
@@ -54,7 +55,7 @@ export async function POST(req: NextRequest) {
         authorId: userId,
       },
     });
-
+    revalidatePath("/");
     return new Response("OK", { status: 200 });
   } catch (error) {
     if (error instanceof z.ZodError)
