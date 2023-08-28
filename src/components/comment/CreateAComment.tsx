@@ -6,6 +6,7 @@ import Link from "next/link";
 import type { User } from "@prisma/client";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { createAComment } from "@/lib/actions";
 
 export const CreateComment: React.FC<{ user: User | null; postId: string }> = ({
   user,
@@ -44,13 +45,18 @@ export const CreateComment: React.FC<{ user: User | null; postId: string }> = ({
 
   if (!user) return null;
   return (
-    <section className="flex w-full items-center justify-center gap-1 bg-slate-800 md:gap-2 max-w-3xl p-2 border-b-2 border-t border-slate-400">
+    <form
+      action={async (formData) => {
+        createAComment(formData, postId);
+      }}
+      className="flex w-full items-center justify-center gap-1 bg-slate-800 md:gap-2 max-w-3xl p-2 border-b-2 border-t border-slate-400"
+    >
       <textarea
         placeholder="Skomentuj..."
         rows={2}
         autoFocus={true}
         className="grow bg-transparent outline-none resize-none placeholder:italic text-slate-200"
-        value={input}
+        name="content"
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
@@ -83,6 +89,6 @@ export const CreateComment: React.FC<{ user: User | null; postId: string }> = ({
           </div>
         </>
       ) : null}
-    </section>
+    </form>
   );
 };
