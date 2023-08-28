@@ -112,6 +112,7 @@ export const Navbar = async () => {
                     height={96}
                     width={96}
                     alt="Twój awatar"
+                    className="rounded-full"
                   />
                 </div>
               </label>
