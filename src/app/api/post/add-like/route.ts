@@ -3,7 +3,6 @@ import { db } from "@/lib/db";
 import { postValidator } from "@/lib/validators";
 import { getAuthSession } from "@/lib/auth";
 import { z } from "zod";
-import { revalidatePath } from "next/cache";
 
 export async function POST(req: NextRequest) {
   try {
@@ -47,15 +46,17 @@ export async function POST(req: NextRequest) {
     if (!post) {
       return new Response("Server error", { status: 500 });
     }
-    await db.notification.create({
-      data: {
-        userId: post?.authorId,
-        content: "polubił Twój post",
-        link: `/post/${postId}`,
-        authorId: userId,
-      },
-    });
-    revalidatePath("/");
+    if (session.user.id !== post.authorId) {
+      await db.notification.create({
+        data: {
+          userId: post?.authorId,
+          content: "polubił Twój post",
+          link: `/post/${postId}`,
+          authorId: userId,
+        },
+      });
+    }
+
     return new Response("OK", { status: 200 });
   } catch (error) {
     if (error instanceof z.ZodError)
