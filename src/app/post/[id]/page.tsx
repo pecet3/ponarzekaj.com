@@ -114,14 +114,6 @@ const page = async ({ params, searchParams }: PageProps) => {
                   post.createdAt
                 ).fromNow()}`}</p>
 
-                <div className=" flex items-center justify-center text-right text-xs ">
-                  <p className="mx-1 font-thin">{` ∙`}</p>
-                  <LikesCommentsInfo
-                    commentsLength={commentsLength!}
-                    likesLength={likesLength!}
-                  />
-                </div>
-
                 {isUserPost ? (
                   <button className="flex items-center gap-1 text-sm text-gray-500 ">
                     <p className="mx-1 font-thin text-xs  text-slate-200">{` ∙`}</p>
@@ -142,6 +134,12 @@ const page = async ({ params, searchParams }: PageProps) => {
           </div>
         </div>
         {session ? <CreateComment user={user} postId={id} /> : null}
+      </div>
+      <div className="m-auto border-slate-200 border-b w-full flex justify-center text-xs">
+        <LikesCommentsInfo
+          commentsLength={commentsLength!}
+          likesLength={likesLength!}
+        />
       </div>
       {entries.map((comment) => (
         <CommentView key={comment.id} comment={comment} />
