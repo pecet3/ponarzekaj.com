@@ -6,6 +6,8 @@ import Link from "next/link";
 import type { User } from "@prisma/client";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import "@uploadthing/react/styles.css";
+import UploadthingButton from "../UploadthingButton";
 
 const emojiList = [
   {
@@ -25,14 +27,20 @@ const emojiList = [
     id: 4,
   },
 ];
-
+export type PostInput = {
+  content: string;
+  emoji: string;
+  imageUrl: string;
+};
 export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
   const router = useRouter();
 
-  const [input, setInput] = useState<{ content: string; emoji: string }>({
+  const [input, setInput] = useState<PostInput>({
     content: "",
     emoji: "😐",
+    imageUrl: "",
   });
+  const [imageUrl, setImageUrl] = useState("");
   const [counter, setCounter] = useState<number>(input.content.length);
   const maxInputLength = 280;
 
@@ -138,6 +146,7 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
               >
                 Dodaj
               </button>
+              <UploadthingButton onImageUpload={setImageUrl} />
               <p
                 className={`text-[10px] text-slate-200 w-8 ${
                   counter > maxInputLength ? "text-red-400" : ""
