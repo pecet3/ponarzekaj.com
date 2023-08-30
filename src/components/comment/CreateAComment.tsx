@@ -67,7 +67,7 @@ export const CreateComment: React.FC<{ user: User | null; postId: string }> = ({
             <div className="flex flex-col items-center gap-1 justify-center">
               <button
                 onClick={handleSubmit}
-                className="m-auto text-slate-800 rounded-md bg-slate-200 p-1 text-sm transition-all duration-300 hover:bg-slate-50 md:text-base"
+                className="submit-btn"
                 disabled={counter > maxInputLength}
               >
                 Dodaj
