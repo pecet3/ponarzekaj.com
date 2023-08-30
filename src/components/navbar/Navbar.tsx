@@ -52,7 +52,7 @@ export const Navbar = async () => {
           <img
             src="/logo.png"
             alt="logo"
-            className="h-16 w-auto hidden sm:flex"
+            className="h-16 w-auto hidden sm:block"
           />
           <img
             className="h-16 w-auto flex sm:hidden"
@@ -121,7 +121,10 @@ export const Navbar = async () => {
             </div>
           </>
         ) : (
-          <Link className="majorButton mr-2" href="/sign-up">
+          <Link
+            className="rounded-lg p-1 text-xl bg-blue-700 text-slate-100 font-semibold hover:bg-blue-600 duration-300 ring-1 ring-blue-600 mr-2"
+            href="/sign-up"
+          >
             Zaloguj się
           </Link>
         )}
