@@ -9,6 +9,7 @@ import { BiError, BiCommentAdd } from "react-icons/bi";
 import { HiPencilAlt } from "react-icons/hi";
 import { FaRegComments } from "react-icons/fa";
 import { IoMdNotifications } from "react-icons/io";
+import { ImFilePicture } from "react-icons/im";
 export const Icons = {
   Logo: ({ ...props }) => {
     return <RiChatPrivateLine {...props} />;
@@ -54,5 +55,8 @@ export const Icons = {
   },
   Notification: ({ ...props }) => {
     return <IoMdNotifications {...props} />;
+  },
+  Image: ({ ...props }) => {
+    return <ImFilePicture {...props} />;
   },
 };
