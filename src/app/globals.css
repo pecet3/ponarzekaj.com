@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @layer components {
-  .majorButton{
-    @apply rounded-lg p-1 text-xl bg-blue-700 text-slate-100 font-semibold hover:bg-blue-600 duration-300 ring-1 ring-blue-600
+  .submit-btn{
+    @apply m-0 text-slate-50 rounded-md bg-blue-700 py-1 px-1.5 text-sm transition-all duration-300 hover:bg-blue-600 md:text-base
   }
 }
 
