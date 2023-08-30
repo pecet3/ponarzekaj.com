@@ -6,7 +6,7 @@ import Link from "next/link";
 import type { User } from "@prisma/client";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import "@uploadthing/react/styles.css";
+
 import UploadthingButton from "../UploadthingButton";
 
 const emojiList = [
@@ -138,15 +138,17 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
                 </button>
               ))}
             </div>
-            <div className="flex flex-col items-center  gap-1 md:flex-row">
-              <button
-                onClick={handleSubmit}
-                className="m-auto text-slate-800 rounded-md bg-slate-200 p-1 text-sm transition-all duration-300 hover:bg-slate-50 md:text-base"
-                disabled={counter > maxInputLength}
-              >
-                Dodaj
-              </button>
-              <UploadthingButton onImageUpload={setImageUrl} />
+            <div className="flex flex-col items-center  gap-1 md:flex-row w-full">
+              <div className="flex justify-between items-center w-full">
+                <button
+                  onClick={handleSubmit}
+                  className="submit-btn"
+                  disabled={counter > maxInputLength}
+                >
+                  Dodaj
+                </button>
+              </div>
+              <UploadthingButton setImageUrl={setImageUrl} />
               <p
                 className={`text-[10px] text-slate-200 w-8 ${
                   counter > maxInputLength ? "text-red-400" : ""
