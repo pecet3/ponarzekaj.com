@@ -46,7 +46,7 @@ export const FriendRequest: React.FunctionComponent<IProvidersProps> = async ({
     });
     const friendData = await db.user.findUnique({
       where: {
-        id: friend.id,
+        id: friend.friendId,
       },
     });
     await db.notification.create({
