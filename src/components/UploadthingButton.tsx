@@ -14,8 +14,9 @@ const UploadthingButton: React.FC<UploadthingButtonProps> = ({
 
   return (
     <div className="relative hover:cursor">
-      <Icons.Image className="absolute top-0 right-0" size={20} />
-      <div className="opacity-50">
+      <Icons.Image className="absolute top-0.5 right-0.5 z-10" size={20} />
+      📷
+      <div className="">
         <UploadButton
           endpoint="imageUploader"
           onClientUploadComplete={(res) => {
@@ -26,7 +27,7 @@ const UploadthingButton: React.FC<UploadthingButtonProps> = ({
           onUploadError={(error: Error) => {
             alert(`ERROR! ${error.message}`);
           }}
-          className="ut-button:bg-blue-600 ut-allowed-content:hidden ut-label:hidden"
+          className="ut-button:bg-blue-600 ut-button:text-xs ut-allowed-content:hidden ut-button:w-8 ut-button:h-8"
         />
       </div>
     </div>
