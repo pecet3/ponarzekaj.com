@@ -138,7 +138,7 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
                 </button>
               ))}
             </div>
-            <div className="flex flex-col items-center  gap-1 md:flex-row w-full">
+            <div className="flex flex-col items-center gap-1 w-full">
               <div className="flex justify-between items-center w-full">
                 <button
                   onClick={handleSubmit}
@@ -147,8 +147,9 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
                 >
                   Dodaj
                 </button>
+                <UploadthingButton setImageUrl={setImageUrl} />
               </div>
-              <UploadthingButton setImageUrl={setImageUrl} />
+
               <p
                 className={`text-[10px] text-slate-200 w-8 ${
                   counter > maxInputLength ? "text-red-400" : ""
