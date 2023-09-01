@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { UploadButton } from "@/utils/uploadthing";
-import "@uploadthing/react/styles.css";
 import { Icons } from "./ui/Icons";
 interface UploadthingButtonProps {
   setImageUrl: (fileUrl: string) => void;
@@ -27,7 +26,7 @@ const UploadthingButton: React.FC<UploadthingButtonProps> = ({
           onUploadError={(error: Error) => {
             alert(`ERROR! ${error.message}`);
           }}
-          className=""
+          className="ut-button:bg-blue-600 ut-allowed-content:hidden ut-label:hidden"
         />
       </div>
     </div>
