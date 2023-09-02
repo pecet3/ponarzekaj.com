@@ -5,27 +5,49 @@ import { db } from "./db";
 import { ratelimit } from "./redis";
 import { getAuthSession } from "./auth";
 import { PostInput } from "@/components/post/CreateAPost";
+import { utapi } from "uploadthing/server";
+
+interface FileEsque extends Blob {
+  name: string;
+}
 
 export const createAPost = async (form: FormData, input: PostInput) => {
   try {
     const { emoji, content } = input;
+
+    const files = form.getAll("files");
+
     const session = await getAuthSession();
     const authorId = session?.user.id as string;
+
     if (!session) return;
+
     const { success } = await ratelimit.post.limit(authorId);
 
-    if (!success) {
-      return;
-    }
+    if (!success) return;
 
-    const post = await db.post.create({
-      data: {
-        authorId,
-        emoji,
-        content,
-      },
-    });
-    console.log("1");
+    const response =
+      files.length > 0
+        ? await utapi.uploadFiles(files as FileEsque | FileEsque[])
+        : null;
+
+    console.log(response);
+    const post = response
+      ? await db.post.create({
+          data: {
+            authorId,
+            emoji,
+            content,
+          },
+        })
+      : await db.post.create({
+          data: {
+            authorId,
+            emoji,
+            content,
+          },
+        });
+
     const user = await db.user.findUnique({
       where: {
         id: authorId,
@@ -39,7 +61,7 @@ export const createAPost = async (form: FormData, input: PostInput) => {
       },
     });
     if (!user) return;
-    console.log("2");
+
     for (const friend of user.friends) {
       await db.notification.create({
         data: {
@@ -50,12 +72,10 @@ export const createAPost = async (form: FormData, input: PostInput) => {
         },
       });
     }
-    console.log("3");
+
     revalidatePath("/");
   } catch (error) {
-    return {
-      error,
-    };
+    return error;
   }
 };
 export const createAComment = async (form: FormData, postId: string) => {

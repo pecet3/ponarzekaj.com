@@ -68,6 +68,7 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
 
       <textarea
         placeholder="Wyrzuć swoje frustracje...śmiało"
+        name="text"
         rows={2}
         autoFocus={true}
         className="grow bg-transparent outline-none resize-none placeholder:italic text-slate-200"
@@ -103,7 +104,7 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
                 >
                   <input
                     type="radio"
-                    name="selectedEmoji"
+                    name="emoji"
                     value={emoji.value}
                     checked={emoji.value === input.emoji}
                     onChange={() =>
@@ -127,6 +128,7 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
                 >
                   Dodaj
                 </button>
+                <input name="files" type="file" multiple />
               </div>
 
               <p
