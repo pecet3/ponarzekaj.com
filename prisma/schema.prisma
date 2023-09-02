@@ -98,7 +98,8 @@ model Post {
   content   String     @db.VarChar(280)
   authorId  String
   emoji     String?
-  imageUrl  String?
+  file      String?
+  fileKey   String?
   author    User       @relation(fields: [authorId], references: [id])
   likes     LikePost[]
   comments  Comment[]
