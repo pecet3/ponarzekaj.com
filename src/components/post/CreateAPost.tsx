@@ -31,21 +31,19 @@ const emojiList = [
 export type PostInput = {
   content: string;
   emoji: string;
-  imageUrl: string;
 };
 export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
   const [input, setInput] = useState<PostInput>({
     content: "",
     emoji: "😐",
-    imageUrl: "",
   });
+  const [counter, setCounter] = useState<number>(input.content.length);
+  const [isFile, setIsFile] = useState(false);
+  const maxInputLength = 280;
 
   useEffect(() => {
     setCounter(input.content.length);
   }, [input]);
-
-  const [counter, setCounter] = useState<number>(input.content.length);
-  const maxInputLength = 280;
 
   if (!user) return null;
   return (
@@ -128,7 +126,15 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
                 >
                   Dodaj
                 </button>
-                <input name="files" type="file" multiple />
+                <label className="text-xl">
+                  {isFile ? " ✅" : "📷"}
+                  <input
+                    name="files"
+                    type="file"
+                    className="hidden"
+                    onChange={() => setIsFile(true)}
+                  />
+                </label>
               </div>
 
               <p
