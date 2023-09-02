@@ -8,6 +8,7 @@ import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
 import UploadthingButton from "../UploadthingButton";
+import { createAPost } from "@/lib/actions";
 
 const emojiList = [
   {
@@ -75,7 +76,8 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
 
   if (!user) return null;
   return (
-    <section
+    <form
+      action={async (formData) => createAPost(formData, input)}
       className="flex w-full items-center justify-center gap-1 bg-slate-800 md:gap-2 sm:rounded-t-xl max-w-3xl
      p-2 border-b-2 border-slate-400 sm:border-t-0 border-t"
     >
@@ -90,6 +92,7 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
           height={96}
         />
       </Link>
+
       <textarea
         placeholder="Wyrzuć swoje frustracje...śmiało"
         rows={2}
@@ -141,13 +144,12 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
             <div className="flex flex-col items-center gap-1 w-full">
               <div className="flex justify-between items-center w-full">
                 <button
-                  onClick={handleSubmit}
+                  type="submit"
                   className="submit-btn"
                   disabled={counter > maxInputLength}
                 >
                   Dodaj
                 </button>
-                <UploadthingButton setImageUrl={setImageUrl} />
               </div>
 
               <p
@@ -161,6 +163,6 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
           </div>
         </>
       ) : null}
-    </section>
+    </form>
   );
 };
