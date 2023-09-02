@@ -68,7 +68,16 @@ export const PostView: React.FC<Props> = async ({ post }) => {
               href={`/post/${post.id}`}
               className="max-w-[17rem] grow sm:max-w-md md:max-w-[36rem] my-0.5 sm:my-0"
             >
-              <span className=" break-words text-lg">{post.content}</span>
+              <span className="break-words text-lg">{post.content}</span>
+              {post.fileUrl ? (
+                <Image
+                  src={post.fileUrl || ""}
+                  alt="zdjęcie pod postem"
+                  className="h-40 w-auto md:h-64 rounded-md"
+                  width={960}
+                  height={480}
+                />
+              ) : null}
               <span className="mx-1 text-lg font-bold text-slate-400">{` ∙ ${
                 post.emoji ?? "😐"
               }`}</span>
