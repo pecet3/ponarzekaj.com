@@ -4,18 +4,18 @@ import { revalidatePath } from "next/cache";
 import { db } from "./db";
 import { ratelimit } from "./redis";
 import { getAuthSession } from "./auth";
+import { PostInput } from "@/components/post/CreateAPost";
 
-const createAPost = async (
-  form: FormData,
-  authorId: string,
-  emoji: string,
-  content: string
-) => {
+export const createAPost = async (form: FormData, input: PostInput) => {
   try {
+    const { emoji, content } = input;
+    const session = await getAuthSession();
+    const authorId = session?.user.id as string;
+    if (!session) return;
     const { success } = await ratelimit.post.limit(authorId);
 
     if (!success) {
-      return new Response("TOO MANY REQUESTS", { status: 403 });
+      return;
     }
 
     const post = await db.post.create({
@@ -25,7 +25,7 @@ const createAPost = async (
         content,
       },
     });
-
+    console.log("1");
     const user = await db.user.findUnique({
       where: {
         id: authorId,
@@ -39,7 +39,7 @@ const createAPost = async (
       },
     });
     if (!user) return;
-
+    console.log("2");
     for (const friend of user.friends) {
       await db.notification.create({
         data: {
@@ -50,7 +50,7 @@ const createAPost = async (
         },
       });
     }
-
+    console.log("3");
     revalidatePath("/");
   } catch (error) {
     return {
