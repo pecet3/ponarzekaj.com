@@ -86,11 +86,12 @@ export const createAPost = async (form: FormData, input: PostInput) => {
       });
     }
   } catch (error) {
-    return error;
+    return { error: error };
   } finally {
     revalidatePath("/");
   }
 };
+
 export const createAComment = async (form: FormData, postId: string) => {
   const session = await getAuthSession();
   const content = form.get("content");
