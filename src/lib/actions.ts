@@ -17,6 +17,8 @@ export const createAPost = async (form: FormData, input: PostInput) => {
 
     const files = form.getAll("files");
 
+    const file = files[0] as FileEsque;
+
     const session = await getAuthSession();
     const authorId = session?.user.id as string;
 
@@ -25,28 +27,6 @@ export const createAPost = async (form: FormData, input: PostInput) => {
     const { success } = await ratelimit.post.limit(authorId);
 
     if (!success) return;
-
-    const response =
-      files.length > 0
-        ? await utapi.uploadFiles(files as FileEsque | FileEsque[])
-        : null;
-
-    console.log(response);
-    const post = response
-      ? await db.post.create({
-          data: {
-            authorId,
-            emoji,
-            content,
-          },
-        })
-      : await db.post.create({
-          data: {
-            authorId,
-            emoji,
-            content,
-          },
-        });
 
     const user = await db.user.findUnique({
       where: {
@@ -62,6 +42,39 @@ export const createAPost = async (form: FormData, input: PostInput) => {
     });
     if (!user) return;
 
+    if (file.size > 0) {
+      const response = await utapi.uploadFiles(file as FileEsque);
+
+      const post = await db.post.create({
+        data: {
+          authorId,
+          emoji,
+          content,
+          fileUrl: response.data?.url,
+          fileKey: response.data?.key,
+        },
+      });
+
+      for (const friend of user.friends) {
+        await db.notification.create({
+          data: {
+            userId: friend.friendId,
+            content: "opublikował post",
+            link: `/post/${post.id}`,
+            authorId: authorId,
+          },
+        });
+      }
+    }
+
+    const post = await db.post.create({
+      data: {
+        authorId,
+        emoji,
+        content,
+      },
+    });
+
     for (const friend of user.friends) {
       await db.notification.create({
         data: {
@@ -72,10 +85,10 @@ export const createAPost = async (form: FormData, input: PostInput) => {
         },
       });
     }
-
-    revalidatePath("/");
   } catch (error) {
     return error;
+  } finally {
+    revalidatePath("/");
   }
 };
 export const createAComment = async (form: FormData, postId: string) => {
