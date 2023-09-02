@@ -95,23 +95,27 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
           <div className="flex flex-col items-center gap-1 self-end">
             <div className="m-auto flex flex-wrap justify-center rounded-lg bg-slate-600">
               {emojiList.map((emoji) => (
-                <button
+                <label
                   key={emoji.id}
-                  className={`${
+                  className={`flex items-center space-x-2 hover:cursor-pointer ${
                     emoji.value === input.emoji ? "rounded-md bg-slate-400" : ""
                   }`}
-                  onClick={() =>
-                    setInput(
-                      (prev) =>
-                        (prev = {
-                          ...prev,
-                          emoji: emoji.value,
-                        })
-                    )
-                  }
                 >
+                  <input
+                    type="radio"
+                    name="selectedEmoji"
+                    value={emoji.value}
+                    checked={emoji.value === input.emoji}
+                    onChange={() =>
+                      setInput((prev) => ({
+                        ...prev,
+                        emoji: emoji.value,
+                      }))
+                    }
+                    className="hidden"
+                  />
                   {emoji.value}
-                </button>
+                </label>
               ))}
             </div>
             <div className="flex flex-col items-center gap-1 w-full">
