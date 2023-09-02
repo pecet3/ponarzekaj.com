@@ -34,45 +34,18 @@ export type PostInput = {
   imageUrl: string;
 };
 export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
-  const router = useRouter();
-
   const [input, setInput] = useState<PostInput>({
     content: "",
     emoji: "😐",
     imageUrl: "",
   });
-  const [imageUrl, setImageUrl] = useState("");
-  const [counter, setCounter] = useState<number>(input.content.length);
-  const maxInputLength = 280;
 
   useEffect(() => {
     setCounter(input.content.length);
   }, [input]);
 
-  const handleSubmit = async (
-    e:
-      | React.MouseEvent<HTMLButtonElement, MouseEvent>
-      | React.KeyboardEvent<HTMLTextAreaElement>
-  ) => {
-    try {
-      await axios.post("/api/post/create", {
-        content: input.content,
-        emoji: input.emoji,
-        authorId: user?.id,
-      });
-      toast.success("Dodałeś Post!");
-      setInput(
-        (prev) =>
-          (prev = {
-            ...prev,
-            content: "",
-          })
-      );
-      router.refresh();
-    } catch (error) {
-      toast.error("Ups...Coś poszło nie tak");
-    }
-  };
+  const [counter, setCounter] = useState<number>(input.content.length);
+  const maxInputLength = 280;
 
   if (!user) return null;
   return (
@@ -108,14 +81,14 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
               })
           )
         }
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            e.preventDefault();
-            if (input.content !== "") {
-              handleSubmit(e);
-            }
-          }
-        }}
+        // onKeyDown={(e) => {
+        //   if (e.key === "Enter") {
+        //     e.preventDefault();
+        //     if (input.content !== "") {
+        //       handleSubmit(e);
+        //     }
+        //   }
+        // }}
       />
       {input.content !== "" ? (
         <>
@@ -166,3 +139,28 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
     </form>
   );
 };
+
+//   const handleSubmit = async (
+//     e:
+//       | React.MouseEvent<HTMLButtonElement, MouseEvent>
+//       | React.KeyboardEvent<HTMLTextAreaElement>
+//   ) => {
+//     try {
+//       await axios.post("/api/post/create", {
+//         content: input.content,
+//         emoji: input.emoji,
+//         authorId: user?.id,
+//       });
+//       toast.success("Dodałeś Post!");
+//       setInput(
+//         (prev) =>
+//           (prev = {
+//             ...prev,
+//             content: "",
+//           })
+//       );
+//       router.refresh();
+//     } catch (error) {
+//       toast.error("Ups...Coś poszło nie tak");
+//     }
+//   };
