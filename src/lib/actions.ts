@@ -22,11 +22,11 @@ export const createAPost = async (form: FormData, input: PostInput) => {
     const session = await getAuthSession();
     const authorId = session?.user.id as string;
 
-    if (!session) return;
+    if (!session) throw new Error();
 
     const { success } = await ratelimit.post.limit(authorId);
 
-    if (!success) return;
+    if (!success) throw new Error();
 
     const user = await db.user.findUnique({
       where: {
@@ -40,7 +40,7 @@ export const createAPost = async (form: FormData, input: PostInput) => {
         },
       },
     });
-    if (!user) return;
+    if (!user) throw new Error();
 
     if (file.size > 0) {
       const response = await utapi.uploadFiles(file as FileEsque);
@@ -65,7 +65,7 @@ export const createAPost = async (form: FormData, input: PostInput) => {
           },
         });
       }
-      return;
+      return { success: "success" };
     }
 
     const post = await db.post.create({
@@ -86,6 +86,7 @@ export const createAPost = async (form: FormData, input: PostInput) => {
         },
       });
     }
+    return { success: "success" };
   } catch (error) {
     return { error: error };
   } finally {
@@ -94,14 +95,21 @@ export const createAPost = async (form: FormData, input: PostInput) => {
 };
 
 export const createAComment = async (form: FormData, postId: string) => {
-  const session = await getAuthSession();
-  const content = form.get("content");
-  await db.comment.create({
-    data: {
-      authorId: session?.user.id as string,
-      content: content as string,
-      postId,
-    },
-  });
-  revalidatePath(`/post/${postId}`);
+  try {
+    const session = await getAuthSession();
+    const content = form.get("content");
+    if (!session || content) throw new Error();
+    await db.comment.create({
+      data: {
+        authorId: session?.user.id as string,
+        content: content as string,
+        postId,
+      },
+    });
+    return { success: "success" };
+  } catch (error) {
+    return { error: error };
+  } finally {
+    revalidatePath(`/post/${postId}`);
+  }
 };
