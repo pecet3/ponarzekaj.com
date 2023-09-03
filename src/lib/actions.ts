@@ -65,6 +65,7 @@ export const createAPost = async (form: FormData, input: PostInput) => {
           },
         });
       }
+      return;
     }
 
     const post = await db.post.create({
