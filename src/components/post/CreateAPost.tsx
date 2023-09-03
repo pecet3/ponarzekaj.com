@@ -1,14 +1,13 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import axios from "axios";
 import Link from "next/link";
 import type { User } from "@prisma/client";
-import { toast } from "react-hot-toast";
-import { useRouter } from "next/navigation";
 
-import UploadthingButton from "../UploadthingButton";
 import { createAPost } from "@/lib/actions";
+import { SubmitButton } from "../SubmitButton";
+import { Icons } from "../ui/Icons";
+import { toast } from "react-hot-toast";
 
 const emojiList = [
   {
@@ -52,7 +51,11 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
     <form
       ref={formRef}
       action={async (formData) => {
-        await createAPost(formData, input);
+        const { error, success } = await createAPost(formData, input);
+
+        if (error) return toast.error("Ups... Coś poszło nie tak");
+
+        if (success) toast.success("Dodałeś post!");
         formRef.current?.reset();
         setIsFile(false);
         setInput({
@@ -102,7 +105,7 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
       />
       {input.content !== "" ? (
         <>
-          <div className="flex flex-col items-center gap-0.5 self-end">
+          <div className="flex flex-col items-center gap-1 self-end">
             <div className="m-auto flex flex-wrap justify-center rounded-lg bg-slate-600">
               {emojiList.map((emoji) => (
                 <label
@@ -128,17 +131,17 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
                 </label>
               ))}
             </div>
-            <div className="flex flex-col items-center  w-full">
-              <div className="flex justify-between items-center w-full">
-                <button
-                  type="submit"
-                  className="submit-btn"
-                  disabled={counter > maxInputLength}
-                >
-                  Dodaj
-                </button>
-                <label className="text-2xl flex items-center justify-center hover:cursor-pointer">
-                  <p className="pb-1"> {isFile ? " ✅" : "📷"}</p>
+            <div className="flex flex-col items-center w-full">
+              <div className="flex justify-between items-center w-full gap-1">
+                <SubmitButton />
+                <label className="hover:cursor-pointer">
+                  <div className="">
+                    {isFile ? (
+                      <Icons.Confirm size={20} className="text-green-600" />
+                    ) : (
+                      <Icons.Image size={20} />
+                    )}
+                  </div>
                   <input
                     name="files"
                     type="file"
