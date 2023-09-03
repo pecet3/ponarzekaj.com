@@ -69,7 +69,7 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
           className={`h-12 w-12 rounded-full md:h-16 md:w-16 ${
             input.content ? "hidden md:flex" : ""
           }`}
-          alt="Your profile photo"
+          alt="Twoje zdjęcie profilowe"
           width={96}
           height={96}
         />
