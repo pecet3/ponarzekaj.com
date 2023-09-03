@@ -39,6 +39,7 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
   });
   const [counter, setCounter] = useState<number>(input.content.length);
   const [isFile, setIsFile] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const maxInputLength = 280;
 
@@ -101,7 +102,7 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
       />
       {input.content !== "" ? (
         <>
-          <div className="flex flex-col items-center gap-1 self-end">
+          <div className="flex flex-col items-center gap-0.5 self-end">
             <div className="m-auto flex flex-wrap justify-center rounded-lg bg-slate-600">
               {emojiList.map((emoji) => (
                 <label
@@ -127,7 +128,7 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
                 </label>
               ))}
             </div>
-            <div className="flex flex-col items-center gap-1 w-full">
+            <div className="flex flex-col items-center  w-full">
               <div className="flex justify-between items-center w-full">
                 <button
                   type="submit"
@@ -136,8 +137,8 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
                 >
                   Dodaj
                 </button>
-                <label className="text-xl">
-                  {isFile ? " ✅" : "📷"}
+                <label className="text-2xl flex items-center justify-center hover:cursor-pointer">
+                  <p className="pb-1"> {isFile ? " ✅" : "📷"}</p>
                   <input
                     name="files"
                     type="file"
