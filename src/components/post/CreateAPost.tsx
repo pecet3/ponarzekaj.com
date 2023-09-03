@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import axios from "axios";
 import Link from "next/link";
@@ -39,6 +39,7 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
   });
   const [counter, setCounter] = useState<number>(input.content.length);
   const [isFile, setIsFile] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
   const maxInputLength = 280;
 
   useEffect(() => {
@@ -48,7 +49,16 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
   if (!user) return null;
   return (
     <form
-      action={async (formData) => createAPost(formData, input)}
+      ref={formRef}
+      action={async (formData) => {
+        await createAPost(formData, input);
+        formRef.current?.reset();
+        setIsFile(false);
+        setInput({
+          content: "",
+          emoji: "😐",
+        });
+      }}
       className="flex w-full items-center justify-center gap-1 bg-slate-800 md:gap-2 sm:rounded-t-xl max-w-3xl
      p-2 border-b-2 border-slate-400 sm:border-t-0 border-t"
     >
