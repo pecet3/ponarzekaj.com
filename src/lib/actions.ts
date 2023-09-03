@@ -98,7 +98,13 @@ export const createAComment = async (form: FormData, postId: string) => {
   try {
     const session = await getAuthSession();
     const content = form.get("content");
-    if (!session || content) throw new Error();
+
+    if (!session) throw new Error();
+
+    const { success } = await ratelimit.comment.limit(session.user.id);
+
+    if (!success) throw new Error();
+
     await db.comment.create({
       data: {
         authorId: session?.user.id as string,
@@ -106,6 +112,27 @@ export const createAComment = async (form: FormData, postId: string) => {
         postId,
       },
     });
+
+    const post = await db.post.findUnique({
+      where: {
+        id: postId,
+      },
+    });
+
+    if (!post) {
+      throw new Error();
+    }
+
+    if (session.user.id !== post.authorId) {
+      await db.notification.create({
+        data: {
+          userId: post?.authorId,
+          content: "skomentował Twój post",
+          link: `/post/${postId}`,
+          authorId: session?.user.id,
+        },
+      });
+    }
     return { success: "success" };
   } catch (error) {
     return { error: error };
