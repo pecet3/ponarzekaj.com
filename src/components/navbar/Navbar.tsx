@@ -44,7 +44,7 @@ export const Navbar = async () => {
     }
     revalidatePath("/");
   }
-
+  if (!user && session?.user.id) return <p>Wystąpił błąd</p>;
   return (
     <nav className="navbar bg-slate-700 text-slate-200 p-0.5">
       <div className="flex-1">
