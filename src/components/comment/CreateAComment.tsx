@@ -51,9 +51,8 @@ export const CreateComment: React.FC<{ user: User | null; postId: string }> = ({
         <>
           <div className="flex flex-col items-center gap-1 self-end">
             <div className="flex flex-col items-center gap-1 justify-center">
-              <div className="w-14">
-                <SubmitButton />
-              </div>
+              <SubmitButton />
+
               <p
                 className={`text-[10px] text-slate-200 ${
                   counter > maxInputLength ? "text-red-400" : ""
