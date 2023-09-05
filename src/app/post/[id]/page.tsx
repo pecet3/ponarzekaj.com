@@ -1,6 +1,5 @@
 import React from "react";
 import { db } from "@/lib/db";
-import Error from "@/components/Error";
 import Image from "next/image";
 import { getAuthSession } from "@/lib/auth";
 import { CommentView } from "@/components/comment/CommentView";
@@ -13,6 +12,7 @@ import { isUserThing } from "@/lib/helpers";
 import { CreateComment } from "@/components/comment/CreateAComment";
 import PaginationControls from "@/components/PaginationControls";
 import { LikesCommentsInfo } from "@/components/LikesCommentsInfo";
+import { Error } from "@/components/Error";
 dayjs.extend(relativeTime);
 
 interface PageProps {
@@ -72,7 +72,7 @@ const page = async ({ params, searchParams }: PageProps) => {
   const end = start + Number(per_page);
 
   const entries = comments.slice(start, end);
-  if (!post) return null;
+  if (!post) return <Error />;
   return (
     <MainTile>
       <div className="sm:rounded-t-xl bg-slate-950 text-slate-200 w-full sm:border-t-0 border-t border-slate-400">
