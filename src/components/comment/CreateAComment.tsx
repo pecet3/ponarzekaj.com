@@ -32,7 +32,7 @@ export const CreateComment: React.FC<{ user: User | null; postId: string }> = ({
 
         if (error) return toast.error("Ups... Coś poszło nie tak");
 
-        if (success) toast.success("Dodałeś post!");
+        if (success) toast.success("Dodałeś komentarz!");
 
         formRef.current?.reset();
         setInput("");
