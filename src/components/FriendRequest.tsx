@@ -104,19 +104,25 @@ export const FriendRequest: React.FunctionComponent<IProvidersProps> = async ({
         className="rounded-full h-8 w-8 sm:h-12 sm:w-12"
         alt="Zdjęcie użytkownika co chce dodać Cię do znajomych"
       />
-      <span className="text-slate-200 flex-1">
+      <span className="text-slate-200 flex-1 w-24 break-words">
         <p className="text-lg sm:text-xl font-semibold m-0">{user.name}</p>
         <p className="text-base sm:text-sm text-slate-400 m-0">{user.email}</p>
       </span>
       <span className="flex items-center justify-self-end gap-0.5 sm:gap-2">
         <form action={acceptFriend}>
-          <button type="submit">
-            <Icons.Confirm size={28} />
+          <button type="submit" className="sm:hidden block">
+            <Icons.Confirm size={24} />
+          </button>
+          <button type="submit" className="hidden sm:block">
+            <Icons.Confirm size={32} />
           </button>
         </form>
         <form action={denyFriend}>
-          <button type="submit">
-            <Icons.Reject size={28} />
+          <button type="submit" className="sm:hidden block">
+            <Icons.Reject size={24} />
+          </button>
+          <button type="submit" className="hidden sm:block">
+            <Icons.Reject size={32} />
           </button>
         </form>
       </span>
