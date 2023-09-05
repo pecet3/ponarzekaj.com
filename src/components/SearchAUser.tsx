@@ -51,7 +51,10 @@ export const SearchUser: FC<PageProps> = ({}) => {
       <ul className="flex flex-col gap-2  overflow-y-scroll overflow-hidden">
         {results
           ? results.map((user) => (
-              <li className="list-none flex justify-center items-center mr-3">
+              <li
+                className="list-none flex justify-center items-center mr-3"
+                key={user.id}
+              >
                 <Link
                   href={`/profile/${user.name}`}
                   className="bg-blue-900 text-slate-200 rounded-lg
