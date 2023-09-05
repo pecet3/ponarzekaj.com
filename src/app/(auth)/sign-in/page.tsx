@@ -27,16 +27,18 @@ const UserAuthForm: React.FunctionComponent = ({}) => {
           <h1 className="font-bold mb-2 text-xl">Zaloguj się za pomocą:</h1>
           <button
             type="button"
-            className="rounded-md p-1 text-xl bg-blue-700 text-slate-300 font-semibold hover:bg-blue-600 duration-300 flex justify-center"
+            className="rounded-md p-1 text-xl bg-blue-700 text-slate-300 font-semibold hover:bg-blue-600 duration-300 flex justify-center items-center"
             onClick={loginWithGoogle}
             disabled={isLoading}
           >
             {isLoading ? (
-              <Icons.Spinner size={24} className="animate-spin" />
+              <Icons.Spinner size={20} className="animate-spin my-1" />
             ) : (
-              <Icons.Google size={24} />
+              <span className="flex">
+                <Icons.Google size={24} className="mr-2" />
+                Google
+              </span>
             )}
-            Google
           </button>
         </div>
       ) : (
@@ -48,16 +50,18 @@ const UserAuthForm: React.FunctionComponent = ({}) => {
           </p>
           <button
             type="button"
-            className="rounded-md p-1 text-xl bg-blue-700 text-slate-300 font-semibold hover:bg-blue-600 duration-300 flex justify-center"
+            className="rounded-md p-1 text-xl bg-blue-700 text-slate-300 font-semibold hover:bg-blue-600 duration-300 flex justify-center items-center"
             onClick={loginWithGoogle}
             disabled={isLoading}
           >
             {isLoading ? (
-              <Icons.Spinner size={24} className="animate-spin" />
+              <Icons.Spinner size={20} className="animate-spin my-1" />
             ) : (
-              <Icons.Google size={24} />
+              <span className="flex">
+                <Icons.Google size={24} className="mr-2" />
+                Google
+              </span>
             )}
-            Google
           </button>
         </div>
       )}
