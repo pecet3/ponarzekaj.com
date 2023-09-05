@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { User } from "@prisma/client";
 
-import { createAPost } from "@/lib/actions";
+import { createAPost } from "@/next_actions/post";
 import { SubmitButton } from "../SubmitButton";
 import { Icons } from "../ui/Icons";
 import { toast } from "react-hot-toast";

@@ -6,7 +6,7 @@ import Link from "next/link";
 import type { User } from "@prisma/client";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { createAComment } from "@/lib/actions";
+import { createAComment } from "@/next_actions/comment";
 import { SubmitButton } from "../SubmitButton";
 
 export const CreateComment: React.FC<{ user: User | null; postId: string }> = ({
