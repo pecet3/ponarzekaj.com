@@ -29,7 +29,7 @@ export const FriendView: React.FunctionComponent<IProvidersProps> = async ({
       <Link
         href={`/profile/${encodedUsername}`}
         className="bg-blue-900 text-slate-200 rounded-lg
-         shadow-md shadow-gray-800 w-full p-2 flex gap-2"
+         shadow-md shadow-gray-800 w-full p-2 flex gap-2 items-center"
       >
         <Image
           src={user.image ?? ""}
