@@ -57,11 +57,11 @@ export default async function Home({
       {session ? (
         <CreatePost user={user} />
       ) : (
-        <p className="text-sm text-center italic text-white ">
+        <p className="text-sm text-center text-white p-1">
           Nie masz konta?{" "}
           <Link
-            href="/sign-up?first-time=true"
-            className="border-b-sky-600 text-sky-600"
+            href="/sign-in?first-time=true"
+            className="border-b-sky-600 border-b text-sky-400 italic"
           >
             Zarejestruj się
           </Link>
