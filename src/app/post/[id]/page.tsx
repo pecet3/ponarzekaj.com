@@ -25,23 +25,6 @@ interface PageProps {
 const page = async ({ params, searchParams }: PageProps) => {
   const session = await getAuthSession();
 
-  const notificationId = searchParams["notificationId"];
-
-  const notification = notificationId
-    ? await db.notification.findUnique({
-        where: {
-          id: notificationId as string,
-        },
-      })
-    : null;
-
-  if (notification) {
-    await db.notification.delete({
-      where: {
-        id: notificationId as string,
-      },
-    });
-  }
   const user = await db.user.findUnique({
     where: {
       id: session ? session?.user.id : "",
