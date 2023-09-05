@@ -96,30 +96,30 @@ export const FriendRequest: React.FunctionComponent<IProvidersProps> = async ({
     revalidatePath("/profile");
   };
   return (
-    <div className="bg-blue-900 text-slate-200 rounded-lg shadow-md shadow-gray-800 w-full p-2 flex gap-2">
+    <li className="bg-blue-900 text-slate-200 rounded-lg shadow-md shadow-gray-800 w-full p-2 flex gap-0.5 sm:gap-2 items-center">
       <Image
         src={user.image ?? ""}
         width={96}
         height={96}
-        className="rounded-full h-14 w-14"
+        className="rounded-full h-8 w-8 sm:h-12 sm:w-12"
         alt="Zdjęcie użytkownika co chce dodać Cię do znajomych"
       />
       <span className="text-slate-200 flex-1">
-        <p className="text-lg sm:text-xl font-semibold">{user.name}</p>
-        <p className="text-base sm:text-sm text-slate-400">{user.email}</p>
+        <p className="text-lg sm:text-xl font-semibold m-0">{user.name}</p>
+        <p className="text-base sm:text-sm text-slate-400 m-0">{user.email}</p>
       </span>
-      <span className="flex items-center justify-self-end gap-2">
+      <span className="flex items-center justify-self-end gap-0.5 sm:gap-2">
         <form action={acceptFriend}>
           <button type="submit">
-            <Icons.Confirm size={32} />
+            <Icons.Confirm size={28} />
           </button>
         </form>
         <form action={denyFriend}>
           <button type="submit">
-            <Icons.Reject size={32} />
+            <Icons.Reject size={28} />
           </button>
         </form>
       </span>
-    </div>
+    </li>
   );
 };
