@@ -108,7 +108,7 @@ export const FriendRequest: React.FunctionComponent<IProvidersProps> = async ({
         <p className="text-lg sm:text-xl font-semibold m-0">{user.name}</p>
         <p className="text-base sm:text-sm text-slate-400 m-0">{user.email}</p>
       </span>
-      <span className="flex items-center justify-self-end gap-0.5 sm:gap-2">
+      <span className="flex items-center justify-self-end gap-1 sm:gap-2">
         <form action={acceptFriend}>
           <button type="submit" className="sm:hidden block">
             <Icons.Confirm size={24} />
