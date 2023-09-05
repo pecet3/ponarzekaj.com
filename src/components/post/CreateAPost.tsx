@@ -38,7 +38,6 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
   });
   const [counter, setCounter] = useState<number>(input.content.length);
   const [isFile, setIsFile] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const maxInputLength = 280;
 
