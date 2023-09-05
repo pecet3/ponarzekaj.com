@@ -1,6 +1,6 @@
 import React from "react";
 import { db } from "@/lib/db";
-import Error from "@/components/Error";
+import { Error } from "@/components/Error";
 import Image from "next/image";
 import { PostView } from "@/components/post/PostView";
 import PaginationControls from "@/components/PaginationControls";
@@ -33,6 +33,7 @@ const page = async ({ params, searchParams }: PageProps) => {
     },
   });
 
+  if (!data) return <Error />;
   const user = data[0];
 
   const posts = await db.post.findMany({
