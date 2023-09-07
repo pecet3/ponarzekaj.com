@@ -81,7 +81,7 @@ const page = async ({ params, searchParams }: PageProps) => {
             <Link href={`/profile/${post.author.name}`} className="">
               <Image
                 src={post.author.image || ""}
-                alt={`@${post.author.name}'s avatar`}
+                alt={`zdjęcie profilowe użytkownika ${post.author.name}`}
                 className="h-10 w-10 rounded-full md:h-12 md:w-12"
                 width={48}
                 height={48}
@@ -108,6 +108,15 @@ const page = async ({ params, searchParams }: PageProps) => {
               <div className="max-w-[16rem] grow sm:max-w-md md:max-w-[36rem]">
                 <span className=" break-words text-base md:text-lg">
                   {post.content}
+                  {post.fileUrl ? (
+                    <Image
+                      src={post.fileUrl || ""}
+                      alt="zdjęcie pod postem"
+                      className="h-40 w-auto md:h-64 rounded-md"
+                      width={960}
+                      height={480}
+                    />
+                  ) : null}
                 </span>
                 <span className="mx-1 text-lg font-bold text-slate-400">{` ∙ ${
                   post.emoji ?? "😐"
