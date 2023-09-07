@@ -167,7 +167,7 @@ const page = async ({ params, searchParams }: PageProps) => {
               </Link>
             </div>
           ) : displayNotifications ? (
-            <p>Jesteście znajomymi</p>
+            <p className="px-4">Jesteście znajomymi</p>
           ) : null}
         </span>
         <p className="text-base sm:text-xl ">{user.email}</p>
