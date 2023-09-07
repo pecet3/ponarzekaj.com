@@ -36,7 +36,7 @@ export const PostView: React.FC<Props> = async ({ post }) => {
           <Link href={`/profile/${post.author.name}`} className="">
             <Image
               src={post.author.image || ""}
-              alt={`@${post.author.name}'s avatar`}
+              alt={`zdjęcie profilowe użytkownika ${post.author.name}`}
               className="h-10 w-10 rounded-full md:h-12 md:w-12"
               width={96}
               height={96}
