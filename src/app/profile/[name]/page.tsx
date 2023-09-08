@@ -35,6 +35,7 @@ const page = async ({ params, searchParams }: PageProps) => {
 
   if (!data) return <Error />;
   const user = data[0];
+  if(!user) return <Error />
 
   const posts = await db.post.findMany({
     where: {
