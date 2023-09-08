@@ -51,69 +51,38 @@ const page = async ({ params, searchParams }: PageProps) => {
 
   if (data.length === 0 || !posts) return <Error />;
 
-  const userInfo = () => {
-    if (session) {
-      const isUserProfile = session
-        ? isUserThing(session?.user.id as string, user.id)
-        : false;
+  const isUserProfile = isUserThing(session?.user.id as string, user.id);
 
-      const isAlreadyFriendList = session
-        ? user.friends.filter((friend) => friend.friendId === session?.user.id)
-        : [];
-      const pageUserFriend = isAlreadyFriendList[0];
+  const isAlreadyFriendList = user.friends.filter(
+    (friend) => friend.friendId === session?.user.id
+  );
+  const pageUserFriend = isAlreadyFriendList[0];
 
-      const isAlreadyFriendLength = isAlreadyFriendList?.length;
+  const isAlreadyFriendLength = isAlreadyFriendList?.length;
 
-      const isAlreadyFriend = isAlreadyFriendLength === 0 ? false : true;
+  const isAlreadyFriend = isAlreadyFriendLength === 0 ? false : true;
 
-      const displayAddFriendButton =
-        isAlreadyFriend || isUserProfile || pageUserFriend?.accepted === true
-          ? false
-          : true;
+  const displayAddFriendButton =
+    isAlreadyFriend || isUserProfile || pageUserFriend?.accepted === true
+      ? false
+      : true;
 
-      const displayNotifications =
-        pageUserFriend?.accepted && !isUserProfile ? true : false;
+  const displayNotifications =
+    pageUserFriend?.accepted && !isUserProfile ? true : false;
 
-      const notificationAcceptFriend =
-        !pageUserFriend?.accepted &&
-        !isUserProfile &&
-        pageUserFriend?.initiator === true
-          ? true
-          : false;
+  const notificationAcceptFriend =
+    !pageUserFriend?.accepted &&
+    !isUserProfile &&
+    pageUserFriend?.initiator === true
+      ? true
+      : false;
 
-      const notificationIsInvited =
-        !pageUserFriend?.accepted &&
-        !isUserProfile &&
-        pageUserFriend?.initiator === false
-          ? true
-          : false;
-      return {
-        isUserProfile,
-        isAlreadyFriend,
-        displayAddFriendButton,
-        displayNotifications,
-        notificationAcceptFriend,
-        notificationIsInvited,
-      };
-    }
-    return {
-      isUserProfile: false,
-      displayAddFriendButton: false,
-      displayNotifications: false,
-      notificationAcceptFriend: false,
-      notificationIsInvited: false,
-      isAlreadyFriend: false,
-    };
-  };
-
-  const {
-    isUserProfile,
-    displayAddFriendButton,
-    displayNotifications,
-    notificationAcceptFriend,
-    notificationIsInvited,
-    isAlreadyFriend,
-  } = userInfo();
+  const notificationIsInvited =
+    !pageUserFriend?.accepted &&
+    !isUserProfile &&
+    pageUserFriend?.initiator === false
+      ? true
+      : false;
 
   // pagination things
 
