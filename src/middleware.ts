@@ -39,5 +39,5 @@ export default withAuth(
 )
 
 export const config = {
-    matcher: ['/profile/:path*', '/sign-in']
+    matcher: ['/sign-in',]
 }
