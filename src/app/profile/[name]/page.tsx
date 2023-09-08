@@ -24,6 +24,7 @@ const page = async ({ params, searchParams }: PageProps) => {
   const decodedName = decodeURI(name);
 
   const session = await getAuthSession();
+  if (!session) return <p>Zaloguj się, aby wyświetlać użytkowników</p>;
   const data = await db.user.findMany({
     where: {
       name: decodedName,
