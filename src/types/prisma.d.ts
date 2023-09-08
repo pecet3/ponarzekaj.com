@@ -4,6 +4,7 @@ import type {
   User,
   PostLikes,
   CommentLikes,
+  Friend
 } from "@prisma/client";
 
 export type FullComment = Comment & {
@@ -15,3 +16,7 @@ export type FullPost = Post & {
   author: User;
   likes?: PostLikes[];
 };
+
+export type UserWithFriends = User & {
+    friends: Friend[]
+}
