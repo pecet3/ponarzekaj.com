@@ -2,12 +2,13 @@
 import { revalidatePath } from 'next/cache';
 import { db } from "@/lib/db";
 import { getAuthSession } from '../lib/auth';
+import { UserWithFriends } from '../types/prisma';
 
-export const addFriend = async function addFriend(user: any) {
-    "use server";
+export const addFriend = async function addFriend(user: UserWithFriends) {
+
     const session = await getAuthSession()
     if (!session)
-        return console.log("nieudalo sie");
+        return
 
     await db.friend.create({
         data: {
