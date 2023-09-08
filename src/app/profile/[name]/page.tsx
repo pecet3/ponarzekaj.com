@@ -11,6 +11,7 @@ import { isUserThing } from "@/lib/helpers";
 import { revalidatePath } from "next/cache";
 import { toast } from "react-hot-toast";
 import Link from "next/link";
+import { addFriend } from "../../../next_actions/friends";
 
 interface PageProps {
   params: {
@@ -24,7 +25,6 @@ const page = async ({ params, searchParams }: PageProps) => {
   const decodedName = decodeURI(name);
 
   const session = await getAuthSession();
-  if (!session) return <p>Zaloguj się, aby wyświetlać użytkowników</p>;
   const data = await db.user.findMany({
     where: {
       name: decodedName,
@@ -36,7 +36,6 @@ const page = async ({ params, searchParams }: PageProps) => {
 
   if (!data) return <Error />;
   const user = data[0];
-  if (!user) return <Error />;
 
   const posts = await db.post.findMany({
     where: {
@@ -52,68 +51,69 @@ const page = async ({ params, searchParams }: PageProps) => {
 
   if (data.length === 0 || !posts) return <Error />;
 
-  const isUserProfile = isUserThing(session?.user.id as string, user.id);
+  const userInfo = () => {
+    if (session) {
+      const isUserProfile = session
+        ? isUserThing(session?.user.id as string, user.id)
+        : false;
 
-  const isAlreadyFriendList = user.friends.filter(
-    (friend) => friend.friendId === session?.user.id
-  );
-  const pageUserFriend = isAlreadyFriendList[0];
+      const isAlreadyFriendList = session
+        ? user.friends.filter((friend) => friend.friendId === session?.user.id)
+        : [];
+      const pageUserFriend = isAlreadyFriendList[0];
 
-  const isAlreadyFriendLength = isAlreadyFriendList?.length;
+      const isAlreadyFriendLength = isAlreadyFriendList?.length;
 
-  const isAlreadyFriend = isAlreadyFriendLength === 0 ? false : true;
+      const isAlreadyFriend = isAlreadyFriendLength === 0 ? false : true;
 
-  const displayAddFriendButton =
-    isAlreadyFriend || isUserProfile || pageUserFriend?.accepted === true
-      ? false
-      : true;
+      const displayAddFriendButton =
+        isAlreadyFriend || isUserProfile || pageUserFriend?.accepted === true
+          ? false
+          : true;
 
-  const displayNotifications =
-    pageUserFriend?.accepted && !isUserProfile ? true : false;
+      const displayNotifications =
+        pageUserFriend?.accepted && !isUserProfile ? true : false;
 
-  const notificationAcceptFriend =
-    !pageUserFriend?.accepted &&
-    !isUserProfile &&
-    pageUserFriend?.initiator === true
-      ? true
-      : false;
+      const notificationAcceptFriend =
+        !pageUserFriend?.accepted &&
+        !isUserProfile &&
+        pageUserFriend?.initiator === true
+          ? true
+          : false;
 
-  const notificationsIsInvited =
-    !pageUserFriend?.accepted &&
-    !isUserProfile &&
-    pageUserFriend?.initiator === false
-      ? true
-      : false;
-
-  const addFriend = async function addFriend() {
-    "use server";
-
-    if (!session || isUserProfile || isAlreadyFriend)
-      return console.log("nieudalo sie");
-
-    await db.friend.create({
-      data: {
-        userId: user.id,
-        friendId: session?.user.id,
-      },
-    });
-    await db.friend.create({
-      data: {
-        userId: session?.user.id,
-        friendId: user.id,
-        initiator: true,
-      },
-    });
-    await db.notification.create({
-      data: {
-        userId: user.id,
-        authorId: session.user.id,
-        content: "Wysłał Ci zaproszenie do znajomych",
-        link: `/friends`,
-      },
-    });
-    revalidatePath("/");
+      const notificationIsInvited =
+        !pageUserFriend?.accepted &&
+        !isUserProfile &&
+        pageUserFriend?.initiator === false
+          ? true
+          : false;
+      return {
+        isUserProfile,
+        isAlreadyFriend,
+        displayAddFriendButton,
+        displayNotifications,
+        notificationAcceptFriend,
+        notificationIsInvited,
+      };
+    }
+    return {
+      isUserProfile: false,
+      displayAddFriendButton: false,
+      displayNotifications: false,
+      notificationAcceptFriend: false,
+      notificationIsInvited: false,
+      isAlreadyFriend: false,
+    };
   };
+
+  const {
+    isUserProfile,
+    displayAddFriendButton,
+    displayNotifications,
+    notificationAcceptFriend,
+    notificationIsInvited,
+    isAlreadyFriend,
+  } = userInfo();
 
   // pagination things
 
@@ -146,9 +146,9 @@ const page = async ({ params, searchParams }: PageProps) => {
       <div className="flex flex-col sm:ml-48 ml-40 mt-2 text-slate-200">
         <span className="flex justify-between items-end">
           <p className="text-xl sm:text-2xl  font-bold">{user.name}</p>
-          {displayAddFriendButton ? (
+          {displayAddFriendButton && session && user ? (
             <form
-              action={addFriend}
+              action={() => addFriend(user)}
               className="bg-slate-900 rounded-lg p-1 mx-2 hover:bg-slate-950 duration-300"
             >
               <button type="submit" className="text-slate-200 flex gap-1">
@@ -162,14 +162,14 @@ const page = async ({ params, searchParams }: PageProps) => {
                 Akceptuj zaproszenie
               </Link>
             </div>
-          ) : notificationsIsInvited ? (
+          ) : notificationIsInvited ? (
             <div className="bg-slate-900 rounded-lg p-1 mx-2 hover:bg-slate-950 duration-300">
               <Link href="/friends" className="text-slate-200 flex gap-1">
                 Wysłano zaproszenie
               </Link>
             </div>
           ) : displayNotifications ? (
-            <p className="px-4">Jesteście znajomymi</p>
+            <p>Jesteście znajomymi</p>
           ) : null}
         </span>
         <p className="text-base sm:text-xl ">{user.email}</p>
