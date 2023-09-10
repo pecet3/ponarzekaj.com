@@ -63,4 +63,5 @@ export const Icons = {
   },
   Discord: ({...props}) => { 
     return <BsDiscord {...props} />
+  },
 };
