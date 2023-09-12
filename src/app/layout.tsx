@@ -35,7 +35,7 @@ export default function RootLayout({
               , 2023
             </p>
             <a href="https://discord.gg/jDxBNk6M  className="text-center"><Icons.Discord size={32} className="text-slate-20" >
-          Nasz discord
+          Discord społeczności
 </a>
           </footer>
         </Providers>
