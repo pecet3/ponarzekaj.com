@@ -2,7 +2,6 @@ import { z } from "zod";
 
 export const createPostValidator = z.object({
   content: z.string().min(1).max(280),
-  authorId: z.string(),
   emoji: z.string().emoji(),
 });
 
@@ -18,6 +17,5 @@ export const commentValidator = z.object({
 
 export const createCommentValidator = z.object({
   content: z.string().min(1).max(280),
-  authorId: z.string(),
   postId: z.string(),
 });
