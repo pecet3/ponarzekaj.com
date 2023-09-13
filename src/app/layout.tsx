@@ -2,9 +2,9 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Navbar } from "@/components/navbar/Navbar";
-import { Icons } from "@/compontents/ui/Icons"
 import { Toaster } from "react-hot-toast";
 import Providers from "@/components/Providers";
+import { Icons } from "../components/ui/Icons";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -34,9 +34,10 @@ export default function RootLayout({
               </a>
               , 2023
             </p>
-            <a href="https://discord.gg/jDxBNk6M  className="text-center"><Icons.Discord size={32} className="text-slate-20" >
-          Discord społeczności
-</a>
+            <a href="https://discord.gg/jDxBNk6M" className="text-center">
+              <Icons.Discord size={32} className="text-slate-20" />
+              Discord społeczności
+            </a>
           </footer>
         </Providers>
       </body>
