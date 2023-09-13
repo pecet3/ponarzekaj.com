@@ -6,6 +6,7 @@ import { ratelimit } from "@/lib/redis";
 import { getAuthSession } from "@/lib/auth";
 import { PostInput } from "@/components/post/CreateAPost";
 import { utapi } from "uploadthing/server";
+import { createPostValidator } from '../lib/validators';
 
 interface FileEsque extends Blob {
   name: string;
@@ -13,14 +14,17 @@ interface FileEsque extends Blob {
 
 export const createAPost = async (form: FormData, input: PostInput) => {
   try {
-    const { emoji, content } = input;
+    const session = await getAuthSession();
+    const authorId = session?.user.id as string;
+
+    const { emoji, content } = createPostValidator.parse({ emoji: input.emoji, content: input.content });
+
 
     const files = form.getAll("files");
 
     const file = files[0] as FileEsque;
 
-    const session = await getAuthSession();
-    const authorId = session?.user.id as string;
+
 
     if (!session) throw new Error();
 
@@ -65,7 +69,7 @@ export const createAPost = async (form: FormData, input: PostInput) => {
           },
         });
       }
-      return { success: "success" };
+      return { success: true };
     }
 
     const post = await db.post.create({
@@ -86,9 +90,9 @@ export const createAPost = async (form: FormData, input: PostInput) => {
         },
       });
     }
-    return { success: "success" };
+    return { success: true };
   } catch (error) {
-    return { error: error };
+    return { error };
   } finally {
     revalidatePath("/");
   }
