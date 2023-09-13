@@ -6,6 +6,7 @@ import { ProfileList } from "./ProfileList";
 import { db } from "@/lib/db";
 import { NotificationView } from "../NotificationView";
 import { revalidatePath } from "next/cache";
+import { Error } from "../Error";
 
 export const Navbar = async () => {
   const session = await getAuthSession();
@@ -44,7 +45,7 @@ export const Navbar = async () => {
     }
     revalidatePath("/");
   }
-  if (!user && session?.user.id) return <p>Wystąpił błąd</p>;
+  if (!user && session?.user.id) return <Error />;
   return (
     <nav className="navbar bg-slate-700 text-slate-200 p-0.5">
       <div className="flex-1">
