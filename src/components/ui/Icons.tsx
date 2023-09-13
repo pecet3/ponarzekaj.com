@@ -10,6 +10,8 @@ import { HiPencilAlt } from "react-icons/hi";
 import { FaRegComments } from "react-icons/fa";
 import { IoMdNotifications } from "react-icons/io";
 import { ImFilePicture } from "react-icons/im";
+import { BsDiscord } from "react-icons/bs"
+ 
 export const Icons = {
   Logo: ({ ...props }) => {
     return <RiChatPrivateLine {...props} />;
@@ -58,5 +60,8 @@ export const Icons = {
   },
   Image: ({ ...props }) => {
     return <ImFilePicture {...props} />;
+  },
+  Discord: ({...props}) => { 
+    return <BsDiscord {...props} />
   },
 };

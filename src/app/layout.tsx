@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Navbar } from "@/components/navbar/Navbar";
+import { Icons } from "@/compontents/ui/Icons"
 import { Toaster } from "react-hot-toast";
 import Providers from "@/components/Providers";
 const inter = Inter({ subsets: ["latin"] });
@@ -22,7 +23,7 @@ export default function RootLayout({
         <Providers>
           <Navbar />
           {children}
-          <footer className="bg-slate-700 text-slate-300 text-sm flex flex-col items-center p-2 justify-center mt-8 ">
+          <footer className="bg-slate-700 text-slate-300 text-sm flex gap-2 items-center p-2 justify-center mt-8 ">
             <p className="">Strona powstała w celu nauki oraz zabawy.</p>
             <p>
               <a
@@ -33,6 +34,9 @@ export default function RootLayout({
               </a>
               , 2023
             </p>
+            <a href="https://discord.gg/jDxBNk6M  className="text-center"><Icons.Discord size={32} className="text-slate-20" >
+          Discord społeczności
+</a>
           </footer>
         </Providers>
       </body>
