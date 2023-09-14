@@ -157,3 +157,67 @@ export const addALike = async (postId: string) => {
     revalidatePath("/")
   }
 }
+
+export const deleteAPost = async (postId: string) => {
+  try {
+
+
+    const session = await getAuthSession();
+    const userId = session?.user.id
+    if (!session) {
+      return new Response("Unauthorized", { status: 401 });
+    }
+    if (session.user.id !== userId) {
+      return new Response("Unauthorized", { status: 401 });
+    }
+
+    const commentsList = await db.comment.findMany({
+      where: {
+        postId: postId,
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    const commentsArray = commentsList.map((comment) => comment.id);
+
+    for (const commentId of commentsArray) {
+      await db.likeComment.deleteMany({
+        where: {
+          commentId,
+        },
+      });
+    }
+
+    await db.comment.deleteMany({
+      where: {
+        postId: postId,
+      },
+    });
+
+    await db.likePost.deleteMany({
+      where: {
+        postId: postId,
+      },
+    });
+
+    await db.post.deleteMany({
+      where: {
+        id: postId,
+      },
+    });
+
+    await db.notification.deleteMany({
+      where: {
+        postId: postId,
+      },
+    });
+
+    return { success: true }
+  } catch (error) {
+    return { error }
+  } finally {
+    revalidatePath("/");
+  }
+}
