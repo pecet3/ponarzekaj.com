@@ -10,10 +10,10 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
-    const { content, authorId, emoji } = createPostValidator.parse(body);
+    const { content, emoji } = createPostValidator.parse(body);
 
-    const session = getAuthSession();
-
+    const session = await getAuthSession();
+    const authorId = session?.user.id as string
     if (!session) {
       return new Response("Unauthorized", { status: 401 });
     }
