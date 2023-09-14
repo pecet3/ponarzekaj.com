@@ -160,8 +160,6 @@ export const addALike = async (postId: string) => {
 
 export const deleteAPost = async (postId: string) => {
   try {
-
-
     const session = await getAuthSession();
     const userId = session?.user.id
     if (!session) {
@@ -224,10 +222,6 @@ export const deleteAPost = async (postId: string) => {
 
 export const deleteALike = async (postId: string) => {
   try {
-    ;
-
-
-
     const session = await getAuthSession();
     const userId = session?.user.id
     if (!session) {
@@ -253,7 +247,7 @@ export const deleteALike = async (postId: string) => {
 
     return { success: true }
   } catch (error) {
-    return (error)
+    return { error }
   } finally {
     revalidatePath("/");
   }
