@@ -6,7 +6,7 @@ import { ratelimit } from "@/lib/redis";
 import { getAuthSession } from "@/lib/auth";
 import { PostInput } from "@/components/post/CreateAPost";
 import { utapi } from "uploadthing/server";
-import { createPostValidator } from '../lib/validators';
+import { createPostValidator, postValidator } from '../lib/validators';
 
 interface FileEsque extends Blob {
   name: string;
@@ -19,12 +19,9 @@ export const createAPost = async (form: FormData, input: PostInput) => {
 
     const { emoji, content } = createPostValidator.parse({ emoji: input.emoji, content: input.content });
 
-
     const files = form.getAll("files");
 
     const file = files[0] as FileEsque;
-
-
 
     if (!session) throw new Error();
 
@@ -87,6 +84,7 @@ export const createAPost = async (form: FormData, input: PostInput) => {
           content: "opublikował post",
           link: `/post/${post.id}`,
           authorId: authorId,
+          postId: post.id,
         },
       });
     }
@@ -97,3 +95,65 @@ export const createAPost = async (form: FormData, input: PostInput) => {
     revalidatePath("/");
   }
 };
+
+export const addALike = async (postId: string) => {
+  try {
+    // const { postId, userId } = postValidator.parse(body);
+
+    const session = await getAuthSession();
+    const userId = session?.user.id
+
+    if (!session) {
+      throw new Error("Unauthorized");
+    }
+
+    if (session.user.id !== userId) {
+      return new Response("Unauthorized", { status: 401 });
+    }
+
+    const likes = await db.likePost.findMany({
+      where: {
+        postId,
+        userId,
+      },
+    });
+
+    if (likes.length !== 0) {
+      return new Response("User already liked it", { status: 403 });
+    }
+
+    await db.likePost.create({
+      data: {
+        userId,
+        postId,
+      },
+    });
+
+    const post = await db.post.findUnique({
+      where: {
+        id: postId,
+      },
+    });
+    if (!post) {
+      return new Response("Server error", { status: 500 });
+    }
+    if (session.user.id !== post.authorId) {
+      await db.notification.create({
+        data: {
+          userId: post?.authorId,
+          content: "polubił Twój post",
+          link: `/post/${postId}`,
+          authorId: userId,
+          postId: postId
+        },
+      });
+    }
+
+    return { success: true };
+
+  } catch (error) {
+    return { error }
+  } finally {
+    revalidatePath("/")
+  }
+}
