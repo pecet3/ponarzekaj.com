@@ -108,7 +108,7 @@ export const addALike = async (postId: string) => {
     }
 
     if (session.user.id !== userId) {
-      return new Response("Unauthorized", { status: 401 });
+      throw new Error()
     }
 
     const likes = await db.likePost.findMany({
@@ -119,7 +119,7 @@ export const addALike = async (postId: string) => {
     });
 
     if (likes.length !== 0) {
-      return new Response("User already liked it", { status: 403 });
+      throw new Error()
     }
 
     await db.likePost.create({
@@ -135,7 +135,7 @@ export const addALike = async (postId: string) => {
       },
     });
     if (!post) {
-      return new Response("Server error", { status: 500 });
+      throw new Error()
     }
     if (session.user.id !== post.authorId) {
       await db.notification.create({
