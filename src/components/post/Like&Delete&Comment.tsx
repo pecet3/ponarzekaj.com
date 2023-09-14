@@ -5,6 +5,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { addALike, deleteALike, deleteAPost } from "../../next_actions/post";
 
 export const AddLikeDeleteComment: FunctionComponent<{
   isLiked: boolean;
@@ -63,28 +64,64 @@ export const AddLikeDeleteComment: FunctionComponent<{
     <>
       <div className="m-auto mr-1 flex justify-end gap-2 text-xs">
         {isUserPost ? (
-          <button
-            className="flex items-center gap-1 text-gray-500 "
-            onClick={deletePostHandle}
+          <form
+            action={async () => {
+              const { error, success } = await deleteAPost(postId);
+              if (success) {
+                return toast.success("Usunąłeś post");
+              }
+              if (error) {
+                return toast.error("Ups...Coś poszło nie tak");
+              }
+            }}
           >
-            <Icons.Delete size={16} className="text-red-400" /> Usuń
-            <i className="text-xs font-extralight text-slate-200">{`∙`}</i>
-          </button>
+            <button
+              className="flex items-center gap-1 text-gray-500 "
+              type="submit"
+            >
+              <Icons.Delete size={16} className="text-red-400" /> Usuń
+              <i className="text-xs font-extralight text-slate-200">{`∙`}</i>
+            </button>
+          </form>
         ) : null}
         {!isLiked ? (
-          <button
-            className=" flex items-center justify-center rounded-xl px-1 py-0.5 bg-slate-200 dark text-black dark:bg-blue-900 dark:text-white"
-            onClick={addLikeHandle}
+          <form
+            action={async () => {
+              const { error, success } = await addALike(postId);
+              if (success) {
+                return toast.success("Polubiłeś post!");
+              }
+              if (error) {
+                return toast.error("Ups...Coś poszło nie tak");
+              }
+            }}
           >
-            <Icons.Like size={16} className="text-blue-500" /> Lubię to
-          </button>
+            <button
+              className=" flex items-center justify-center rounded-xl px-1 py-0.5 bg-slate-200 dark text-black dark:bg-blue-900 dark:text-white"
+              type="submit"
+            >
+              <Icons.Like size={16} className="text-blue-500" /> Lubię to
+            </button>
+          </form>
         ) : (
-          <button
-            className=" flex items-center justify-center rounded-xl px-1 py-0.5 dark:bg-slate-2400 dark:text-black bg-blue-900 text-white"
-            onClick={deleteLikeHandle}
+          <form
+            action={async () => {
+              const { error, success } = await deleteALike(postId);
+              if (success) {
+                return toast.success("Polubiłeś post!");
+              }
+              if (error) {
+                return toast.error("Ups...Coś poszło nie tak");
+              }
+            }}
           >
-            <Icons.Like size={16} className="text-blue-500" /> Polubiono
-          </button>
+            <button
+              className=" flex items-center justify-center rounded-xl px-1 py-0.5 dark:bg-slate-2400 dark:text-black bg-blue-900 text-white"
+              type="submit"
+            >
+              <Icons.Like size={16} className="text-blue-500" /> Polubiono
+            </button>
+          </form>
         )}
         <Link
           href={`/post/${postId}`}
