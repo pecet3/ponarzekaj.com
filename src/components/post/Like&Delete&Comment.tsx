@@ -108,7 +108,7 @@ export const AddLikeDeleteComment: FunctionComponent<{
             action={async () => {
               const { error, success } = await deleteALike(postId);
               if (success) {
-                return toast.success("Polubiłeś post!");
+                return toast.success("Nie lubisz już tego...");
               }
               if (error) {
                 return toast.error("Ups...Coś poszło nie tak");
