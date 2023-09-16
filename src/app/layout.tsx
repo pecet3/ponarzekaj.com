@@ -8,7 +8,7 @@ import { Icons } from "../components/ui/Icons";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "ponarzekaj.com",
+  title: "𝑝𝓸🅽𝕒𝙧𝙯𝙚𝙠𝙖𝙟.𝖈𝖔𝖒",
   description: "strona na której możesz ponarzekać",
 };
 
