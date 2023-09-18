@@ -20,6 +20,6 @@ export const ratelimit = {
     redis,
     analytics: true,
     prefix: "ratelimit:like",
-    limiter: Ratelimit.slidingWindow(2, "10s"),
+    limiter: Ratelimit.slidingWindow(9, "45s"),
   }),
 };
