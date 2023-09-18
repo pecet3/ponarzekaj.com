@@ -102,7 +102,11 @@ export const addALike = async (postId: string) => {
 
     const session = await getAuthSession();
     const userId = session?.user.id
+    const { success } = await ratelimit.notification.limit(userId as string);
 
+    if (!success) {
+      throw new Error("TOO MANY REQUESTS");
+    }
     if (!session) {
       throw new Error("Unauthorized");
     }
