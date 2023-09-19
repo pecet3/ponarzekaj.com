@@ -12,7 +12,7 @@ export const SubmitButton = () => {
       {pending ? (
         <Icons.Spinner className="animate-spin m-auto" size={20} />
       ) : (
-        "Dodaj"
+        "Wyślij"
       )}
     </button>
   );
