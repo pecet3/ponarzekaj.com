@@ -1,16 +1,58 @@
 import React from "react";
-import { getAuthSession } from "../../../lib/auth";
+import { db } from "@/lib/db";
+import Image from "next/image";
+import { getAuthSession } from "@/lib/auth";
+import { MainTile } from "@/components/MainTile";
+import { Icons } from "@/components/ui/Icons";
+import { Error } from "@/components/Error";
 
-const page = async () => {
+
+
+
+const page= async () => {
+  
+
+
   const session = await getAuthSession();
-  if (!session)
-    return (
-      <p className="flex flex-col min-h-screen">
-        Nie jesteś zalogowany, aby przeglądać profil
-      </p>
-    );
+ 
+  const user = await db.user.findUnique({
+    where: {
+      id:session?.user.id
+    },
+  });
+
+  if (!user || !session) return <Error />;
+ 
+
+
+
+  // const handleImageChange = (event) => {
+  //   setBackgroundImage(URL.createObjectURL(event.target.files[0]));
+  // };
+
   return (
-    <main className="flex flex-col min-h-screen">{session.user.name}</main>
+    <MainTile>
+      <div className="relative">
+        <Image
+          src={user.backgroundImage}
+          alt={`Background image for ${user.name}`}
+          height={1280}
+          width={720}
+          className="h-56 sm:h-96 sm:rounded-t-xl  w-screen"
+        />
+        <label htmlFor="backgroundImage" className="absolute bottom-0 right-0 p-2 cursor-pointer">
+          <Icons.Image size={20} className="text-blue-400" />
+        </label>
+        <input
+          id="backgroundImage"
+          type="file"
+          accept="image/*"
+          
+          className="hidden"
+        />
+      </div>
+      {/* Add more form fields for other editable properties here */}
+    </MainTile>
   );
 };
 
