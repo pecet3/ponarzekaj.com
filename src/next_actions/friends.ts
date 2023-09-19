@@ -4,7 +4,7 @@ import { db } from "@/lib/db";
 import { getAuthSession } from '../lib/auth';
 import { UserWithFriends } from '../types/prisma';
 import { Friend } from "@prisma/client"
-export async function addFriend(user: UserWithFriends) {
+export const addFriend = async (user: UserWithFriends) => {
   try {
     const session = await getAuthSession()
     if (!session) throw new Error("Unauthorized user");
@@ -36,7 +36,7 @@ export async function addFriend(user: UserWithFriends) {
   }
 };
 
-export async function acceptFriend(friend: Friend) {
+export const acceptFriend = async (friend: Friend) => {
   try {
     const session = await getAuthSession()
 
