@@ -56,6 +56,12 @@ export async function POST(req: NextRequest) {
         id: postId,
       },
     });
+
+    await db.notification.deleteMany({
+      where: {
+        postId: postId,
+      },
+    });
     revalidatePath("/");
     return NextResponse.json({ revalidated: true, now: Date.now() });
   } catch (error) {

@@ -20,3 +20,8 @@ export const createCommentValidator = z.object({
   postId: z.string(),
   authorId: z.string(),
 });
+
+export const authValidator = z.object({
+  email: z.string(),
+  password: z.string(),
+})
