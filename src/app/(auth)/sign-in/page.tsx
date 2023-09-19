@@ -4,8 +4,9 @@ import * as React from "react";
 import { FC } from "react";
 import { Icons } from "../../../components/ui/Icons";
 import { useSearchParams } from "next/navigation";
+import { RegisterForm } from "../../../components/auth/RegisterForm";
 
-const UserAuthForm: React.FunctionComponent = ({}) => {
+const page: React.FunctionComponent = ({}) => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const searchParams = useSearchParams();
   const firstTime = searchParams.get("first-time");
@@ -21,7 +22,7 @@ const UserAuthForm: React.FunctionComponent = ({}) => {
   };
 
   return (
-    <main className="flex flex-col background min-h-screen">
+    <main className="flex flex-col background min-h-screen text-slate-800">
       {!firstTime ? (
         <div className="flex flex-col  mt-6 mx-auto bg-slate-400 p-2 rounded-md">
           <h1 className="font-bold mb-2 text-xl">Zaloguj się za pomocą:</h1>
@@ -43,11 +44,9 @@ const UserAuthForm: React.FunctionComponent = ({}) => {
         </div>
       ) : (
         <div className="flex flex-col justify-center items-center mt-6 mx-auto bg-slate-400 p-2 rounded-md">
-          <h1 className="font-bold mb-2 text-xl">Zarejestruj się za pomocą:</h1>
-          <p className="text-sm">
-            {" "}
-            na ten moment to jest jedyna opcja rejestracji
-          </p>
+          <h1 className="font-bold mb-2 text-xl">Zarejestruj się</h1>
+          <RegisterForm />
+          <h2 className="my-2 text-base font-serif">lub wejdź inaczej...</h2>
           <button
             type="button"
             className="rounded-md p-1 text-xl bg-blue-700 text-slate-300 font-semibold hover:bg-blue-600 duration-300 flex justify-center items-center"
@@ -69,4 +68,4 @@ const UserAuthForm: React.FunctionComponent = ({}) => {
   );
 };
 
-export default UserAuthForm;
+export default page;
