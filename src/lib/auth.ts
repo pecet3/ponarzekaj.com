@@ -31,8 +31,8 @@ export const authOptions: NextAuthOptions = {
           }
         })
 
-        if (user) {
-          // Any object returned will be saved in `user` property of the JWT
+        if (user?.password === credentials?.password) {
+
           return user
         } else {
           // If you return null then an error will be displayed advising the user to check their details.
@@ -64,7 +64,7 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       const dbUser = await db.user.findFirst({
         where: {
-          email: token.email,
+          email: token.email as string,
         },
       });
 
