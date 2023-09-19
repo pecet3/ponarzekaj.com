@@ -21,6 +21,7 @@
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
     "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "dayjs": "^1.11.8",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.12",
@@ -37,6 +38,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.4",
     "daisyui": "^3.4.0",
     "prisma": "^5.0.0"
   }
