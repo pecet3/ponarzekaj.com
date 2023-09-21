@@ -28,7 +28,7 @@ const Auth = () => {
   return (
     <main className="flex flex-col background min-h-screen text-slate-800">
       {!register ? (
-        <div className="flex flex-col  mt-6 mx-auto bg-slate-400 p-2 rounded-md">
+        <section className="flex flex-col  mt-6 mx-auto bg-slate-400 p-2 rounded-md">
           <h1 className="font-bold mb-2 text-xl">Zaloguj się</h1>
           <LoginForm />
           <h2 className="my-2 text-base font-serif text-center">
@@ -36,7 +36,7 @@ const Auth = () => {
           </h2>
           <button
             type="button"
-            className="rounded-md mt-2 p-1 text-xl bg-blue-700 text-slate-300 font-semibold hover:bg-blue-600 duration-300 flex justify-center items-center"
+            className="rounded-md p-1 text-xl bg-blue-700 text-slate-300 font-semibold hover:bg-blue-600 duration-300 flex justify-center items-center"
             onClick={loginWithGoogle}
             disabled={isLoading}
           >
@@ -56,9 +56,9 @@ const Auth = () => {
           >
             Zarejestruj się
           </Link>
-        </div>
+        </section>
       ) : (
-        <div className="flex flex-col  mt-6 mx-auto bg-slate-400 p-2 rounded-md">
+        <section className="flex flex-col  mt-6 mx-auto bg-slate-400 p-2 rounded-md">
           <h1 className="font-bold text-xl">Zarejestruj się</h1>
           <RegisterForm />
           <h2 className="my-2 text-base font-serif text-center">
@@ -85,7 +85,7 @@ const Auth = () => {
           >
             Mam już konto
           </Link>
-        </div>
+        </section>
       )}
       <p className="w-48 my-2 mx-auto text-xs text-center font-mono space-y-0">
         Proszę nie zapominać haseł, jeszcze nie mamy podłączonego serwera email
