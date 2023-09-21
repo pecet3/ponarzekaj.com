@@ -6,14 +6,14 @@ import { ratelimit } from "@/lib/redis";
 import { getAuthSession } from "@/lib/auth";
 import { commentValidator, createCommentValidator } from '../lib/validators';
 
-export const createAComment = async (form: FormData, postId: string, userId: string) => {
+export const createAComment = async (form: FormData, formPostId: string, formAuthorId: string) => {
   try {
     const session = await getAuthSession();
-    const content = form.getAll("content")?.toString() as string;
+    const formContent = form.getAll("content")?.toString() as string;
 
     if (!session) throw new Error();
 
-    // const body = createCommentValidator.parse({ userId, postId, content });
+    const { authorId, postId, content } = createCommentValidator.parse({ authorId: formAuthorId, postId: formPostId, content: formContent });
 
     const { success } = await ratelimit.comment.limit(session.user.id);
 
@@ -21,9 +21,9 @@ export const createAComment = async (form: FormData, postId: string, userId: str
 
     const comment = await db.comment.create({
       data: {
-        authorId: session?.user.id as string,
-        content: content as string,
-        postId: postId
+        authorId,
+        content,
+        postId,
       },
     });
 
@@ -52,7 +52,7 @@ export const createAComment = async (form: FormData, postId: string, userId: str
   } catch (error) {
     return { error: error };
   } finally {
-    revalidatePath(`/post/${postId}`);
+    revalidatePath(`/post/${formPostId}`);
   }
 };
 
