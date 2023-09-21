@@ -11,10 +11,10 @@ export const RegisterForm = () => {
       className="flex flex-col gap-1 justify-center items-center text-slate-200"
       action={async (form) => {
         const password = form.getAll("password");
-        const repeatedPassword = form.getAll("repetedPassword");
-
-        if (password !== repeatedPassword)
-          return toast.error("Hasła nie są takie same!");
+        const repeatedPassword = form.getAll("repeatedPassword");
+        console.log("p1: " + password, "p2: " + repeatedPassword);
+        // if (password == repeatedPassword)
+        //   return toast.error("Hasła nie są takie same!");
         await register(form);
         router.push("/sign-in");
       }}
