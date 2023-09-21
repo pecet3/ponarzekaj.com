@@ -3,6 +3,8 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { NextAuthOptions, getServerSession } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
+import bcrypt from 'bcryptjs';
+import { loginValidator } from './validators';
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db),
   session: {
@@ -11,6 +13,7 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/sign-in",
   },
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     CredentialsProvider({
       // The name to display on the sign in form (e.g. "Sign in with...")
@@ -25,21 +28,19 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials, req) {
         // Add logic here to look up the user from the credentials supplied
+        const { email, password } = loginValidator.parse(credentials)
+
         const user = await db.user.findUnique({
           where: {
             email: credentials?.email as string,
           }
         })
+        if (!user || !user?.password || user.email !== email) return null
 
-        if (user?.password === credentials?.password) {
+        const isPasswordValid = await bcrypt.compare(password, user.password)
+        if (!isPasswordValid) return null
 
-          return user
-        } else {
-          // If you return null then an error will be displayed advising the user to check their details.
-          return null
-
-          // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
-        }
+        return user
       }
     }),
     GoogleProvider({
