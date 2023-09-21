@@ -9,21 +9,21 @@ import { commentValidator, createCommentValidator } from '../lib/validators';
 export const createAComment = async (form: FormData, postId: string, userId: string) => {
   try {
     const session = await getAuthSession();
-    const content = form.get("content")?.toString();
+    const content = form.getAll("content")?.toString() as string;
 
     if (!session) throw new Error();
 
-    const body = createCommentValidator.parse({ userId, postId, content });
+    // const body = createCommentValidator.parse({ userId, postId, content });
 
     const { success } = await ratelimit.comment.limit(session.user.id);
 
     if (!success) throw new Error();
 
-    await db.comment.create({
+    const comment = await db.comment.create({
       data: {
         authorId: session?.user.id as string,
         content: content as string,
-        postId: body.postId
+        postId: postId
       },
     });
 
@@ -44,6 +44,7 @@ export const createAComment = async (form: FormData, postId: string, userId: str
           content: "skomentował Twój post",
           link: `/post/${postId}`,
           authorId: session?.user.id,
+          commentId: comment.id
         },
       });
     }
