@@ -50,7 +50,7 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
     <form
       ref={formRef}
       action={async (formData) => {
-        const { error, success } = await createAPost(formData, input, user.id);
+        const { error, success } = await createAPost(formData, input);
 
         if (error) return toast.error("Ups... Coś poszło nie tak");
 

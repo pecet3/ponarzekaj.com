@@ -3,7 +3,6 @@ import { z } from "zod";
 export const createPostValidator = z.object({
   content: z.string().min(1).max(280),
   emoji: z.string().emoji(),
-  authorId: z.string(),
 });
 
 export const postValidator = z.object({
