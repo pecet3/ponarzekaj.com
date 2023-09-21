@@ -60,7 +60,7 @@ export default async function Home({
         <p className="text-sm text-center text-white p-1">
           Nie masz konta?{" "}
           <Link
-            href="/sign-in?first-time=true"
+            href="/auth?register=true"
             className="border-b-sky-600 border-b text-sky-400 italic"
           >
             Zarejestruj się
