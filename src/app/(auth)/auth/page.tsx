@@ -37,6 +37,9 @@ const Auth = () => {
             onClick={loginWithGoogle}
             disabled={isLoading}
           >
+            <h2 className="my-2 text-base font-serif text-center">
+              lub wejdź inaczej...
+            </h2>
             {isLoading ? (
               <Icons.Spinner size={20} className="animate-spin my-1" />
             ) : (

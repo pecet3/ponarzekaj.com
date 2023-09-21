@@ -30,7 +30,7 @@ export const RegisterForm = () => {
         type="text"
         className="p-1  rounded-md text-sm"
         name="name"
-        placeholder="twoja nazwa np. karol wojtyła"
+        placeholder="twoja nazwa"
         minLength={4}
         required
       />
