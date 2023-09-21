@@ -1,8 +1,8 @@
 "use client";
 import { SubmitButton } from "../SubmitButton";
 import { toast } from "react-hot-toast";
-import { login } from "../../next_actions/auth";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 export const LoginForm = () => {
   const router = useRouter();
@@ -10,8 +10,14 @@ export const LoginForm = () => {
     <form
       className="flex flex-col gap-1 justify-center items-center text-slate-200"
       action={async (form) => {
-        await login(form);
-        router.push("/sign-in");
+        const email = form.getAll("email").toString();
+        const password = form.getAll("password").toString();
+        signIn("credentials", {
+          email,
+          password,
+          callbackUrl: "/"
+        });
+        // router.push("/sign-in");
       }}
     >
       <input
