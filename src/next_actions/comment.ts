@@ -6,12 +6,14 @@ import { ratelimit } from "@/lib/redis";
 import { getAuthSession } from "@/lib/auth";
 import { commentValidator } from '../lib/validators';
 
-export const createAComment = async (form: FormData, postId: string) => {
+export const createAComment = async (form: FormData, postId: string, userId: string) => {
   try {
     const session = await getAuthSession();
     const content = form.get("content");
 
     if (!session) throw new Error();
+
+    const body = commentValidator.parse({ userId, postId });
 
     const { success } = await ratelimit.comment.limit(session.user.id);
 
