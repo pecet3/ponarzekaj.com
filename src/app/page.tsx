@@ -54,7 +54,7 @@ export default async function Home({
 
   return (
     <MainTile>
-      {session ? (
+      {/* {session ? (
         <CreatePost user={user} />
       ) : (
         <p className="text-sm text-center text-white p-1">
@@ -66,7 +66,7 @@ export default async function Home({
             Zarejestruj się
           </Link>
         </p>
-      )}
+      )} */}
       {entries.map((post) => {
         return <PostView key={post.id} post={post} />;
       })}
