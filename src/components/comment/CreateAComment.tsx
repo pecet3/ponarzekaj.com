@@ -28,7 +28,11 @@ export const CreateComment: React.FC<{ user: User | null; postId: string }> = ({
     <form
       ref={formRef}
       action={async (formData) => {
-        const { error, success } = await createAComment(formData, postId);
+        const { error, success } = await createAComment(
+          formData,
+          postId,
+          user.id
+        );
 
         if (error) return toast.error("Ups... Coś poszło nie tak");
 
