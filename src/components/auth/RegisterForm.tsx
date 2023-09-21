@@ -12,14 +12,11 @@ export const RegisterForm = () => {
       action={async (form) => {
         const password = form.getAll("password");
         const repeatedPassword = form.getAll("repeatedPassword");
-        console.log(
-          "p1: " + password,
-          "p2: " + repeatedPassword,
-          form.getAll("name").toString()
-        );
-        if (password == repeatedPassword)
+        if (password !== repeatedPassword)
           return toast.error("Hasła nie są takie same!");
-        await register(form);
+        const { success, error } = await register(form);
+        if (success) toast.success("Teraz musisz się zalogować");
+        if (error) toast.error("Ups...coś poszło nie tak");
       }}
     >
       <input
@@ -33,7 +30,8 @@ export const RegisterForm = () => {
         type="text"
         className="p-1  rounded-md text-sm"
         name="name"
-        placeholder="imię i nazwisko"
+        placeholder="twoja nazwa np. karol wojtyła"
+        minLength={4}
         required
       />
       <input
@@ -41,6 +39,7 @@ export const RegisterForm = () => {
         className="p-1 rounded-md text-sm"
         name="password"
         placeholder="hasło"
+        minLength={6}
         required
       />
       <input
@@ -48,6 +47,7 @@ export const RegisterForm = () => {
         className="p-1 rounded-md text-sm"
         name="repeatedPassword"
         placeholder="powtórz hasło"
+        minLength={6}
         required
       />
       <SubmitButton />
