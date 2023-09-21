@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .submit-btn{
+    @apply m-auto text-slate-50 rounded-md bg-blue-700 py-1 px-1.5 text-sm transition-all duration-300 hover:bg-blue-600 md:text-base w-14 text-center
+  }
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+ 
+  background-color: #586585;
+  
+  }
+}
+
+@media (max-width: 648px){
+  :root{
+    background: rgb(30 41 59)
+  }
+}
