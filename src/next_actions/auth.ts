@@ -20,7 +20,7 @@ export const register = async (form: FormData) => {
             }
         })
 
-        if (isThatUser.length === null) throw new Error()
+        if (isThatUser.length > 0) throw new Error()
 
         const user = await db.user.create({
             data: {
