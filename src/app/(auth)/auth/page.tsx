@@ -59,7 +59,7 @@ const Auth = () => {
         </div>
       ) : (
         <div className="flex flex-col  mt-6 mx-auto bg-slate-400 p-2 rounded-md">
-          <h1 className="font-bold mb-2 text-xl">Zarejestruj się</h1>
+          <h1 className="font-bold text-xl">Zarejestruj się</h1>
           <RegisterForm />
           <h2 className="my-2 text-base font-serif text-center">
             lub wejdź inaczej...
