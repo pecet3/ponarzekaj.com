@@ -12,11 +12,14 @@ export const RegisterForm = () => {
       action={async (form) => {
         const password = form.getAll("password");
         const repeatedPassword = form.getAll("repeatedPassword");
-        console.log("p1: " + password, "p2: " + repeatedPassword);
-        // if (password == repeatedPassword)
-        //   return toast.error("Hasła nie są takie same!");
+        console.log(
+          "p1: " + password,
+          "p2: " + repeatedPassword,
+          form.getAll("name").toString()
+        );
+        if (password == repeatedPassword)
+          return toast.error("Hasła nie są takie same!");
         await register(form);
-        router.push("/sign-in");
       }}
     >
       <input
