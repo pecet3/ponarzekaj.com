@@ -12,12 +12,12 @@ interface FileEsque extends Blob {
   name: string;
 }
 
-export const createAPost = async (form: FormData, input: PostInput) => {
+export const createAPost = async (form: FormData, input: PostInput, formAuthorId: string) => {
   try {
     const session = await getAuthSession();
     const authorId = session?.user.id as string;
 
-    const { emoji, content } = createPostValidator.parse({ emoji: input.emoji, content: input.content });
+    const { emoji, content } = createPostValidator.parse({ emoji: input.emoji, content: input.content, authorId: formAuthorId });
 
     const files = form.getAll("files");
 
