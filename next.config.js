@@ -20,11 +20,17 @@ const nextConfig = {
                 port: '',
                 pathname: '**',
             },
+            {
+                protocol: 'https',
+                hostname: 'avatarfiles.alphacoders.com',
+                port: '',
+                pathname: '**',
+            },
         ],
     },
     experimental: {
         serverActions: true,
-      },
+    },
 
 }
 module.exports = nextConfig
