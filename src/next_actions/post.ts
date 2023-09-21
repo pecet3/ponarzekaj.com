@@ -173,6 +173,17 @@ export const deleteAPost = async (postId: string) => {
       throw new Error()
     }
 
+    const post = await db.post.findUnique({
+      where: {
+        id: postId
+      }
+    })
+    if (!post) throw new Error()
+
+    if (post.fileKey) {
+      await utapi.deleteFiles(post.fileKey);
+    }
+
     const commentsList = await db.comment.findMany({
       where: {
         postId: postId,
