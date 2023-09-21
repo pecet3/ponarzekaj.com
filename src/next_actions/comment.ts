@@ -4,16 +4,16 @@ import { revalidatePath } from "next/cache";
 import { db } from "@/lib/db";
 import { ratelimit } from "@/lib/redis";
 import { getAuthSession } from "@/lib/auth";
-import { commentValidator } from '../lib/validators';
+import { commentValidator, createCommentValidator } from '../lib/validators';
 
 export const createAComment = async (form: FormData, postId: string, userId: string) => {
   try {
     const session = await getAuthSession();
-    const content = form.get("content");
+    const content = form.get("content")?.toString();
 
     if (!session) throw new Error();
 
-    const body = commentValidator.parse({ userId, postId });
+    const body = createCommentValidator.parse({ userId, postId, content });
 
     const { success } = await ratelimit.comment.limit(session.user.id);
 
@@ -23,7 +23,7 @@ export const createAComment = async (form: FormData, postId: string, userId: str
       data: {
         authorId: session?.user.id as string,
         content: content as string,
-        postId,
+        postId: body.postId
       },
     });
 

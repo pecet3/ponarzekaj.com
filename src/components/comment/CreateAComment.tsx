@@ -39,7 +39,6 @@ export const CreateComment: React.FC<{ user: User | null; postId: string }> = ({
         if (success) toast.success("Dodałeś komentarz!");
 
         formRef.current?.reset();
-        setInput("");
       }}
       className="flex w-full items-center justify-center gap-1 bg-slate-800 md:gap-2 max-w-3xl p-2 border-b-2 border-t border-slate-400"
     >
