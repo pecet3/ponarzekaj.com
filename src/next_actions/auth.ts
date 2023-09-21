@@ -15,13 +15,13 @@ export const register = async (form: FormData) => {
 
         const hashedPassword = await bcrypt.hash(password, 10)
 
-        const isThatUser = await db.user.findMany({
+        const existingUsers = await db.user.findMany({
             where: {
                 email
             },
         })
 
-        if (isThatUser.length > 0) throw new Error()
+        if (existingUsers.length > 0) throw new Error()
 
         const user = await db.user.create({
             data: {
