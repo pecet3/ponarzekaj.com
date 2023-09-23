@@ -10,29 +10,14 @@ import { getAuthSession } from "@/lib/auth";
 
 const page = async () => {
   const session = await getAuthSession();
+  if (!session) return null;
   const user = await db.user.findUnique({
     where: {
       id: session?.user.id,
     },
-    include: {
-      friends: true,
-    },
   });
 
-  if (!session || !user) return <Error />;
-
-  const posts = await db.post.findMany({
-    where: {
-      authorId: session?.user.id,
-    },
-    include: {
-      comments: true,
-      author: true,
-      likes: true,
-    },
-    take: 10,
-    orderBy: [{ createdAt: "desc" }],
-  });
+  if (!user) return <Error />;
 
   return (
     <MainTile>
@@ -58,13 +43,8 @@ const page = async () => {
         </span>
         <p className="text-base sm:text-xl ">{user.email}</p>
       </div>
-      {posts ? (
-        <div className="mt-10  flex flex-col border-t-2 border-slate-400">
-          {posts.map((post) => {
-            return <PostView post={post} key={post.id} />;
-          })}
-        </div>
-      ) : null}
+
+      <div className="opacity-0">.</div>
     </MainTile>
   );
 };
