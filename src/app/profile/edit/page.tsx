@@ -43,7 +43,9 @@ const page = async () => {
         </span>
         <p className="text-base sm:text-xl ">{user.email}</p>
       </div>
-
+      <form className="mt-20">
+        <input type="name" placeholder={user.name || "Wpisz swoje imię"} />
+      </form>
       <div className="opacity-0">.</div>
     </MainTile>
   );
