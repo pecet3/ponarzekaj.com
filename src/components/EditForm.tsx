@@ -9,7 +9,7 @@ export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
   return (
     <form className="mt-16 flex flex-col justify-center mx-auto gap-2 sm:bg-transparent bg-slate-700 rounded-md p-2">
       <input
-        type="name"
+        type="text"
         name="name"
         placeholder={user.name || "Wpisz swoje imię"}
         className="rounded-md placeholder:p-1 bg-slate-400 placeholder:text-black"
@@ -19,6 +19,13 @@ export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
         name="email"
         placeholder={user.email || "Wpisz swoje imię"}
         className="rounded-md placeholder:p-1 bg-slate-400 placeholder:text-black"
+      />
+      <textarea
+        placeholder="Twój opis"
+        name="description"
+        rows={2}
+        autoFocus={true}
+        className="grow bg-transparent outline-none resize-none placeholder:italic text-slate-200"
       />
       <SubmitButton />
     </form>
