@@ -8,6 +8,7 @@ import { MainTile } from "@/components/MainTile";
 import { Icons } from "@/components/ui/Icons";
 import { getAuthSession } from "@/lib/auth";
 import { SubmitButton } from "../../../components/SubmitButton";
+import { EditForm } from "../../../components/EditForm";
 
 const page = async () => {
   const session = await getAuthSession();
@@ -44,20 +45,7 @@ const page = async () => {
         </span>
         <p className="text-base sm:text-xl ">{user.email}</p>
       </div>
-      <form className="mt-16 flex flex-col justify-center mx-auto gap-2 sm:bg-transparent bg-slate-700 rounded-md p-2">
-        <input
-          type="name"
-          name="name"
-          placeholder={user.name || "Wpisz swoje imię"}
-          className="rounded-md placeholder:p-1 bg-slate-400 placeholder:text-black"
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder={user.email || "Wpisz swoje imię"}
-          className="rounded-md placeholder:p-1 bg-slate-400 placeholder:text-black"
-        />
-      </form>
+      <EditForm user={user} />
       <div className="opacity-0">.</div>
     </MainTile>
   );

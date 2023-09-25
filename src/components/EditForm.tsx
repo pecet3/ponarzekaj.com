@@ -7,7 +7,7 @@ import { FunctionComponent } from "react";
 
 export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
   return (
-    <form className="mt-16 flex flex-col justify-center mx-auto gap-2 sm:bg-transparent bg-slate-700 rounded-md p-2">
+    <form className="mt-16 flex flex-col justify-center mx-auto gap-2 sm:bg-transparent bg-slate-700 rounded-md p-2 items-center">
       <input
         type="text"
         name="name"
@@ -25,7 +25,7 @@ export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
         name="description"
         rows={2}
         autoFocus={true}
-        className="grow bg-transparent outline-none resize-none placeholder:italic text-slate-200"
+        className="rounded-md placeholder:p-1 bg-slate-400 placeholder:text-black resize-none w-full"
       />
       <SubmitButton />
     </form>
