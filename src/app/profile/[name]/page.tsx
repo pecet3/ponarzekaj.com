@@ -112,7 +112,7 @@ const page = async ({ params, searchParams }: PageProps) => {
           className="absolute rounded-full w-32 h-32  sm:w-40 sm:h-40 left-3 bottom-[-4rem] sm:bottom-[-5rem] "
         />
       </div>
-      <div className="flex flex-col sm:ml-48 ml-40 mt-2 text-slate-200">
+      <div className="flex flex-col sm:ml-48 ml-40 mt-2 text-slate-200 break-words">
         <span className="flex justify-between items-end">
           <p className="text-xl sm:text-2xl  font-bold">{user.name}</p>
           {displayAddFriendButton && session && user ? (
