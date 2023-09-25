@@ -5,7 +5,6 @@ import { register } from "../../next_actions/auth";
 import { useRouter } from "next/navigation";
 
 export const RegisterForm = () => {
-  const router = useRouter();
   return (
     <form
       className="flex flex-col gap-1 justify-center items-center text-slate-200"
