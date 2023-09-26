@@ -5,13 +5,13 @@ import { BsWechat, BsPersonAdd } from "react-icons/bs";
 import { MdLogout, MdDeleteForever } from "react-icons/md";
 import { FaUserFriends } from "react-icons/fa";
 import { GiConfirmed, GiCancel } from "react-icons/gi";
-import { BiError, BiCommentAdd } from "react-icons/bi";
+import { BiError, BiCommentAdd, BiSolidEdit } from "react-icons/bi";
 import { HiPencilAlt } from "react-icons/hi";
 import { FaRegComments } from "react-icons/fa";
 import { IoMdNotifications } from "react-icons/io";
 import { ImFilePicture } from "react-icons/im";
-import { BsDiscord } from "react-icons/bs"
- 
+import { BsDiscord } from "react-icons/bs";
+
 export const Icons = {
   Logo: ({ ...props }) => {
     return <RiChatPrivateLine {...props} />;
@@ -61,7 +61,10 @@ export const Icons = {
   Image: ({ ...props }) => {
     return <ImFilePicture {...props} />;
   },
-  Discord: ({...props}) => { 
-    return <BsDiscord {...props} />
+  Discord: ({ ...props }) => {
+    return <BsDiscord {...props} />;
+  },
+  Edit: ({ ...props }) => {
+    return <BiSolidEdit {...props} />;
   },
 };
