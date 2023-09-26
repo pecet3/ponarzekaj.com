@@ -8,7 +8,7 @@ import { MainTile } from "@/components/MainTile";
 import { Icons } from "@/components/ui/Icons";
 import { getAuthSession } from "@/lib/auth";
 import { SubmitButton } from "../../../components/SubmitButton";
-import { EditForm } from "../../../components/EditForm";
+import { EditForm } from "../../../components/editProfile/EditForm";
 
 const page = async () => {
   const session = await getAuthSession();
