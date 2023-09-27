@@ -49,7 +49,7 @@ export const Navbar = async () => {
   return (
     <nav className="navbar bg-slate-700 text-slate-200 p-0.5">
       <div className="flex-1">
-        <Link className="" href="/profile/edit">
+        <Link className="" href="/">
           <img
             src="/logo.png"
             alt="logo"
