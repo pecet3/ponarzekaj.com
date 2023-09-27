@@ -23,28 +23,6 @@ const page = async () => {
 
   return (
     <MainTile>
-      <div className="relative">
-        <Image
-          src={user.backgroundImage ?? ""}
-          alt={`zdjęcie ${user.name}`}
-          height={1280}
-          width={720}
-          className="h-56 sm:h-96 sm:rounded-t-xl  w-screen"
-        />
-        <Image
-          src={user.image ?? ""}
-          alt={`zdjęcie ${user.name}`}
-          height={700}
-          width={700}
-          className="absolute rounded-full w-32 h-32  sm:w-40 sm:h-40 left-3 bottom-[-4rem] sm:bottom-[-5rem] "
-        />
-      </div>
-      <div className="flex flex-col sm:ml-48 ml-36 mt-2 text-slate-200 break-words">
-        <span className="flex justify-between items-end">
-          <p className="text-xl sm:text-2xl  font-bold">{user.name}</p>
-        </span>
-        <p className="text-base sm:text-xl ">{user.email}</p>
-      </div>
       <EditForm user={user} />
       <div className="opacity-0">.</div>
     </MainTile>
