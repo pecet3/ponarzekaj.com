@@ -15,7 +15,7 @@ export const ProfileList: FunctionComponent<{ username: string | null }> = ({
         <Link href={`/profile/${username}`}>Profil</Link>
       </li>
       <li>
-        <a>Edytuj</a>
+        <Link href={`/profile/edit`}>Edytuj</Link>
       </li>
       <li>
         <button onClick={() => signOut()}>Wyloguj się</button>
