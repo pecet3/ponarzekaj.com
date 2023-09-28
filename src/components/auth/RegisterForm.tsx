@@ -5,16 +5,24 @@ import { register } from "../../next_actions/auth";
 import { useRouter } from "next/navigation";
 
 export const RegisterForm = () => {
+  const router = useRouter();
   return (
     <form
       className="flex flex-col gap-1 justify-center items-center text-slate-200"
       action={async (form) => {
         const password = form.getAll("password");
         const repeatedPassword = form.getAll("repeatedPassword");
-        if (password !== repeatedPassword)
+        console.log(`${password} ${repeatedPassword}: 2`);
+        if (password === repeatedPassword)
           return toast.error("Hasła nie są takie same!");
         const { success, error } = await register(form);
-        if (success) toast.success("Teraz musisz się zalogować");
+        if (success) {
+          toast.success("Teraz musisz się zalogować");
+
+          setTimeout(() => {
+            router.push("/auth");
+          }, 5000);
+        }
         if (error) toast.error("Ups...coś poszło nie tak");
       }}
     >
