@@ -10,10 +10,10 @@ export const RegisterForm = () => {
     <form
       className="flex flex-col gap-1 justify-center items-center text-slate-200"
       action={async (form) => {
-        const password = form.getAll("password");
-        const repeatedPassword = form.getAll("repeatedPassword");
+        const password = form.getAll("password").toString();
+        const repeatedPassword = form.getAll("repeatedPassword").toString();
         console.log(`${password} ${repeatedPassword}: 2`);
-        if (password === repeatedPassword)
+        if (password !== repeatedPassword)
           return toast.error("Hasła nie są takie same!");
         const { success, error } = await register(form);
         if (success) {
