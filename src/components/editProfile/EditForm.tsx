@@ -3,13 +3,18 @@ import React from "react";
 import type { User } from "@prisma/client";
 import { SubmitButton } from "../SubmitButton";
 
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import Image from "next/image";
+import { Icons } from "../ui/Icons";
 
 export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
+  const [isFile, setIsFile] = useState({
+    avatar: false,
+    background: false,
+  });
   return (
     <form className="mt-12 grid grid-cols-2 justify-center mx-auto gap-2 sm:bg-transparent bg-slate-700 rounded-md p-2 items-center">
-      <div className="flex gap-2">
+      <div className="flex gap-2 flex-col">
         <Image
           src={user.image ?? ""}
           alt={`zdjęcie ${user.name}`}
@@ -17,6 +22,29 @@ export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
           width={200}
           className="rounded-full w-16 h-16"
         />
+        <label className="hover:cursor-pointer">
+          <div className="">
+            {isFile.avatar ? (
+              <Icons.Confirm size={20} className="text-green-600" />
+            ) : (
+              <Icons.Image size={20} />
+            )}
+          </div>
+          <input
+            name="files"
+            type="file"
+            className="hidden"
+            onChange={() =>
+              setIsFile(
+                (prev) =>
+                  (prev = {
+                    ...prev,
+                    avatar: true,
+                  })
+              )
+            }
+          />
+        </label>
         <Image
           src={user.backgroundImage ?? ""}
           alt={`zdjęcie ${user.name}`}
