@@ -13,7 +13,7 @@ export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
     background: false,
   });
   return (
-    <form className="mt-12 grid grid-cols-2 justify-center mx-auto gap-2 sm:bg-transparent bg-slate-700 rounded-md p-2 items-center">
+    <form className="mt-12 flex justify-center mx-auto gap-2 sm:bg-transparent bg-slate-700 rounded-md p-2 items-center">
       <div className="flex gap-2 flex-col">
         <Image
           src={user.image ?? ""}
@@ -74,7 +74,10 @@ export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
           className="rounded-md placeholder:p-1 bg-slate-400 placeholder:text-slate-800 text-black resize-none w-full"
         />
       </div>
-      <SubmitButton />
+      {/* zrobić żeby można było dodawać klasy do komponentu */}
+      <div className="flex-wrap">
+        <SubmitButton />
+      </div>
     </form>
   );
 };
