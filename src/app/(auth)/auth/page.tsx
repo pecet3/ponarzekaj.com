@@ -87,7 +87,7 @@ const Auth = () => {
           </Link>
         </section>
       )}
-      <p className="w-48 my-2 mx-auto text-xs text-center font-mono space-y-0">
+      <p className="w-48 my-2 mx-auto text-black text-xs text-center font-mono space-y-0">
         Proszę nie zapominać haseł, jeszcze nie mamy podłączonego serwera email
         do stronki
       </p>
