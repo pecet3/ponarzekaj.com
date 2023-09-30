@@ -20,8 +20,8 @@ export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
   });
   return (
     <>
-      <form className="flex flex-col justify-center items-center">
-        <div className="flex flex-wrap justify-center mx-auto gap-2 sm:bg-transparent bg-slate-700 rounded-md p-2 items-center">
+      <form className="flex flex-col justify-center py-8 items-center gap-4">
+        <div className="flex flex-wrap justify-center mx-auto gap-2 p-1 sm:bg-transparent bg-slate-500 rounded-md items-center">
           <div className="flex gap-2 flex-col items-center bg-slate-600 rounded-md p-1">
             <Image
               src={user.image ?? ""}
@@ -84,26 +84,42 @@ export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
               />
             </label>
           </div>
-          <div className="flex flex-col gap-2 bg-slate-600 rounded-md h-full p-1 flex-grow">
-            <input
-              type="text"
-              name="name"
-              placeholder={user.name || "Wpisz swoje imię"}
-              className="rounded-md placeholder:p-1 bg-slate-400 placeholder:text-slate-800 text-black"
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder={user.email || "Wpisz swoje imię"}
-              className="rounded-md placeholder:p-1 bg-slate-400 placeholder:text-slate-800 text-black"
-            />
-            <textarea
-              placeholder="Twój opis"
-              name="description"
-              rows={2}
-              autoFocus={true}
-              className="rounded-md placeholder:p-1 bg-slate-400 placeholder:text-slate-800 text-black resize-none w-full"
-            />
+          <div className="flex flex-col gap-2 ">
+            <div className="flex flex-col bg-slate-600 rounded-md h-full p-1 flex-grow gap-2">
+              <input
+                type="text"
+                name="name"
+                placeholder={user.name || "Wpisz swoje imię"}
+                className="rounded-md placeholder:p-1 bg-slate-400 placeholder:text-slate-800 text-black"
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder={user.email || "Wpisz swoje imię"}
+                className="rounded-md placeholder:p-1 bg-slate-400 placeholder:text-slate-800 text-black"
+              />
+              <textarea
+                placeholder="Twój opis"
+                name="description"
+                rows={3}
+                autoFocus={true}
+                className="rounded-md placeholder:p-1 bg-slate-400 placeholder:text-slate-800 text-black resize-none w-full"
+              />
+            </div>
+            <div className="flex flex-col gap-2 bg-slate-600 rounded-md h-full p-1 flex-grow">
+              <input
+                type="password"
+                name="password"
+                className="rounded-md placeholder:p-1 bg-slate-400 placeholder:text-slate-800 text-black"
+                placeholder="*****"
+              />
+              <input
+                type="password"
+                name="repeatedPassword"
+                className="rounded-md placeholder:p-1 bg-slate-400 placeholder:text-slate-800 text-black"
+                placeholder="*****"
+              />
+            </div>
           </div>
         </div>
 
