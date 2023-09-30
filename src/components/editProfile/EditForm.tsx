@@ -62,7 +62,7 @@ export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
             />
             <label className="hover:cursor-pointer">
               <div className="">
-                {isFile.avatar ? (
+                {isFile.background ? (
                   <Icons.Confirm size={20} className="text-green-600" />
                 ) : (
                   <ChangePhoto content="Zmień zdjęcie w tle" />
@@ -122,8 +122,12 @@ export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
             </div>
           </div>
         </div>
-
-        <SubmitButton />
+        <div className="flex flex-col gap-0.5 justify-center items-center">
+          <p className="text-xs">
+            Nie zapomnij wysłać zmian, po ich wprowadzeniu 😉
+          </p>
+          <SubmitButton />
+        </div>
       </form>
     </>
   );
