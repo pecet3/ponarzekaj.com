@@ -21,7 +21,7 @@ export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
   return (
     <>
       <form className="flex flex-col justify-center items-center">
-        <div className="mt-12 flex flex-wrap justify-center mx-auto gap-2 sm:bg-transparent bg-slate-700 rounded-md p-2 items-center">
+        <div className="flex flex-wrap justify-center mx-auto gap-2 sm:bg-transparent bg-slate-700 rounded-md p-2 items-center">
           <div className="flex gap-2 flex-col items-center bg-slate-600 rounded-md p-1">
             <Image
               src={user.image ?? ""}
@@ -84,7 +84,7 @@ export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
               />
             </label>
           </div>
-          <div className="flex flex-col gap-2 bg-slate-600 rounded-md">
+          <div className="flex flex-col gap-2 bg-slate-600 rounded-md h-full p-1 flex-grow">
             <input
               type="text"
               name="name"
