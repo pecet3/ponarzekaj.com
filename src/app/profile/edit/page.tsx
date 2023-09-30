@@ -22,7 +22,7 @@ const page = async () => {
   if (!user) return <Error />;
 
   return (
-    <MainTile>
+    <MainTile size="max-w-2xl sm:max-w-md ">
       <EditForm user={user} />
     </MainTile>
   );
