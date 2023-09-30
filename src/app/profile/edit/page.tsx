@@ -24,7 +24,6 @@ const page = async () => {
   return (
     <MainTile>
       <EditForm user={user} />
-      <div className="opacity-0">.</div>
     </MainTile>
   );
 };
