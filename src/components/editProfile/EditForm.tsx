@@ -20,8 +20,8 @@ export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
   });
   return (
     <>
-      <form className="flex flex-col justify-center py-8 items-center gap-4">
-        <div className="flex flex-wrap justify-center mx-auto gap-2 p-1 sm:bg-transparent bg-slate-500 rounded-md items-center">
+      <form className="flex flex-col justify-center py-2 sm:py-8 items-center sm:bg-transparent bg-slate-500 rounded-none sm:rounded-md gap-4">
+        <div className="flex flex-wrap justify-center mx-auto gap-6 p-1  items-center">
           <div className="flex gap-2 flex-col items-center bg-slate-600 rounded-md p-1">
             <Image
               src={user.image ?? ""}
@@ -99,7 +99,7 @@ export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
                 className="rounded-md placeholder:p-1 bg-slate-400 placeholder:text-slate-800 text-black"
               />
               <textarea
-                placeholder="Twój opis"
+                placeholder={user.description || "Twój opis"}
                 name="description"
                 rows={3}
                 autoFocus={true}
