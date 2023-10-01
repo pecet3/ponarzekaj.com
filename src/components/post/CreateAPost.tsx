@@ -117,6 +117,7 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
                     type="radio"
                     name="emoji"
                     value={emoji.value}
+                    multiple={false}
                     checked={emoji.value === input.emoji}
                     onChange={() =>
                       setInput((prev) => ({
@@ -145,6 +146,7 @@ export const CreatePost: React.FC<{ user: User | null }> = ({ user }) => {
                     name="files"
                     type="file"
                     className="hidden"
+                    multiple={false}
                     onChange={() => setIsFile(true)}
                   />
                 </label>
