@@ -19,191 +19,32 @@ export const updateProfile = async (form: FormData) => {
         const formEmail = form.getAll("email");
         const formDescription = form.getAll("description");
         const formPassword = form.getAll("password");
+        const formAvatar = form.getAll("avatar");
+        const formBackground = form.getAll("background");
+
+        const avatar = formAvatar[0] as FileEsque;
+        const background = formBackground[0] as FileEsque;
 
         const { name, email, description, password } = updateProfileInfoValidator.parse({ name: formName, email: formEmail, description: formDescription, password: formPassword });
 
-        const files = form.getAll("files");
-
-        const file = files[0] as FileEsque;
+        if (name && name !== "") {
+            await db.user.update({
+                where: {
+                    id: session?.user.id
+                },
+                data: {
+                    name
+                }
+            })
+        }
 
         if (!session) throw new Error();
 
-
+        return { success: true, }
     } catch (error) {
         return { error };
     } finally {
-        revalidatePath("/");
+        revalidatePath("/profile/edit");
     }
 };
 
-export const addALike = async (postId: string) => {
-    try {
-        // const { postId, userId } = postValidator.parse(body);
-
-        const session = await getAuthSession();
-        const userId = session?.user.id
-        const { success } = await ratelimit.notification.limit(userId as string);
-
-        if (!success) {
-            throw new Error("TOO MANY REQUESTS");
-        }
-        if (!session) {
-            throw new Error("Unauthorized");
-        }
-
-        if (session.user.id !== userId) {
-            throw new Error()
-        }
-
-        const likes = await db.likePost.findMany({
-            where: {
-                postId,
-                userId,
-            },
-        });
-
-        if (likes.length !== 0) {
-            throw new Error()
-        }
-
-        await db.likePost.create({
-            data: {
-                userId,
-                postId,
-            },
-        });
-
-        const post = await db.post.findUnique({
-            where: {
-                id: postId,
-            },
-        });
-        if (!post) {
-            throw new Error()
-        }
-        if (session.user.id !== post.authorId) {
-            await db.notification.create({
-                data: {
-                    userId: post?.authorId,
-                    content: "polubił Twój post",
-                    link: `/post/${postId}`,
-                    authorId: userId,
-                    postId: postId
-                },
-            });
-        }
-
-        return { success: true };
-
-    } catch (error) {
-        return { error }
-    } finally {
-        revalidatePath("/")
-    }
-}
-
-export const deleteAPost = async (postId: string) => {
-    try {
-        const session = await getAuthSession();
-        const userId = session?.user.id
-        if (!session) {
-            throw new Error()
-        }
-        if (session.user.id !== userId) {
-            throw new Error()
-        }
-
-        const post = await db.post.findUnique({
-            where: {
-                id: postId
-            }
-        })
-        if (!post) throw new Error()
-
-        if (post.fileKey) {
-            await utapi.deleteFiles(post.fileKey);
-        }
-
-        const commentsList = await db.comment.findMany({
-            where: {
-                postId: postId,
-            },
-            select: {
-                id: true,
-            },
-        });
-
-        const commentsArray = commentsList.map((comment) => comment.id);
-
-        for (const commentId of commentsArray) {
-            await db.likeComment.deleteMany({
-                where: {
-                    commentId,
-                },
-            });
-        }
-
-        await db.comment.deleteMany({
-            where: {
-                postId: postId,
-            },
-        });
-
-        await db.likePost.deleteMany({
-            where: {
-                postId: postId,
-            },
-        });
-
-        await db.post.deleteMany({
-            where: {
-                id: postId,
-            },
-        });
-
-        await db.notification.deleteMany({
-            where: {
-                postId: postId,
-            },
-        });
-
-        return { success: true }
-    } catch (error) {
-        return { error }
-    } finally {
-        revalidatePath("/");
-    }
-}
-
-export const deleteALike = async (postId: string) => {
-    try {
-        const session = await getAuthSession();
-        const userId = session?.user.id
-        if (!session) {
-            throw new Error()
-        }
-
-        if (session.user.id !== userId) {
-            throw new Error()
-        }
-
-        await db.likePost.deleteMany({
-            where: {
-                AND: [
-                    {
-                        postId,
-                    },
-                    {
-                        userId,
-                    },
-                ],
-            },
-        });
-
-        return { success: true }
-    } catch (error) {
-        return { error }
-    } finally {
-        revalidatePath("/");
-    }
-}
