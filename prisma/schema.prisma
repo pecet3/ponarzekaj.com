@@ -64,20 +64,22 @@ enum UserRole {
 }
 
 model User {
-  id              String         @id @default(cuid())
-  name            String?
-  password        String?
-  email           String         @unique
-  emailVerified   DateTime?
-  description     String?
-  image           String?        @default("https://avatarfiles.alphacoders.com/976/97695.gif")
-  backgroundImage String?        @default("https://images2.alphacoders.com/941/thumb-1920-941898.jpg")
-  accounts        Account[]
-  sessions        Session[]
-  posts           Post[]
-  friends         Friend[]       @relation("UserFriend")
-  notifications   Notification[]
-  rank            UserRole       @default(USER)
+  id                 String         @id @default(cuid())
+  name               String?
+  password           String?
+  email              String         @unique
+  emailVerified      DateTime?
+  description        String?
+  image              String?        @default("https://avatarfiles.alphacoders.com/976/97695.gif")
+  imageKey           String?
+  backgroundImage    String?        @default("https://images2.alphacoders.com/941/thumb-1920-941898.jpg")
+  backgroundImageKey String?
+  accounts           Account[]
+  sessions           Session[]
+  posts              Post[]
+  friends            Friend[]       @relation("UserFriend")
+  notifications      Notification[]
+  rank               UserRole       @default(USER)
 }
 
 model Friend {
