@@ -7,7 +7,7 @@ import { getAuthSession } from "@/lib/auth";
 import { PostInput } from "@/components/post/CreateAPost";
 import { utapi } from "uploadthing/server";
 import { createPostValidator, postValidator, updateProfileInfoValidator } from '../lib/validators';
-
+import bcrypt from "bcryptjs"
 interface FileEsque extends Blob {
     name: string;
 }
@@ -15,6 +15,7 @@ interface FileEsque extends Blob {
 export const updateProfile = async (form: FormData) => {
     try {
         const session = await getAuthSession();
+
         const formName = form.getAll("name").toString();
         const formEmail = form.getAll("email").toString();
         const formDescription = form.getAll("description").toString();
@@ -59,13 +60,15 @@ export const updateProfile = async (form: FormData) => {
             })
         }
         const { password } = updateProfileInfoValidator.parse({ password: formPassword });
-        if (name && name !== "") {
+
+        if (password && password !== "") {
+            const hashedPassword = await bcrypt.hash(password, 10)
             await db.user.update({
                 where: {
                     id: session?.user.id
                 },
                 data: {
-                    password
+                    password: hashedPassword
                 }
             })
         }
