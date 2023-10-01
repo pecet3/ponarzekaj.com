@@ -23,7 +23,10 @@ export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
     <form
       className="flex flex-col justify-center py-2 sm:py-8 items-center sm:bg-transparent bg-slate-500 rounded-none sm:rounded-md gap-4"
       action={async (formData) => {
-        await updateProfile(formData);
+        console.log(1);
+        const { success, error } = await updateProfile(formData);
+        if (success) console.log("success", success);
+        console.log(2);
       }}
     >
       <div className="flex flex-wrap justify-center mx-auto gap-6 p-1  items-center">
