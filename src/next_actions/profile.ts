@@ -72,7 +72,18 @@ export const updateProfile = async (form: FormData) => {
                 }
             })
         }
+        if (avatar.size > 0) {
+            const response = await utapi.uploadFiles(avatar as FileEsque);
 
+            await db.user.update({
+                where: {
+                    id: session?.user.id
+                },
+                data: {
+                    image: response.data?.url
+                }
+            })
+        }
         if (!session) throw new Error();
 
         return { success: true, }
