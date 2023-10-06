@@ -26,7 +26,13 @@ export const updateProfile = async (form: FormData) => {
         const avatar = formAvatar[0] as FileEsque;
         const background = formBackground[0] as FileEsque;
 
+        if (!session) throw new Error()
+
         const { name } = updateProfileInfoValidator.parse({ name: formName });
+        const user = await db.user.findUnique({
+            where:
+                { id: session.user.id }
+        })
         if (name && name !== "") {
             await db.user.update({
                 where: {
@@ -80,7 +86,8 @@ export const updateProfile = async (form: FormData) => {
                     id: session?.user.id
                 },
                 data: {
-                    image: response.data?.url
+                    image: response.data?.url,
+                    imageKey: response.data?.key,
                 }
             })
         }
