@@ -3,7 +3,6 @@ import { SubmitButton } from "../SubmitButton";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-import { getAuthSession } from "../../lib/auth";
 
 export const LoginForm = () => {
   const router = useRouter();
@@ -17,13 +16,14 @@ export const LoginForm = () => {
           email,
           password,
           redirect: false,
-          callbackUrl: "/auth",
+          callbackUrl: "/",
         });
         if (res?.error) {
-          toast.error("Error signing");
+          toast.error("Podałeś zły email lub hasło");
           return;
         }
         setTimeout(() => {
+          router.refresh();
           router.push("/");
         }, 3000);
       }}
