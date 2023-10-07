@@ -68,7 +68,7 @@ export default async function Home({
         </p>
       )}
       {entries.map((post) => {
-        return <PostView key={post.id} post={post} />;
+        return <PostView key={post.id} post={post} userRole={user?.rank} />;
       })}
       <PaginationControls
         length={posts.length}
