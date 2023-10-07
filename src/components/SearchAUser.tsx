@@ -48,7 +48,7 @@ export const SearchUser: FC<PageProps> = ({}) => {
           Szukaj 🔍
         </button> */}
       </div>
-      <ul className="flex flex-col gap-2  overflow-y-scroll overflow-hidden">
+      <ul className="flex gap-2  overflow-y-scroll overflow-hidden">
         {results
           ? results.map((user) => (
               <li
@@ -57,8 +57,8 @@ export const SearchUser: FC<PageProps> = ({}) => {
               >
                 <Link
                   href={`/profile/${user.name}`}
-                  className="bg-sky-900 text-slate-200 rounded-lg
-               shadow-md shadow-gray-800 w-full px-1 sm:p-2 flex flex-col gap-2 items-center"
+                  className="bg-purple-900 text-slate-200 rounded-lg
+               shadow-md shadow-gray-800 w-full px-1 sm:p-2 flex flex-col gap-2 justify-center items-center"
                 >
                   <Image
                     src={user.image ?? ""}
