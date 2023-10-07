@@ -12,6 +12,9 @@ import { revalidatePath } from "next/cache";
 import { toast } from "react-hot-toast";
 import Link from "next/link";
 import { addFriend } from "../../../next_actions/friends";
+import { UserWithFriends } from "../../../types/prisma";
+import { FunctionComponent } from "react";
+import { Form } from "./Form";
 
 interface PageProps {
   params: {
@@ -142,18 +145,25 @@ const page = async ({ params, searchParams }: PageProps) => {
         <span className="flex justify-between items-end">
           <p className="text-xl sm:text-2xl  font-bold">{user.name}</p>
           {displayAddFriendButton && session && user ? (
-            <form
-              action={async () => {
-                "use server";
-                const { success, error } = await addFriend(user);
-              }}
-              className="bg-slate-900 rounded-lg p-1 mx-2 hover:bg-slate-950 duration-300"
-            >
-              <button type="submit" className="text-slate-200 flex gap-1">
-                <Icons.AddFriend size={20} className="text-blue-400" />
-                Dodaj
-              </button>
-            </form>
+            // <form
+            //   action={async () => {
+            //     "use server";
+            //     const { success, error } = await addFriend(user);
+            //     if (success) {
+            //       toast.success("Wysłałeś zaproszenie!");
+            //     }
+            //     if (error) {
+            //       toast.error("Ups...coś poszło nie tak");
+            //     }
+            //   }}
+            //   className="bg-slate-900 rounded-lg p-1 mx-2 hover:bg-slate-950 duration-300"
+            // >
+            //   <button type="submit" className="text-slate-200 flex gap-1">
+            //     <Icons.AddFriend size={20} className="text-blue-400" />
+            //     Dodaj
+            //   </button>
+            // </form>
+            <Form user={user} />
           ) : notificationAcceptFriend ? (
             <div className="bg-slate-900 rounded-lg p-1 mx-2 hover:bg-slate-950 duration-300">
               <Link href="/friends" className="text-slate-200 flex gap-1">
@@ -187,7 +197,4 @@ const page = async ({ params, searchParams }: PageProps) => {
   );
 };
 
-const Form = ()=>{
-  return()
-}
 export default page;
