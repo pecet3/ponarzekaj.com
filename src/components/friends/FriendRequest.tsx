@@ -2,7 +2,7 @@ import * as React from "react";
 import type { Friend } from "@prisma/client";
 import { db } from "@/lib/db";
 import Image from "next/image";
-import { Icons } from "./ui/Icons";
+import { Icons } from "../ui/Icons";
 import { revalidatePath } from "next/cache";
 import { getAuthSession } from "@/lib/auth";
 interface IProvidersProps {

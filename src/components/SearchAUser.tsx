@@ -52,13 +52,13 @@ export const SearchUser: FC<PageProps> = ({}) => {
         {results
           ? results.map((user) => (
               <li
-                className="list-none flex justify-center items-center mr-3"
+                className="list-none flex flex-col justify-center items-center mr-3"
                 key={user.id}
               >
                 <Link
                   href={`/profile/${user.name}`}
-                  className="bg-blue-900 text-slate-200 rounded-lg
-               shadow-md shadow-gray-800 w-full px-1 sm:p-2 flex gap-2 items-center"
+                  className="bg-sky-900 text-slate-200 rounded-lg
+               shadow-md shadow-gray-800 w-full px-1 sm:p-2 flex flex-col gap-2 items-center"
                 >
                   <Image
                     src={user.image ?? ""}

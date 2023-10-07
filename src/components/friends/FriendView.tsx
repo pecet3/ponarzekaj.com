@@ -2,7 +2,7 @@ import * as React from "react";
 import type { Friend } from "@prisma/client";
 import { db } from "@/lib/db";
 import Image from "next/image";
-import { Icons } from "./ui/Icons";
+import { Icons } from "../ui/Icons";
 import { revalidatePath } from "next/cache";
 import { getAuthSession } from "@/lib/auth";
 import Link from "next/link";
@@ -28,7 +28,7 @@ export const FriendView: React.FunctionComponent<IProvidersProps> = async ({
     <li className="list-none flex justify-center items-center">
       <Link
         href={`/profile/${encodedUsername}`}
-        className="bg-blue-900 text-slate-200 rounded-lg
+        className="bg-sky-900 text-slate-200 rounded-lg
          shadow-md shadow-gray-800 w-full p-2 flex gap-2 items-center"
       >
         <Image

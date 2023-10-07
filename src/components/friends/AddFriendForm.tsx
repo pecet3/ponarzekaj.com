@@ -4,8 +4,8 @@ import { Icons } from "@/components/ui/Icons";
 
 import { toast } from "react-hot-toast";
 
-import { addFriend } from "../../../next_actions/friends";
-import { UserWithFriends } from "../../../types/prisma";
+import { addFriend } from "../../next_actions/friends";
+import { UserWithFriends } from "../../types/prisma";
 import { FunctionComponent } from "react";
 
 export const Form: FunctionComponent<{ user: UserWithFriends }> = ({

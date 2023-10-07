@@ -3,8 +3,8 @@ import { db } from "@/lib/db";
 
 import { MainTile } from "@/components/MainTile";
 import { getAuthSession } from "@/lib/auth";
-import { FriendRequest } from "@/components/FriendRequest";
-import { FriendView } from "@/components/FriendView";
+import { FriendRequest } from "@/components/friends/FriendRequest";
+import { FriendView } from "@/components/friends/FriendView";
 import { SearchUser } from "@/components/SearchAUser";
 interface PageProps {
   searchParams: { [key: string]: string | string[] | undefined };

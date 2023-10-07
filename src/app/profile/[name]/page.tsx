@@ -14,7 +14,7 @@ import Link from "next/link";
 import { addFriend } from "../../../next_actions/friends";
 import { UserWithFriends } from "../../../types/prisma";
 import { FunctionComponent } from "react";
-import { Form } from "./Form";
+import { Form } from "../../../components/friends/AddFriendForm";
 
 interface PageProps {
   params: {
@@ -177,7 +177,11 @@ const page = async ({ params, searchParams }: PageProps) => {
               </Link>
             </div>
           ) : displayNotifications ? (
-            <p>Jesteście znajomymi</p>
+            <div className="bg-slate-900 rounded-lg p-1 mx-2 hover:bg-slate-950 duration-300">
+              <Link href="/friends" className="text-slate-200 flex gap-1">
+                Jesteście znajomymi
+              </Link>
+            </div>
           ) : null}
         </span>
         <p className="text-base sm:text-xl ">{user.email}</p>
