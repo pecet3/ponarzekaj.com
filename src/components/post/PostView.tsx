@@ -37,11 +37,11 @@ export const PostView: React.FC<Props> = async ({ post }) => {
     <div
       className={`${
         authorRank === "ADMIN"
-          ? "bg-indigo-950"
+          ? "bg-slate-500 text-black border-slate-950"
           : authorRank === "MOD"
           ? "bg-sky-900"
           : authorRank === "PREMIUM"
-          ? "bg-amber-700 text-black"
+          ? "bg-purple-950"
           : "bg-slate-900 md:hover:bg-slate-950 duration-500 text-slate-200"
       }   w-full
       border-b-2 border-slate-400 px-1 py-2 sm:px-1.5 sm:py-2`}
@@ -52,18 +52,18 @@ export const PostView: React.FC<Props> = async ({ post }) => {
             <Image
               src={post.author.image || ""}
               alt={`zdjęcie profilowe użytkownika ${post.author.name}`}
-              className="h-10 w-10 rounded-full md:h-12 md:w-12"
+              className="h-10 w-10 rounded-full md:h-12 md:w-12 p-[1px] bg-slate-400 shadow-md shadow-black"
               width={96}
               height={96}
             />
           </Link>
           <div className="flex flex-col">
-            <div className="flex gap-0.5 sm:gap-1 text-xs sm:text-sm text-slate-300 items-center flex-wrap">
+            <div className="flex gap-0.5 sm:gap-1 text-xs sm:text-sm  items-center flex-wrap">
               <Link href={`/profile/${post.author.name}`}>
                 <span className="font-bold">{`@${post.author.name}`}</span>
               </Link>
               <Link href={`/post/${post.id}`}>
-                <p className="font-thin">{`∙ ${dayjs(
+                <p className="font-light">{`∙ ${dayjs(
                   post.createdAt
                 ).fromNow()}`}</p>
               </Link>
