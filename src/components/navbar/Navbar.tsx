@@ -61,6 +61,9 @@ export const Navbar = async () => {
             alt="logo"
           />
         </Link>
+        <p className="text-sm font-mono flex justify-end items-end text-black">
+          beta 1.0
+        </p>
       </div>
       {/* <div className="flex justify-end mr-1">
         <Link className="btn btn-ghost normal-case text-lg" href="/chat">
