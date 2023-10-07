@@ -8,7 +8,7 @@ import { RegisterForm } from "../../../components/auth/RegisterForm";
 import { LoginForm } from "../../../components/auth/LoginForm";
 import Link from "next/link";
 
-const Auth = () => {
+export const Auth = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const searchParams = useSearchParams();
   const register = searchParams.get("register");
@@ -24,7 +24,7 @@ const Auth = () => {
       setIsLoading(false);
     }
   };
-
+  if (error) return <p>error</p>;
   return (
     <main className="flex flex-col background min-h-screen text-slate-800">
       {!register ? (
