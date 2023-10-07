@@ -37,11 +37,11 @@ export const PostView: React.FC<Props> = async ({ post }) => {
     <div
       className={`${
         authorRank === "ADMIN"
-          ? "bg-slate-500 text-black border-slate-950"
+          ? "bg-slate-400 text-black border-slate-950"
           : authorRank === "MOD"
-          ? "bg-sky-900"
+          ? "bg-sky-950"
           : authorRank === "PREMIUM"
-          ? "bg-purple-950"
+          ? "bg-fuchsia-950"
           : "bg-slate-900 md:hover:bg-slate-950 duration-500 text-slate-200"
       }   w-full
       border-b-2 border-slate-400 px-1 py-2 sm:px-1.5 sm:py-2`}
@@ -52,7 +52,7 @@ export const PostView: React.FC<Props> = async ({ post }) => {
             <Image
               src={post.author.image || ""}
               alt={`zdjęcie profilowe użytkownika ${post.author.name}`}
-              className="h-10 w-10 rounded-full md:h-12 md:w-12 p-[1px] bg-slate-400 shadow-md shadow-black"
+              className="h-10 w-10 rounded-full md:h-12 md:w-12 p-[1px] bg-slate-400 shadow-sm shadow-slate-900"
               width={96}
               height={96}
             />
