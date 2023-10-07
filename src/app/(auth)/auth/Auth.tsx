@@ -31,7 +31,7 @@ export const Auth = () => {
         <section className="flex flex-col  mt-6 mx-auto bg-slate-400 p-2 rounded-md">
           <h1 className="font-bold mb-2 text-xl">Zaloguj się</h1>
           <LoginForm />
-          <h2 className="my-2 text-base font-serif text-center">
+          <h2 className="my-4 text-base font-serif text-center font-bold">
             lub wejdź inaczej...
           </h2>
           <button
@@ -61,7 +61,7 @@ export const Auth = () => {
         <section className="flex flex-col  mt-6 mx-auto bg-slate-400 p-2 rounded-md">
           <h1 className="font-bold text-xl">Zarejestruj się</h1>
           <RegisterForm />
-          <h2 className="my-2 text-base font-serif text-center">
+          <h2 className="my-4 text-base font-serif text-center font-bold">
             lub wejdź inaczej...
           </h2>
           <button
