@@ -84,6 +84,32 @@ const page = async ({ params, searchParams }: PageProps) => {
       ? true
       : false;
 
+  // const addFriend = async () => {
+  //   "use server";
+  //   await db.friend.create({
+  //     data: {
+  //       userId: user.id ?? "",
+  //       friendId: session?.user.id ?? "",
+  //     },
+  //   });
+  //   await db.friend.create({
+  //     data: {
+  //       userId: session?.user.id ?? "",
+  //       friendId: user.id ?? "",
+  //       initiator: true,
+  //     },
+  //   });
+  //   await db.notification.create({
+  //     data: {
+  //       userId: user.id ?? "",
+  //       authorId: session?.user.id ?? "",
+  //       content: "Wysłał Ci zaproszenie do znajomych",
+  //       link: `/friends`,
+  //     },
+  //   });
+  //   revalidatePath("/");
+  // };
+
   // pagination things
 
   const page = searchParams["page"] ?? "1";
@@ -117,7 +143,10 @@ const page = async ({ params, searchParams }: PageProps) => {
           <p className="text-xl sm:text-2xl  font-bold">{user.name}</p>
           {displayAddFriendButton && session && user ? (
             <form
-              action={() => addFriend(user)}
+              action={async () => {
+                "use server";
+                const { success, error } = await addFriend(user);
+              }}
               className="bg-slate-900 rounded-lg p-1 mx-2 hover:bg-slate-950 duration-300"
             >
               <button type="submit" className="text-slate-200 flex gap-1">
@@ -158,4 +187,7 @@ const page = async ({ params, searchParams }: PageProps) => {
   );
 };
 
+const Form = ()=>{
+  return()
+}
 export default page;
