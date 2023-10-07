@@ -10,26 +10,38 @@ import { isUserThing } from "@/lib/helpers";
 import { getAuthSession } from "@/lib/auth";
 import { AddLikeDeleteComment } from "./Like&Delete&Comment";
 import { LikesCommentsInfo } from "../LikesCommentsInfo";
-
+import { UserRank } from "@prisma/client";
+import { db } from "@/lib/db";
 dayjs.extend(relativeTime);
 
 interface Props {
   post: FullPost;
+  userRank?: UserRank;
 }
 
-export const PostView: React.FC<Props> = async ({ post }) => {
+export const PostView: React.FC<Props> = async ({ post, userRank }) => {
   const session = await getAuthSession();
   const isUserPost = isUserThing(post.authorId, session?.user.id as string);
 
   const likesLength = post.likes?.length;
   const commentsLength = post.comments.length;
-
+  const authorRankObject = await db.user.findUnique({
+    where: {
+      id: post.authorId,
+    },
+    select: {
+      rank: true,
+    },
+  });
+  const authorRank = authorRankObject?.rank;
+  if (!authorRank) return;
   const isLiked = post.likes?.find((like) => like.userId === session?.user.id);
-
   return (
     <div
-      className=" bg-slate-900 hover:bg-slate-950 duration-300 text-slate-200 w-full
-    border-b-2 border-slate-400 px-1 py-2 sm:px-1.5 sm:py-2"
+      className={`${
+        authorRank === "ADMIN" ? "bg-indigo-950" : "bg-slate-900"
+      } hover:bg-slate-950 duration-300 text-slate-200 w-full
+      border-b-2 border-slate-400 px-1 py-2 sm:px-1.5 sm:py-2`}
     >
       <div className="flex items-end">
         <div className="flex justify-start gap-2 mb-2.5">
@@ -73,7 +85,7 @@ export const PostView: React.FC<Props> = async ({ post }) => {
                 <Image
                   src={post.fileUrl || ""}
                   alt="zdjęcie pod postem"
-                  className="h-40 w-auto md:h-64 rounded-md"
+                  className="h-56 w-auto md:h-72 rounded-md"
                   width={960}
                   height={480}
                 />
