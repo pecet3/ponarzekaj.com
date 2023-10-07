@@ -56,7 +56,7 @@ model VerificationToken {
 }
 
 ////////////////////////////////////////////////////////////////////////////
-enum UserRole {
+enum UserRank {
   ADMIN
   MOD
   PREMIUM
@@ -79,7 +79,7 @@ model User {
   posts              Post[]
   friends            Friend[]       @relation("UserFriend")
   notifications      Notification[]
-  rank               UserRole       @default(USER)
+  rank               UserRank       @default(USER)
 }
 
 model Friend {
