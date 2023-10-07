@@ -88,7 +88,7 @@ export const PostView: React.FC<Props> = async ({ post }) => {
                 <Image
                   src={post.fileUrl || ""}
                   alt="zdjęcie pod postem"
-                  className="h-48 w-max md:h-72 rounded-md"
+                  className="h-64 w-max md:h-96 rounded-md"
                   width={960}
                   height={480}
                 />
