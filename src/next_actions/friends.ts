@@ -5,9 +5,10 @@ import { getAuthSession } from '../lib/auth';
 import { UserWithFriends } from '../types/prisma';
 import { Friend } from "@prisma/client"
 export const addFriend = async (user: UserWithFriends) => {
+  "use server"
   try {
     const session = await getAuthSession()
-    if (!session) throw new Error("Unauthorized user");
+    if (!session) throw new Error();
 
     await db.friend.create({
       data: {
@@ -31,8 +32,9 @@ export const addFriend = async (user: UserWithFriends) => {
       },
     });
     revalidatePath("/");
+    return { success: true }
   } catch (error) {
-    return { error }
+    return { error: true }
   }
 };
 
