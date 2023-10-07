@@ -36,8 +36,14 @@ export const PostView: React.FC<Props> = async ({ post }) => {
   return (
     <div
       className={`${
-        authorRank === "ADMIN" ? "bg-indigo-950" : "bg-slate-900"
-      } hover:bg-slate-950 duration-300 text-slate-200 w-full
+        authorRank === "ADMIN"
+          ? "bg-indigo-950"
+          : authorRank === "MOD"
+          ? "bg-sky-900"
+          : authorRank === "PREMIUM"
+          ? "bg-amber-700 text-black"
+          : "bg-slate-900 md:hover:bg-slate-950 duration-500 text-slate-200"
+      }   w-full
       border-b-2 border-slate-400 px-1 py-2 sm:px-1.5 sm:py-2`}
     >
       <div className="flex items-end">
@@ -82,7 +88,7 @@ export const PostView: React.FC<Props> = async ({ post }) => {
                 <Image
                   src={post.fileUrl || ""}
                   alt="zdjęcie pod postem"
-                  className="h-56 w-auto md:h-72 rounded-md"
+                  className="h-48 w-max md:h-72 rounded-md"
                   width={960}
                   height={480}
                 />
