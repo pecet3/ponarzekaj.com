@@ -3,23 +3,20 @@ import Link from "next/link";
 import Image from "next/image";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { FaRegComments } from "react-icons/fa";
 import type { FullPost } from "@/types/prisma";
 import { Icons } from "../ui/Icons";
 import { isUserThing } from "@/lib/helpers";
 import { getAuthSession } from "@/lib/auth";
 import { AddLikeDeleteComment } from "./Like&Delete&Comment";
 import { LikesCommentsInfo } from "../LikesCommentsInfo";
-import { UserRank } from "@prisma/client";
 import { db } from "@/lib/db";
 dayjs.extend(relativeTime);
 
 interface Props {
   post: FullPost;
-  userRank?: UserRank;
 }
 
-export const PostView: React.FC<Props> = async ({ post, userRank }) => {
+export const PostView: React.FC<Props> = async ({ post }) => {
   const session = await getAuthSession();
   const isUserPost = isUserThing(post.authorId, session?.user.id as string);
 
