@@ -35,10 +35,10 @@ export const authOptions: NextAuthOptions = {
             email: credentials?.email as string,
           }
         })
-        if (!user || !user?.password || user.email !== email) return null
+        if (!user || !user?.password || user.email !== email) throw new Error("Nie ma takiego użytkownika")
 
         const isPasswordValid = await bcrypt.compare(password, user.password)
-        if (!isPasswordValid) return null
+        if (!isPasswordValid) throw new Error("Hasło nie jest prawidłowe")
 
         return user
       }
@@ -50,6 +50,7 @@ export const authOptions: NextAuthOptions = {
   ],
 
   callbacks: {
+
     async session({ token, session }) {
       if (token) {
         session.user.id = token.id;
