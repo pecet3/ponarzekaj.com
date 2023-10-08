@@ -45,7 +45,7 @@ export const createAPost = async (form: FormData, input: PostInput, formAuthorId
 
     if (file.size > 0) {
       const response = await utapi.uploadFiles(file as FileEsque);
-
+      console.log(response)
       const post = await db.post.create({
         data: {
           authorId,
