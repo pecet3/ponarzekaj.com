@@ -2,11 +2,9 @@
 
 import { revalidatePath } from "next/cache";
 import { db } from "@/lib/db";
-import { ratelimit } from "@/lib/redis";
 import { getAuthSession } from "@/lib/auth";
-import { PostInput } from "@/components/post/CreateAPost";
 import { utapi } from "uploadthing/server";
-import { createPostValidator, postValidator, updateProfileInfoValidator } from '../lib/validators';
+import { updateProfileInfoValidator } from '../lib/validators';
 import bcrypt from "bcryptjs"
 interface FileEsque extends Blob {
     name: string;
@@ -20,10 +18,10 @@ export const updateProfile = async (form: FormData) => {
         const formEmail = form.getAll("email").toString();
         const formDescription = form.getAll("description").toString();
         const formPassword = form.getAll("password").toString();
-        const formAvatar = form.getAll("avatar");
+        const files = form.getAll("files");
         const formBackground = form.getAll("background");
 
-        const avatar = formAvatar[0] as FileEsque;
+        const file = files[0] as FileEsque;
         const background = formBackground[0] as FileEsque;
 
         if (!session) throw new Error()
@@ -78,18 +76,14 @@ export const updateProfile = async (form: FormData) => {
                 }
             })
         }
-        if (avatar.size > 0) {
-            const response = await utapi.uploadFiles(avatar as FileEsque);
+
+        if (file.size > 0) {
+            console.log(file)
+            const response = await utapi.uploadFiles(file as FileEsque);
+
+            console.log(response)
             if (user?.imageKey) {
-                await db.user.update({
-                    where: {
-                        id: session?.user.id
-                    },
-                    data: {
-                        image: response.data?.url,
-                        imageKey: response.data?.key,
-                    }
-                })
+                await utapi.deleteFiles(user.imageKey);
             }
             await db.user.update({
                 where: {
@@ -101,11 +95,27 @@ export const updateProfile = async (form: FormData) => {
                 }
             })
         }
-        if (!session) throw new Error();
+        console.log(background)
+        if (background.size > 0) {
+            const response = await utapi.uploadFiles(background as FileEsque);
+            console.log(response)
+            if (user?.backgroundImageKey && user?.backgroundImageKey !== "") {
+                await utapi.deleteFiles(user.backgroundImageKey);
+            }
+            await db.user.update({
+                where: {
+                    id: session?.user.id
+                },
+                data: {
+                    backgroundImage: response.data?.url,
+                    backgroundImageKey: response.data?.key,
+                }
+            })
+        }
 
         return { success: true, }
-    } catch (error) {
-        return { error: true };
+    } catch (error: any) {
+        return { error: error.message };
     } finally {
         revalidatePath("/profile/edit");
     }
