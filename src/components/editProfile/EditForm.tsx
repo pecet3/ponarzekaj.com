@@ -33,7 +33,7 @@ export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
           return;
         }
         setTimeout(() => {
-          router.push(`/edit/${user.name}`);
+          router.push(`/profile/${user.name}`);
         }, 3000);
       }}
     >
