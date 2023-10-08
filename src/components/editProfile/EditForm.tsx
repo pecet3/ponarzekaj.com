@@ -8,6 +8,7 @@ import Image from "next/image";
 import { Icons } from "../ui/Icons";
 import { updateProfile } from "../../next_actions/profile";
 import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const ChangePhoto: React.FunctionComponent<{ content: string }> = ({
   content,
@@ -16,6 +17,7 @@ const ChangePhoto: React.FunctionComponent<{ content: string }> = ({
 };
 
 export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
+  const router = useRouter();
   const [isFile, setIsFile] = useState({
     avatar: false,
     background: false,
@@ -26,7 +28,13 @@ export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
       action={async (formData) => {
         const { success, error } = await updateProfile(formData);
         if (success) toast.success("Zaktualizowałeś profil!");
-        if (error) toast.error(error);
+        if (error) {
+          toast.error(error);
+          return;
+        }
+        setTimeout(() => {
+          router.push(`/edit/${user.name}`);
+        }, 3000);
       }}
     >
       <div className="flex flex-wrap justify-center mx-auto gap-6 p-1  items-center">
@@ -41,7 +49,7 @@ export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
           <label className="hover:cursor-pointer">
             <div className="">
               {isFile.avatar ? (
-                <Icons.Confirm size={24} className="text-green-600" />
+                <Icons.Confirm size={26} className="text-green-700" />
               ) : (
                 <ChangePhoto content="Zmień profilowe" />
               )}
@@ -72,7 +80,7 @@ export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
           <label className="hover:cursor-pointer">
             <div className="">
               {isFile.background ? (
-                <Icons.Confirm size={24} className="text-green-600" />
+                <Icons.Confirm size={26} className="text-green-700" />
               ) : (
                 <ChangePhoto content="Zmień zdjęcie w tle" />
               )}

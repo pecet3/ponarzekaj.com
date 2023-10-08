@@ -110,15 +110,13 @@ export const Navbar = async () => {
 
             <div className="dropdown dropdown-end bg-slate-700">
               <label tabIndex={0} className="btn btn-ghost btn-circle">
-                <div className="w-10 h-10 rounded-full">
-                  <Image
-                    src={session.user.image ?? ""}
-                    height={96}
-                    width={96}
-                    alt="Twój awatar"
-                    className="rounded-full"
-                  />
-                </div>
+                <Image
+                  src={session.user.image ?? ""}
+                  height={96}
+                  width={96}
+                  alt="Twój awatar"
+                  className="rounded-full w-10 h-10"
+                />
               </label>
 
               <ProfileList username={user?.name ?? ""} />
