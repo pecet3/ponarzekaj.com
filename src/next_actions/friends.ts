@@ -10,6 +10,13 @@ export const addFriend = async (user: UserWithFriends) => {
     const session = await getAuthSession()
     if (!session) throw new Error();
 
+    const isThatFriendList = await db.friend.findMany({
+      where: {
+        friendId: user.id
+      }
+    })
+    if (isThatFriendList.length > 0) throw new Error();
+
     await db.friend.create({
       data: {
         userId: user.id ?? "",
@@ -41,6 +48,13 @@ export const addFriend = async (user: UserWithFriends) => {
 export const acceptFriend = async (friend: Friend) => {
   try {
     const session = await getAuthSession()
+
+    const isThatFriendList = await db.friend.findMany({
+      where: {
+        friendId: friend.id
+      }
+    })
+    if (isThatFriendList.length > 0) throw new Error();
 
     await db.friend.updateMany({
       where: {
