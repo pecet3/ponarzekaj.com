@@ -7,6 +7,7 @@ import { FunctionComponent, useState } from "react";
 import Image from "next/image";
 import { Icons } from "../ui/Icons";
 import { updateProfile } from "../../next_actions/profile";
+import { toast } from "react-hot-toast";
 
 const ChangePhoto: React.FunctionComponent<{ content: string }> = ({
   content,
@@ -23,10 +24,9 @@ export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
     <form
       className="flex flex-col justify-center py-2 sm:py-8 items-center sm:bg-transparent bg-slate-500 rounded-none sm:rounded-md gap-4"
       action={async (formData) => {
-        console.log(1);
         const { success, error } = await updateProfile(formData);
-        if (success) console.log("success", success);
-        console.log(2);
+        if (success) toast.success("Zaktualizowałeś profil!");
+        if (error) toast.error(error);
       }}
     >
       <div className="flex flex-wrap justify-center mx-auto gap-6 p-1  items-center">
@@ -47,9 +47,10 @@ export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
               )}
             </div>
             <input
-              name="avatar"
+              name="files"
               type="file"
               className="hidden"
+              multiple={false}
               onChange={() =>
                 setIsFile(
                   (prev) =>
@@ -76,20 +77,21 @@ export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
                 <ChangePhoto content="Zmień zdjęcie w tle" />
               )}
             </div>
-            <input
+            {/* <input
               name="background"
               type="file"
               className="hidden"
+              multiple={false}
               onChange={() =>
                 setIsFile(
                   (prev) =>
                     (prev = {
                       ...prev,
-                      avatar: true,
+                      background: true,
                     })
                 )
               }
-            />
+            /> */}
           </label>
         </div>
         <div className="flex flex-col gap-2 ">
