@@ -49,7 +49,7 @@ export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
           <label className="hover:cursor-pointer">
             <div className="">
               {isFile.avatar ? (
-                <Icons.Confirm size={26} className="text-green-700" />
+                <Icons.Confirm size={28} className="text-emerald-600" />
               ) : (
                 <ChangePhoto content="Zmień profilowe" />
               )}
@@ -80,7 +80,7 @@ export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
           <label className="hover:cursor-pointer">
             <div className="">
               {isFile.background ? (
-                <Icons.Confirm size={26} className="text-green-700" />
+                <Icons.Confirm size={28} className="text-emerald-600" />
               ) : (
                 <ChangePhoto content="Zmień zdjęcie w tle" />
               )}
