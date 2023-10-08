@@ -42,7 +42,7 @@ const page = async ({ params, searchParams }: PageProps) => {
 
   const posts = await db.post.findMany({
     where: {
-      authorId: user.id ?? "",
+      authorId: user?.id ?? "",
     },
     include: {
       comments: true,
