@@ -41,13 +41,13 @@ export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
           <label className="hover:cursor-pointer">
             <div className="">
               {isFile.avatar ? (
-                <Icons.Confirm size={20} className="text-green-600" />
+                <Icons.Confirm size={24} className="text-green-600" />
               ) : (
                 <ChangePhoto content="Zmień profilowe" />
               )}
             </div>
             <input
-              name="files"
+              name="avatar"
               type="file"
               className="hidden"
               multiple={false}
@@ -72,12 +72,12 @@ export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
           <label className="hover:cursor-pointer">
             <div className="">
               {isFile.background ? (
-                <Icons.Confirm size={20} className="text-green-600" />
+                <Icons.Confirm size={24} className="text-green-600" />
               ) : (
                 <ChangePhoto content="Zmień zdjęcie w tle" />
               )}
             </div>
-            {/* <input
+            <input
               name="background"
               type="file"
               className="hidden"
@@ -91,7 +91,7 @@ export const EditForm: FunctionComponent<{ user: User }> = ({ user }) => {
                     })
                 )
               }
-            /> */}
+            />
           </label>
         </div>
         <div className="flex flex-col gap-2 ">

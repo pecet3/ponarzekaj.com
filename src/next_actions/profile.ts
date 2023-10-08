@@ -18,10 +18,10 @@ export const updateProfile = async (form: FormData) => {
         const formEmail = form.getAll("email").toString();
         const formDescription = form.getAll("description").toString();
         const formPassword = form.getAll("password").toString();
-        const files = form.getAll("files");
+        const formAvatar = form.getAll("avatar");
         const formBackground = form.getAll("background");
 
-        const file = files[0] as FileEsque;
+        const avatar = formAvatar[0] as FileEsque;
         const background = formBackground[0] as FileEsque;
 
         if (!session) throw new Error()
@@ -77,9 +77,8 @@ export const updateProfile = async (form: FormData) => {
             })
         }
 
-        if (file.size > 0) {
-            console.log(file)
-            const response = await utapi.uploadFiles(file as FileEsque);
+        if (avatar.size > 0) {
+            const response = await utapi.uploadFiles(avatar as FileEsque);
 
             console.log(response)
             if (user?.imageKey) {
