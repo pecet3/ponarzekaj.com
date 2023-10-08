@@ -36,6 +36,6 @@ export const loginValidator = z.object({
 export const updateProfileInfoValidator = z.object({
   email: z.string().optional(),
   name: z.string().optional(),
-  description: z.string().min(1).max(280).optional(),
+  description: z.string().min(0).max(280).optional(),
   password: z.string().optional(),
 })
