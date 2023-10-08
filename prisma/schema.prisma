@@ -70,7 +70,7 @@ model User {
   email              String         @unique
   emailVerified      DateTime?
   description        String?
-  image              String?        @default("https://avatarfiles.alphacoders.com/976/97695.gif")
+  image              String?        @default("https://utfs.io/f/b2320fcf-578c-448e-bbd0-7dc9b1732c84-r5l82f.gif")
   imageKey           String?
   backgroundImage    String?        @default("https://images2.alphacoders.com/941/thumb-1920-941898.jpg")
   backgroundImageKey String?
