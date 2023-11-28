@@ -124,7 +124,7 @@ export const Navbar = async () => {
           </>
         ) : (
           <Link
-            className="rounded-lg p-1 text-xl bg-blue-700 text-slate-100 font-semibold hover:bg-blue-600 duration-300 ring-1 ring-blue-600 mr-2"
+            className="rounded-lg p-1 hover:scale-105 text-xl bg-blue-700 text-slate-100 font-semibold hover:bg-blue-600 duration-300 ring-1 ring-blue-600 mr-2"
             href="/auth"
           >
             Zaloguj się
